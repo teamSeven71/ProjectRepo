@@ -4,16 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89d0561e-a224-45eb-9bd5-946b598e58fe" name="Changes" comment="main 클래스 이름 변경">
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/common/TimeStamp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/constant/CategoryType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/constant/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/admin/AdminEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/admin/NoticeEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/ArticleEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/CommentEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/UserEntity.java" afterDir="false" />
+    <list default="true" id="89d0561e-a224-45eb-9bd5-946b598e58fe" name="Changes" comment="Dto 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/mapper/admin/AdminMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/mapper/admin/CommentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/mapper/user/ArticleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/mapper/user/CommentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/mapper/user/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.6/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/community/domain/user/ArticleEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/ArticleEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/community/domain/user/CommentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/CommentEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/community/domain/user/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/community/dto/user/ArticleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/community/dto/user/ArticleDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/community/dto/user/CommentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/community/dto/user/CommentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/community/dto/user/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/community/dto/user/UserDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +37,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -50,20 +58,24 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/bohyun/Desktop/community&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/bohyun/Desktop/community",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Community" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="demo.main" />
@@ -91,7 +103,23 @@
       <option name="project" value="LOCAL" />
       <updated>1711206999775</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Entity 추가">
+      <option name="closed" value="true" />
+      <created>1711208890482</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711208890482</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Dto 추가">
+      <option name="closed" value="true" />
+      <created>1711210104847</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1711210104847</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +139,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="gitignore 추가" />
     <MESSAGE value="main 클래스 이름 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="main 클래스 이름 변경" />
+    <MESSAGE value="Entity 추가" />
+    <MESSAGE value="Dto 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dto 추가" />
   </component>
 </project>

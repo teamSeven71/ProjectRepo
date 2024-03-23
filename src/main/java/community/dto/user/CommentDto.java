@@ -4,6 +4,7 @@ import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class CommentDto {
@@ -42,9 +43,9 @@ public class CommentDto {
 
         private String content; //내용
 
-        private LocalDate createAt;
+        private LocalDateTime createAt;
 
-        private LocalDate modifiedAt;
+        private LocalDateTime modifiedAt;
 
     }
 

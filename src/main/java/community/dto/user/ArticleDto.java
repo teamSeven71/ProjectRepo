@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -50,9 +51,9 @@ public class ArticleDto {
 
         private List<CommentDto.CommentResponseDto> comments;
 
-        private LocalDate createAt;
+        private LocalDateTime createAt;
 
-        private LocalTime modifiedAt;
+        private LocalDateTime modifiedAt;
 
 
     }

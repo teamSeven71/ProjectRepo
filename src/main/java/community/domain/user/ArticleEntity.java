@@ -1,5 +1,6 @@
 package community.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import community.common.TimeStamp;
 import community.constant.CategoryType;
 import community.constant.Role;
@@ -35,5 +36,9 @@ public class ArticleEntity extends TimeStamp {
 
     @Enumerated(EnumType.STRING)
     private CategoryType type = CategoryType.ARTICLE;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<CommentEntity> comments = new ArrayList<>();
 
 }

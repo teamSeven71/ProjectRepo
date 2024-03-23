@@ -2,10 +2,10 @@ package community.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import community.common.TimeStamp;
-import community.constant.CategoryType;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
 @Getter
 @Setter
 @Builder
@@ -31,6 +31,7 @@ public class CommentEntity extends TimeStamp {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private ArticleEntity article;
+
 
 
 }

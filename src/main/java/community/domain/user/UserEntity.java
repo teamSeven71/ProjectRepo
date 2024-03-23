@@ -1,8 +1,12 @@
 package community.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import community.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,5 +31,11 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ArticleEntity> articles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments = new ArrayList<>();
 
 }

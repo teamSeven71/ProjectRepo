@@ -59,27 +59,21 @@ public class UserDto {
 
         private List<CommentEntity> comments;
 
-        private LocalTime createdAt;
-
-        private LocalTime modifiedAt;
-
-
-
 
     }
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    public static class UserPatchDto {
-
-
-//        @NotNull
-//        private String nickName; //닉네임 수정
-
-        //패스워드 수정 (추후)
-
-    }
+//    @Getter
+//    @Setter
+//    @AllArgsConstructor
+//    @NoArgsConstructor
+//    @Builder
+//    public static class UserPatchDto {
+//
+//
+////        @NotNull
+////        private String nickName; //닉네임 수정
+//
+//        //패스워드 수정 (추후)
+//
+//    }
 }
