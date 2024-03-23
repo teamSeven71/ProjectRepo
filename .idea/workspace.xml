@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89d0561e-a224-45eb-9bd5-946b598e58fe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="89d0561e-a224-45eb-9bd5-946b598e58fe" name="Changes" comment="main 클래스 이름 변경">
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/common/TimeStamp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/constant/CategoryType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/constant/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/admin/AdminEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/admin/NoticeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/ArticleEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/CommentEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/community/domain/user/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +24,14 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -34,24 +50,24 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/bohyun/Desktop/community",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bohyun/Desktop/community&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
-    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="Community" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="demo.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="community.Application" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="community.Community" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -67,6 +83,15 @@
       <updated>1711205915959</updated>
       <workItem from="1711205917355" duration="552000" />
     </task>
+    <task id="LOCAL-00001" summary="main 클래스 이름 변경">
+      <option name="closed" value="true" />
+      <created>1711206999775</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711206999775</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -82,5 +107,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="gitignore 추가" />
+    <MESSAGE value="main 클래스 이름 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="main 클래스 이름 변경" />
   </component>
 </project>
