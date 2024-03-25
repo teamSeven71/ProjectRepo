@@ -26,7 +26,7 @@ public class CommentEntity extends TimeStamp {
     @Column(columnDefinition = "TEXT")
     private String content; //내용
 
-    private Long likeNum; //좋아요개수
+//    private Long likeNum; //좋아요개수 -> 후 순위
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")

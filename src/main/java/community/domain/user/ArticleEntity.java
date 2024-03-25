@@ -38,7 +38,6 @@ public class ArticleEntity extends TimeStamp {
     private CategoryType type = CategoryType.ARTICLE;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<CommentEntity> comments = new ArrayList<>();
 
 }

@@ -37,7 +37,7 @@ public class CommentDto {
 
         private String nickName;
 
-        private Long likeNum; //좋아요 개수
+//        private Long likeNum; //좋아요 개수 -> 후순위
 
         private Long articleId; //댓글이 달린 게시글 id
 
@@ -49,16 +49,16 @@ public class CommentDto {
 
     }
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    public static class CommentPatchDto {
-
-
-        private String content; //내용
-
-    }
+//    @Getter
+//    @Setter
+//    @AllArgsConstructor
+//    @NoArgsConstructor
+//    @Builder
+//    public static class CommentPatchDto {
+//
+//
+//        private String content; //내용
+//
+//    }
 
 }
