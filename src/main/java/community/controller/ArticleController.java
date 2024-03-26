@@ -26,21 +26,31 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ArticleDto.ArticleResponseDto addArticle(
-            @RequestBody ArticleDto.ArticleRequestDto request
-            ,@AuthenticationPrincipal UserEntity user
+    public ResponseEntity<ArticleDto.ArticleResponseDto> addArticle(
+            @RequestBody ArticleDto.ArticleRequestDto request,
+            @AuthenticationPrincipal UserEntity user
     ) {
-        return articleService.save(request, user);
+        ArticleDto.ArticleResponseDto responseDto = articleService.save(request, user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @GetMapping
-    public List<ArticleDto.ArticleResponseDto> getAllArticles() {
-        return articleService.getAllArticles();
+    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> getAllArticles() {
+        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticles();
+        return ResponseEntity.ok(articles);
     }
 
     @GetMapping("/{id}")
-    public ArticleDto.ArticleResponseDto getArticle(@PathVariable Long id) {
-        return articleService.getArticleById(id);
+    public ResponseEntity<ArticleDto.ArticleResponseDto> getArticle(@PathVariable Long id) {
+        ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
+        return ResponseEntity.ok(article);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteArticle( @PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
+        articleService.deleteById(id, user);
+        return ResponseEntity.ok("Article deleted successfully.");
     }
 
     // 다른 필요한 API 메서드들을 추가할 수 있습니다.
