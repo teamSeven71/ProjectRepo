@@ -53,5 +53,14 @@ public class ArticleController {
         return ResponseEntity.ok("Article deleted successfully.");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ArticleDto.ArticleResponseDto> updateBoard(
+            @PathVariable Long id,
+            @RequestBody ArticleDto.ArticleRequestDto request,
+            @AuthenticationPrincipal UserEntity user  //
+    ) {
+        ArticleDto.ArticleResponseDto updatedArticle = articleService.updateArticle(id, request, user);
+        return ResponseEntity.ok(updatedArticle);
+    }
     // 다른 필요한 API 메서드들을 추가할 수 있습니다.
 }

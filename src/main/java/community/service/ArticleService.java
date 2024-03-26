@@ -69,5 +69,26 @@ public class ArticleService {
         articleRepository.deleteById(id);
     }
 
+    public ArticleDto.ArticleResponseDto updateArticle(Long id, ArticleDto.ArticleRequestDto request, UserEntity user) {
+        Optional<ArticleEntity> optionalArticle = articleRepository.findById(id);
+
+        // 게시물이 존재하지 않는 경우 예외를 던집니다.
+        if (optionalArticle.isEmpty()) {
+            throw new ArticleNotFoundException("Article not found with id: " + id);
+        }
+
+        ArticleEntity article = optionalArticle.get();
+
+        // 게시물을 작성한 사용자와 현재 로그인한 사용자가 같은지 확인합니다.
+        if (!article.getUser().equals(user)) {
+            throw new UnauthorizedException("You are not authorized to update this article.");
+        }
+
+        article.setTitle(request.getTitle());
+        article.setContent(request.getContent());
+
+        return articleMapper.toResponseDto(article);
+    }
+
     // 다른 필요한 메서드들을 추가할 수 있습니다.
 }
