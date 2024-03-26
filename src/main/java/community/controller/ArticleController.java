@@ -1,6 +1,5 @@
 package community.controller;
 
-import community.constant.CategoryType;
 import community.domain.user.UserEntity;
 import community.dto.user.ArticleDto;
 import community.service.ArticleService;
@@ -46,9 +45,9 @@ public class ArticleController {
 
     //게시물 단 건 삭제 api
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteArticle( @PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
+    public ResponseEntity<Void> deleteArticle( @PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
         articleService.deleteById(id, user);
-        return ResponseEntity.ok("Article deleted successfully.");
+        return  ResponseEntity.noContent().build();
     }
 
     //게시물 단 건 수정 api
