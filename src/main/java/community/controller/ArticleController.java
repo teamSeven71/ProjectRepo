@@ -25,6 +25,7 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
+    // 게시물 등록 api
     @PostMapping
     public ResponseEntity<ArticleDto.ArticleResponseDto> addArticle(
             @RequestBody ArticleDto.ArticleRequestDto request,
@@ -34,12 +35,14 @@ public class ArticleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
+    // 모든 category가 공지사항인 글 조회
     @GetMapping
-    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> getAllArticles() {
-        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticles();
+    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> getAllNotice() {
+        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllNotice();
         return ResponseEntity.ok(articles);
     }
 
+    //게시물 단 건 조회 api
     @GetMapping("/{id}")
     public ResponseEntity<ArticleDto.ArticleResponseDto> getArticle(@PathVariable Long id) {
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
@@ -47,12 +50,14 @@ public class ArticleController {
     }
 
 
+    //게시물 단 건 삭제 api
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteArticle( @PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
         articleService.deleteById(id, user);
         return ResponseEntity.ok("Article deleted successfully.");
     }
 
+    //게시물 단 건 수정 api
     @PutMapping("/{id}")
     public ResponseEntity<ArticleDto.ArticleResponseDto> updateBoard(
             @PathVariable Long id,

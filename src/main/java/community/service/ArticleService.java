@@ -36,8 +36,8 @@ public class ArticleService {
         return articleMapper.toResponseDto(article);
     }
 
-    public List<ArticleDto.ArticleResponseDto> getAllArticles() {
-        List<ArticleEntity> articles = articleRepository.findAll();
+    public List<ArticleDto.ArticleResponseDto> getAllNotice() {
+        List<ArticleEntity> articles = articleRepository.findAllCategory();
         return articles.stream()
                 .map(articleMapper::toResponseDto)
                 .collect(Collectors.toList());
