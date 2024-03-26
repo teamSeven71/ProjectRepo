@@ -46,5 +46,4 @@ out/
 *.p12
 /src/main/generated/
 /nohup/
-
-
+gradle/
