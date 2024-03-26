@@ -1,9 +1,6 @@
 package community.dto.user;
 
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 

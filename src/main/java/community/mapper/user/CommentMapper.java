@@ -9,6 +9,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.stereotype.Component;
+
 
 @Mapper(
         componentModel = "spring",
@@ -16,6 +18,7 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.ERROR
 )
+@Component //
 public interface CommentMapper {
 
     /**
