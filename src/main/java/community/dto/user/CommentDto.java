@@ -47,16 +47,16 @@ public class CommentDto {
 
     }
 
-//    @Getter
-//    @Setter
-//    @AllArgsConstructor
-//    @NoArgsConstructor
-//    @Builder
-//    public static class CommentPatchDto {
-//
-//
-//        private String content; //내용
-//
-//    }
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class CommentPatchDto {
+
+
+        private String content; //내용
+
+    }
 
 }

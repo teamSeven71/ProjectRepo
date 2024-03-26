@@ -1,5 +1,6 @@
 package community.controller;
 
+import community.dto.user.ArticleDto;
 import community.dto.user.CommentDto;
 import community.service.ArticleService;
 import community.service.CommentService;
@@ -26,6 +27,14 @@ public class CommentController {
         CommentDto.CommentResponseDto responseDto = commentService.createComment(userId, commentRequestDto);
         return ResponseEntity.ok().body(responseDto);
     }
+
+
+    @PatchMapping("/update")
+    public ResponseEntity<?> updateComment(@RequestParam("commentId") Long commentId, @RequestBody CommentDto.CommentPatchDto commentPatchDto) {
+        return ResponseEntity.ok().body(commentService.updateComment(commentId, commentPatchDto));
+    }
+
+
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteComment(@RequestParam Long commentId) {

@@ -3,6 +3,7 @@ package community.service;
 import community.domain.user.ArticleEntity;
 import community.domain.user.CommentEntity;
 import community.domain.user.UserEntity;
+import community.dto.user.ArticleDto;
 import community.dto.user.CommentDto;
 import community.mapper.user.ArticleMapper;
 import community.mapper.user.CommentMapper;
@@ -48,7 +49,7 @@ public class CommentService {
         CommentEntity savedComment = commentRepository.save(commentMapper.toRequestEntity(commentRequestDto, userEntity, articleEntity));
 
         savedComment.setCreateAt(currentTime);
-        savedComment = commentRepository.save(savedComment); //작성 시간 설ㄴ
+        savedComment = commentRepository.save(savedComment); //작성 시간 설정
 
         CommentDto.CommentResponseDto responseDto = commentMapper.toResponseDto(savedComment);
         responseDto.setUserId(userId);
@@ -62,6 +63,27 @@ public class CommentService {
 
 
     //댓글 수정
+    public CommentDto.CommentResponseDto updateComment(Long commentId, CommentDto.CommentPatchDto commentPatchDto) {
+
+
+        CommentEntity commentEntity = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NoSuchElementException("Comment not found" + commentId));
+
+
+        //TODO : 해당 댓글 작성자 맞는지 확인 + 추가
+
+
+
+        //댓글 수정
+        commentEntity.setContent(commentPatchDto.getContent()); // 댓글 내용 업데이트
+        LocalDateTime currentTime = LocalDateTime.now();
+        commentEntity.setModifiedAt(currentTime); //수정시간 설정
+        commentEntity = commentRepository.save(commentEntity);
+
+
+        return commentMapper.toResponseDto(commentEntity);
+    }
+
 
 
 
