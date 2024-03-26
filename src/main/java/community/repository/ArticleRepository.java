@@ -1,6 +1,7 @@
 package community.repository;
 
 import community.domain.user.ArticleEntity;
+import community.domain.user.CommentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,5 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
     @Modifying
     @Query("update ArticleEntity set title= :title where id = :id")
     int updateTitle(Long id, String title);
+
 }
