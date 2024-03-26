@@ -9,12 +9,14 @@ import community.mapper.user.CommentMapper;
 import community.repository.ArticleRepository;
 import community.repository.CommentRepository;
 import community.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @Service
 public class CommentService {
 
@@ -46,7 +48,7 @@ public class CommentService {
         CommentEntity savedComment = commentRepository.save(commentMapper.toRequestEntity(commentRequestDto, userEntity, articleEntity));
 
         savedComment.setCreateAt(currentTime);
-        savedComment = commentRepository.save(savedComment); //작성 시간 설정
+        savedComment = commentRepository.save(savedComment); //작성 시간 설ㄴ
 
         CommentDto.CommentResponseDto responseDto = commentMapper.toResponseDto(savedComment);
         responseDto.setUserId(userId);
@@ -62,6 +64,14 @@ public class CommentService {
     //댓글 수정
 
 
-    //댓글 삭제
 
+    //댓글 삭제
+    public void deleteComment(Long commentId) {
+
+        CommentEntity commentEntity = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NoSuchElementException("Comment not found with id: " + commentId));
+
+        commentRepository.deleteById(commentId);
+        log.info("삭제된 Comment: {}",commentId);
+    }
 }
