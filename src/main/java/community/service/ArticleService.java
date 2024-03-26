@@ -1,11 +1,14 @@
 package community.service;
 
 import community.domain.user.ArticleEntity;
+import community.domain.user.UserEntity;
 import community.dto.user.ArticleDto;
 import community.mapper.user.ArticleMapper;
 import community.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +23,14 @@ public class ArticleService {
     public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper) {
         this.articleRepository = articleRepository;
         this.articleMapper = articleMapper;
+    }
+
+    public ArticleDto.ArticleResponseDto save(@RequestBody ArticleDto.ArticleRequestDto request
+                                             ,@AuthenticationPrincipal UserEntity user
+                                    ){
+        ArticleEntity article = articleMapper.toReqeustEntity(request, user);
+        ArticleEntity savedArticle = articleRepository.save(article);
+        return articleMapper.toResponseDto(article);
     }
 
     public List<ArticleDto.ArticleResponseDto> getAllArticles() {
