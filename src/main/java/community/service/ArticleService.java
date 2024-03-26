@@ -1,5 +1,6 @@
 package community.service;
 
+import community.constant.CategoryType;
 import community.domain.user.ArticleEntity;
 import community.domain.user.UserEntity;
 import community.dto.user.ArticleDto;
@@ -36,8 +37,8 @@ public class ArticleService {
         return articleMapper.toResponseDto(article);
     }
 
-    public List<ArticleDto.ArticleResponseDto> getAllNotice() {
-        List<ArticleEntity> articles = articleRepository.findAllCategory();
+    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(CategoryType type) {
+        List<ArticleEntity> articles = articleRepository.findAllCategory(type);
         return articles.stream()
                 .map(articleMapper::toResponseDto)
                 .collect(Collectors.toList());

@@ -35,8 +35,7 @@ public class ArticleEntity extends TimeStamp {
 
 
     @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private CategoryType type = CategoryType.ARTICLE;
+    private CategoryType type;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @Builder.Default

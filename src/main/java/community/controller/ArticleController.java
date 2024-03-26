@@ -1,5 +1,6 @@
 package community.controller;
 
+import community.constant.CategoryType;
 import community.domain.user.UserEntity;
 import community.dto.user.ArticleDto;
 import community.service.ArticleService;
@@ -35,13 +36,6 @@ public class ArticleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
-    // 모든 category가 공지사항인 글 조회
-    @GetMapping
-    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> getAllNotice() {
-        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllNotice();
-        return ResponseEntity.ok(articles);
-    }
-
     //게시물 단 건 조회 api
     @GetMapping("/{id}")
     public ResponseEntity<ArticleDto.ArticleResponseDto> getArticle(@PathVariable Long id) {
@@ -67,5 +61,13 @@ public class ArticleController {
         ArticleDto.ArticleResponseDto updatedArticle = articleService.updateArticle(id, request, user);
         return ResponseEntity.ok(updatedArticle);
     }
-    // 다른 필요한 API 메서드들을 추가할 수 있습니다.
+
+    // 다른 필요한 API 메서드들을 추가 가능
+    // 나중에 게시글 목록 페이지에서 다른 카테고리 누르면 category에 해당하는 모든 글 조회 가능
+    /*@GetMapping
+    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> getAllArticlesByCategory(@PathVariable CategoryType type) {
+        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
+        return ResponseEntity.ok(articles);
+    }*/
+
 }
