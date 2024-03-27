@@ -25,11 +25,11 @@ public class ArticlePageController {
     }
 
     // 메인페이지 공지사항3개 조회
-    @GetMapping("/articles")
+    @GetMapping("/techhome")
     public String showNotice(Model model){
         List<ArticleDto.ArticleResponseDto> notices = articleService.getAllArticlesByCategory(CategoryType.NOTICE);
         model.addAttribute("notices", notices);
-        return "메인 페이지 url";
+        return "/site/index";
     }
 
     // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
