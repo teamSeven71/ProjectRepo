@@ -129,7 +129,9 @@ li {
     margin-left: 10px;
     padding: 10px;
     border-radius: 10px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    color: #e96b56;/* 주황색 */
+    text-decoration: none;
 }
 
 .bt_wrap a:first-child {
@@ -383,4 +385,9 @@ li {
     text-align: center;
     font-size: 13px;
     color: #fff;
+}
+
+#footer a {
+    color: #e96b56; /* 주황색 */
+    text-decoration: none;
 }
