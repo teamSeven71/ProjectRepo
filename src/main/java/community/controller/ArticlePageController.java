@@ -37,11 +37,11 @@ public class ArticlePageController {
     public String showArticles(Model model, @PathVariable CategoryType type){
         List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
         model.addAttribute("articles", articles);
-        return "게시글 목록 페이지 url";
+        return "/site/free";
     }
 
     // 메인페이지의 공지사항 클릭시 & 게시글 목록 페이지에서 특정 게시글 클릭 시 : 해당 게시글 상세 페이지
-    @GetMapping("/articles/{id}")
+    @GetMapping("/article/{id}")
     public String showDetails(
             Model model,
             @PathVariable Long id
