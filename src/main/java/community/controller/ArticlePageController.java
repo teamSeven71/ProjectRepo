@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -54,5 +55,17 @@ public class ArticlePageController {
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
         model.addAttribute("article", article);
         return "/site/articleDetail";
+    }
+
+    @GetMapping("/article/post")
+    public String postArticle(Model model, @RequestParam(required = false) Long id)
+    {
+        if (id == null) {  // 등록
+            model.addAttribute("article", new ArticleDto.ArticleResponseDto());
+        } else {  // 수정
+            ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
+            model.addAttribute("article", article);
+        }
+        return "/site/writeArticle"; // writeArticle.html 파일을 응답으로 반환
     }
 }
