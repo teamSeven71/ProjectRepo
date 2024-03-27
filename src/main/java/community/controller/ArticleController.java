@@ -1,14 +1,15 @@
 package community.controller;
 
+import community.domain.user.UserEntity;
 import community.dto.user.ArticleDto;
 import community.service.ArticleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import java.util.List;
 
@@ -24,15 +25,48 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping
-    public List<ArticleDto.ArticleResponseDto> getAllArticles() {
-        return articleService.getAllArticles();
+    // 게시물 등록 api
+    @PostMapping
+    public ResponseEntity<ArticleDto.ArticleResponseDto> addArticle(
+            @RequestBody ArticleDto.ArticleRequestDto request,
+            @AuthenticationPrincipal UserEntity user
+    ) {
+        ArticleDto.ArticleResponseDto responseDto = articleService.save(request, user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
+    //게시물 단 건 조회 api
     @GetMapping("/{id}")
-    public ArticleDto.ArticleResponseDto getArticle(@PathVariable Long id) {
-        return articleService.getArticleById(id);
+    public ResponseEntity<ArticleDto.ArticleResponseDto> getArticle(@PathVariable Long id) {
+        ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
+        return ResponseEntity.ok(article);
     }
 
-    // 다른 필요한 API 메서드들을 추가할 수 있습니다.
+
+    //게시물 단 건 삭제 api
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteArticle( @PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
+        articleService.deleteById(id, user);
+        return  ResponseEntity.noContent().build();
+    }
+
+    //게시물 단 건 수정 api
+    @PutMapping("/{id}")
+    public ResponseEntity<ArticleDto.ArticleResponseDto> updateBoard(
+            @PathVariable Long id,
+            @RequestBody ArticleDto.ArticleRequestDto request,
+            @AuthenticationPrincipal UserEntity user  //
+    ) {
+        ArticleDto.ArticleResponseDto updatedArticle = articleService.updateArticle(id, request, user);
+        return ResponseEntity.ok(updatedArticle);
+    }
+
+    // 다른 필요한 API 메서드들을 추가 가능
+    // 나중에 게시글 목록 페이지에서 다른 카테고리 누르면 category에 해당하는 모든 글 조회 가능
+    /*@GetMapping
+    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> getAllArticlesByCategory(@PathVariable CategoryType type) {
+        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
+        return ResponseEntity.ok(articles);
+    }*/
+
 }

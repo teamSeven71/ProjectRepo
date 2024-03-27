@@ -17,8 +17,8 @@ public class SwaggerConfig {
 
     private Info apiInfo() {
         return new Info()
-                .title("Blog API") // API 제목
-                .description("블로그 CRUD API") // API 설명
+                .title("ArticleAPI") // API 제목
+                .description("Article CRUD API") // API 설명
                 .version("1.0.0"); // API 버전
     }
 }

@@ -35,9 +35,10 @@ public class ArticleEntity extends TimeStamp {
 
 
     @Enumerated(EnumType.STRING)
-    private CategoryType type = CategoryType.ARTICLE;
+    private CategoryType type;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<CommentEntity> comments = new ArrayList<>();
 
 }
