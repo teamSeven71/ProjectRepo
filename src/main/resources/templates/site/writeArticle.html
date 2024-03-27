@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="assets/css/articleCreate.css"/>
     <!-- 부트스트랩 CSS 링크 -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
 <body>
 <header id="header" class="d-flex align-items-center">
@@ -21,10 +25,10 @@
         <!--          <li><a href="#">회원가입</a></li>-->
         <!--          <li><a href="#">로그인</a></li>-->
         <div class="d-flex justify-content-end align-items-center mb-4">
-            <a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">Home</a>
+            <a class="nav" href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">Home</a>
             <!--          <a href="#" style="margin-left: 10px;">Join</a>-->
-            <a href="#" style="margin-left: 10px;">Login</a>
-            <a href="#" style="margin-left: 10px;">MyPage</a>
+            <a class="nav" href="#" style="margin-left: 10px;">Login</a>
+            <a class="nav" href="#" style="margin-left: 10px;">MyPage</a>
         </div>
     </div>
     </div>
@@ -46,13 +50,13 @@
                         </dl>
                     </div>
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button id="categoryDropdownBtn" class="btn btn-dark" type="button">
                             카테고리 선택
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-                            <a class="dropdown-item" href="#" data-value="카테고리1">카테고리 1</a>
-                            <a class="dropdown-item" href="#" data-value="카테고리2">카테고리 2</a>
-                            <a class="dropdown-item" href="#" data-value="카테고리3">카테고리 3</a>
+                        <div id="categoryDropdown" class="dropdown-menu" aria-labelledby="categoryDropdownBtn">
+                            <label class="dropdown-item"><input type="checkbox" name="category" value="카테고리1"> 카테고리 1</label>
+                            <label class="dropdown-item"><input type="checkbox" name="category" value="카테고리2"> 카테고리 2</label>
+                            <label class="dropdown-item"><input type="checkbox" name="category" value="카테고리3"> 카테고리 3</label>
                         </div>
                     </div>
                 </div>
@@ -75,8 +79,19 @@
         </div>
     </div>
 </div>
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+    <div class="container">
+        <div class="copyright">
+            &copy;  <strong><span>TechTalk</span></strong>
+        </div>
+    </div>
+</footer><!-- End Footer -->
 <!-- 부트스트랩 JavaScript 라이브러리 -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 <script src="assets/js/article.js"></script>
 
 </body>
