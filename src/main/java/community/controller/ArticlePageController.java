@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Tag(name = "아티클 Page")
@@ -36,9 +38,12 @@ public class ArticlePageController {
     @GetMapping("/articles/{type}")
     public String showArticles(Model model, @PathVariable CategoryType type){
         List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
+        //id 순으로 정렬.
+        Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
         model.addAttribute("articles", articles);
         return "/site/free";
     }
+
 
     // 메인페이지의 공지사항 클릭시 & 게시글 목록 페이지에서 특정 게시글 클릭 시 : 해당 게시글 상세 페이지
     @GetMapping("/article/{id}")
@@ -48,6 +53,6 @@ public class ArticlePageController {
     ) {
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
         model.addAttribute("article", article);
-        return "게시글 상세 페이지 url";
+        return "/site/articleDetail";
     }
 }
