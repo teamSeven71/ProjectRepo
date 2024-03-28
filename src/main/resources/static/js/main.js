@@ -36,7 +36,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -99,7 +99,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -108,7 +108,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -118,7 +118,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -152,9 +152,72 @@
 
   heroCarouselItems.forEach((item, index) => {
     (index === 0) ?
-    heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>":
-      heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
+        heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>" :
+        heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
   });
+
+  let currentPage = 1;
+  const itemsPerPage = 3;
+  const boardSections = document.querySelectorAll('.featured');
+
+  function showPage(pageNumber) {
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = pageNumber * itemsPerPage;
+
+    boardSections.forEach(section => {
+      const items = section.querySelectorAll('.icon-box');
+      items.forEach((item, index) => {
+        if (index >= startIndex && index < endIndex) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  function prevPage() {
+    if (currentPage > 1) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  }
+
+  function nextPage() {
+    if (currentPage < Math.ceil(boardSections[0].querySelectorAll('.icon-box').length / itemsPerPage)) {
+      currentPage++;
+      showPage(currentPage);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    showPage(currentPage);
+
+    const prevButton = document.querySelector('.featured .btn[data-bs-slide="prev"]');
+    const nextButton = document.querySelector('.featured .btn[data-bs-slide="next"]');
+
+    prevButton.addEventListener('click', prevPage);
+    nextButton.addEventListener('click', nextPage);
+  });
+
+
+  function prevPage() {
+    if (currentPage > 1) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  }
+
+  function nextPage() {
+    const totalItems = document.querySelectorAll('.icon-box').length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      showPage(currentPage);
+    }
+  }
+
+  showPage(currentPage);
 
   /**
    * Clients Slider
@@ -200,7 +263,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -222,9 +285,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -238,7 +301,7 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
@@ -262,7 +325,7 @@
   });
 
   /**
-   * Initiate Pure Counter 
+   * Initiate Pure Counter
    */
   new PureCounter();
 

@@ -1,5 +1,6 @@
 package community.dto.user;
 
+import community.constant.CategoryType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -25,6 +26,9 @@ public class ArticleDto {
         @NotBlank
         private String content; //내용
 
+        @NotBlank
+        private CategoryType type; //카테고리
+
 
 
     }
@@ -48,6 +52,8 @@ public class ArticleDto {
 
         private String content; //내용
 
+        private CategoryType type; //카테고리
+
 
         private List<CommentDto.CommentResponseDto> comments;
 
@@ -69,6 +75,8 @@ public class ArticleDto {
         private String title; //제목
 
         private String content; //내용
+
+        private CategoryType type; //카테고리
 
     }
 }
