@@ -57,6 +57,7 @@ public class ArticlePageController {
         return "/site/articleDetail";
     }
 
+    // 게시글 작성 페이지 & 수정 페이지
     @GetMapping("/article/post")
     public String postArticle(Model model, @RequestParam(required = false) Long id)
     {
