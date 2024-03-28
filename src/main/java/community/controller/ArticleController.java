@@ -5,6 +5,7 @@ import community.dto.user.ArticleDto;
 import community.service.ArticleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 @Tag(name = "아티클 CRUD")
 @RestController
 @RequestMapping("/api/articles")
+@Slf4j
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -57,7 +59,11 @@ public class ArticleController {
             @RequestBody ArticleDto.ArticleRequestDto request,
             @AuthenticationPrincipal UserEntity user  //
     ) {
+        log.info("title: " + request.getTitle());
+        log.info("content: " + request.getContent());
         ArticleDto.ArticleResponseDto updatedArticle = articleService.updateArticle(id, request, user);
+        log.info("new-title: " + updatedArticle.getTitle());
+        log.info("new-content: " + updatedArticle.getContent());
         return ResponseEntity.ok(updatedArticle);
     }
 

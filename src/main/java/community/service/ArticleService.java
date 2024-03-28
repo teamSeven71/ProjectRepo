@@ -81,12 +81,15 @@ public class ArticleService {
         ArticleEntity article = optionalArticle.get();
 
         // 게시물을 작성한 사용자와 현재 로그인한 사용자가 같은지 확인합니다.
-        if (!article.getUser().equals(user)) {
+        if (!article.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("You are not authorized to update this article.");
         }
 
         article.setTitle(request.getTitle());
         article.setContent(request.getContent());
+        article.setType(request.getType());
+
+        articleRepository.save(article);
 
         return articleMapper.toResponseDto(article);
     }
