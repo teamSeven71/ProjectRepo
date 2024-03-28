@@ -1,17 +1,33 @@
+//----------------------------게시글 삭제 ----------------------------------------
 const deleteButton = document.getElementById('delete-btn');
 
 if (deleteButton) {
+    console.log("버튼 있어여");
     deleteButton.addEventListener('click', event => {
+        console.log("버튼 눌렷어여");
         let id = document.getElementById('article-id').value;
-        fetch(`/api/article/${id}`, {
+        let typeValue = document.getElementById('article-type').value;
+        console.log(id);
+        console.log(typeValue);
+        fetch(`/api/articles/${id}`, {
             method: 'DELETE'
-        }).then(() => {
-            alert('삭제가 완료되었습니다');
-            location.replace('/articles');
-        });
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('삭제가 완료되었습니다');
+                    location.replace("/articles/" + typeValue);
+                } else {
+                    alert('게시물 삭제에 실패했습니다');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting article:', error);
+                alert('게시물 삭제 중 오류가 발생했습니다');
+            });
     });
 }
 
+//----------------------------게시글 수정 ----------------------------------------
 const modifyButton = document.getElementById('modify-btn');
 
 if (modifyButton) {
@@ -21,6 +37,16 @@ if (modifyButton) {
         let id = params.get('id');
         console.log(id);
 
+        const typeElements = document.getElementsByName('type');
+        let typeValue;
+
+        for (let i = 0; i < typeElements.length; i++) {
+            if (typeElements[i].checked) {
+                typeValue = typeElements[i].value;
+                break; // 체크된 요소를 찾으면 반복문 종료
+            }
+        }
+
         fetch(`/api/articles/${id}`, {
             method: 'PUT',
             headers: {
@@ -28,7 +54,8 @@ if (modifyButton) {
             },
             body: JSON.stringify({
                 title: document.getElementById('title').value,
-                content: document.getElementById('content').value
+                content: document.getElementById('content').value,
+                type: typeValue
             })
         }).then(() => {
             alert('수정이 완료되었습니다');
@@ -36,7 +63,7 @@ if (modifyButton) {
         });
     });
 }
-
+//----------------------------게시글 생성 ----------------------------------------
 const createButton = document.getElementById('create-btn');
 
 if (createButton) {

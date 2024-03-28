@@ -45,7 +45,7 @@ public class UserEntity implements UserDetails {
     @Builder.Default
     private List<ArticleEntity> articles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     private List<CommentEntity> comments = new ArrayList<>();
 
