@@ -32,7 +32,7 @@ if (modifyButton) {
             })
         }).then(() => {
             alert('수정이 완료되었습니다');
-            location.replace(`/articles/${id}`);
+            location.replace(`/article/${id}`);
         });
     });
 }
@@ -41,6 +41,17 @@ const createButton = document.getElementById('create-btn');
 
 if (createButton) {
     createButton.addEventListener('click', event => {
+
+        const typeElements = document.getElementsByName('type');
+        let typeValue;
+
+        for (let i = 0; i < typeElements.length; i++) {
+            if (typeElements[i].checked) {
+                typeValue = typeElements[i].value;
+                break; // 체크된 요소를 찾으면 반복문 종료
+            }
+        }
+
         fetch(`/api/articles`, {
             method: 'POST',
             headers: {
@@ -48,11 +59,12 @@ if (createButton) {
             },
             body : JSON.stringify({
                 title: document.getElementById('title').value,
-                content: document.getElementById('content').value
+                content: document.getElementById('content').value,
+                type: typeValue
             }),
         }).then(() => {
             alert('등록 완료되었습니다');
-            location.replace("/articles");
+            location.replace("/articles/" + typeValue);
         })
     })
 }
