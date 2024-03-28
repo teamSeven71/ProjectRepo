@@ -30,6 +30,17 @@
     <!-- css 수정할때 여기에 적용하면 됩니다!-->
     <link href="/css/custom.css" rel="stylesheet">
 
+    <style>
+        button{
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            cursor:pointer;
+            font-size: 15px;
+            background: #e96b56;
+        }
+    </style>
+
     <!-- =======================================================
     * Template Name: Eterna
     * Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
@@ -121,6 +132,7 @@
                         <div class="entry-meta">
                             <ul>
                                 <input type="hidden" id="article-id" th:value="${article.id}">
+                                <input type="hidden" id="article-type" th:value="${article.type}">
                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> nickName나올 계획<div th:text="${article.nickName}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <div th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm:ss')}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
@@ -128,7 +140,7 @@
                                 <li class="d-flex align-items-center"><button type="button" id="modify-btn"
                                                                               th:onclick="|location.href='@{/article/post?id={articleId}(articleId=${article.id})}'|"
                                                                               class="btn btn-primary btn-sm">수정</button></li>
-                                <li class="d-flex align-items-center"><a href ="#">삭제</a></li>
+                                <li class="d-flex align-items-center"><button type="button" id="delete-btn" class="btn btn-primary btn-sm">삭제</button></li>
                             </ul>
                         </div>
 
@@ -276,6 +288,7 @@
 
 <!-- Template Main JS File -->
 <script src="/js/main.js"></script>
+<script src="/js/article.js"></script>
 
 </body>
 

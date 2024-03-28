@@ -62,7 +62,7 @@ public class ArticleService {
         ArticleEntity article = optionalArticle.get();
 
         // 게시물을 작성한 사용자와 현재 로그인한 사용자가 같은지 확인합니다.
-        if (!article.getUser().equals(user)) {
+        if (!article.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("You are not authorized to delete this article.");
         }
 
