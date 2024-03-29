@@ -121,11 +121,17 @@ li {
     font-size: 1.4rem;
 }
 
+.bt_wrap #create-btn{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.2rem;
+}
 .bt_wrap {
     margin-top: 30px;
     text-align: center;
     font-size: 1.2rem;
 }
+
 
 .bt_wrap a {
     display: inline-block;
@@ -142,12 +148,22 @@ li {
     margin-left: 0;
 }
 
-.bt_wrap .on {
+.bt_wrap .on1 {
     background-color: white;
-    width:60px;
+    width:80px;
     height:30px;
     border-radius: 10px;
     border: 1px solid #ccc;
+    color:#e96b56;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.bt_wrap .on2 {
+    background-color: white;
+    width:80px;
+    height:30px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    /*color:#e96b56;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .bt_wrap .on:hover {
