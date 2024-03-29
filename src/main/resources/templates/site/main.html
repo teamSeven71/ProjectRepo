@@ -68,7 +68,7 @@
 
         <div id="items" class="carousel-inner" role="listbox">
           <!-- for each 반복문으로 조회한 공지 글 표시 -->
-          <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg)" th:each="item: ${notices}">
+          <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg)" th:each="item, iterStat: ${notices}" th:if="${iterStat.index lt 3}">
             <input type="hidden" id="article-id" th:value="${item.id}">
             <div class="carousel-container">
               <div class="carousel-content">

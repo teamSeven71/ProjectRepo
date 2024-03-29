@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
 
-    @Query("select a from ArticleEntity a where a.type = :type ORDER BY a.createAt DESC")
+    @Query("select a from ArticleEntity a where a.type = :type")
     List<ArticleEntity> findAllCategory(CategoryType type);
 
 }
