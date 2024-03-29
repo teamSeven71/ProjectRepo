@@ -41,7 +41,11 @@
     min-height: 10px;
     text-align: center;
 }
-
+.board_wrap h3{
+    color:#eb7b68;
+    text-align: left;
+    font-size:30px
+}
 
 .board_write .info dl {
     width: 50%;
@@ -61,6 +65,19 @@
 .board_write .info dd {
     width: 100%;
     margin-right: 10px;
+}
+
+.board_write button {
+
+    background-color: white;
+    width:60px;
+    height:30px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    color:#e96b56;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 50px;
 }
 
 .board_write .title input[type="text"],
@@ -148,22 +165,13 @@ li {
     margin-left: 0;
 }
 
-.bt_wrap .on1 {
+.bt_wrap .on {
     background-color: white;
     width:80px;
     height:30px;
     border-radius: 10px;
     border: 1px solid #ccc;
     color:#e96b56;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.bt_wrap .on2 {
-    background-color: white;
-    width:80px;
-    height:30px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    /*color:#e96b56;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .bt_wrap .on:hover {
@@ -181,16 +189,12 @@ li {
     border-bottom: 1px dashed darkgrey;
     font-size: 0;
 }
-.board_wrap h3{
-    color:#eb7b68;
-    text-align: left;
-    font-size:30px
-}
 
 .board_write .title dl {
     font-size: 0;
     margin-top: 15px;
     margin-bottom: 15px;
+
 }
 
 .board_write .title dt,
@@ -208,8 +212,14 @@ li {
 }
 
 .board_write .title dd {
-    width: calc(100% - 100px);
+    width: calc(100% - 280px);
 }
+.board_write .title input[type="password"] {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-left: -100px; /* 비밀번호 입력칸을 왼쪽으로 이동시킴 */
+}
+
 
 .board_write .title input[type="text"],
 .board_write .info input[type="text"],

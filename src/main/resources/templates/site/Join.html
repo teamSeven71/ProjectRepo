@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>게시글 생성</title>
-    <link rel="stylesheet" href="assets/css/login.css"/>
+    <link rel="stylesheet" href="assets/css/join.css"/>
     <!-- 부트스트랩 CSS 링크 -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -36,6 +36,7 @@
 <div class="board_wrap">
     <div class="board_create">
         <div class="board_title">
+            <h3>회원 가입</h3>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
@@ -43,18 +44,32 @@
                     <div style="flex: 1;">
                         <dl>
                             <dt>아이디</dt>
-                            <dd><input type="text" placeholder="아이디 입력" id="id"/></dd>
+                            <dd>
+                                <input type="text" placeholder="아이디 입력" id="id"/>
+                                <button onclick="checkDuplicate('id')">check</button>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>닉네임</dt>
+                            <dd>
+                                <input type="text" placeholder="닉네임 입력" id="nickName"/>
+                                <button onclick="checkDuplicate('nickName')">check</button>
+                            </dd>
                         </dl>
                         <dl>
                             <dt>비밀번호</dt>
-                            <dd><input type="text" placeholder="비밀번호 입력" id="title"/></dd>
+                            <dd>
+                                <input type="text" placeholder="비밀번호 입력" id="password"/>
+                                <button onclick="checkDuplicate('password')">check</button>
+                            </dd>
+
                         </dl>
                     </div>
 
                 </div>
 
                 <div class="bt_wrap">
-                    <button id="create-btn" class="on" type="submit">로그인</button>
+                    <button id="create-btn1" class="on" type="submit">등록</button>
                 </div>
             </div>
         </div>
