@@ -44,8 +44,6 @@ public interface ArticleMapper {
 
 
 
-
-
     /**
      * Dto -> Entity
      */
@@ -56,7 +54,6 @@ public interface ArticleMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "userEntity")
-    @Mapping(target = "type", ignore = true)
     ArticleEntity toReqeustEntity(ArticleDto.ArticleRequestDto articleRequestDto, UserEntity userEntity);
 
 }

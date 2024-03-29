@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>게시글 생성</title>
+    <link rel="stylesheet" href="assets/css/login.css"/>
+    <!-- 부트스트랩 CSS 링크 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+</head>
+<body>
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <div class="logo">
+            <h1><a href="index.html">TechTalk</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        </div>
+        <!--          <li><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">홈</a></li>-->
+        <!--          <li><a href="#">회원가입</a></li>-->
+        <!--          <li><a href="#">로그인</a></li>-->
+        <div class="d-flex justify-content-end align-items-center mb-4">
+            <a class="nav" href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">Home</a>
+            <!--          <a href="#" style="margin-left: 10px;">Join</a>-->
+            <a class="nav" href="#" style="margin-left: 10px;">Login</a>
+            <a class="nav" href="#" style="margin-left: 10px;">MyPage</a>
+        </div>
+    </div>
+    </div>
+</header><!-- End Header -->
+<div class="board_wrap">
+    <div class="board_create">
+        <div class="board_title">
+        </div>
+        <div class="board_write_wrap">
+            <div class="board_write">
+                <div class="title d-flex align-items-center justify-content-between">
+                    <div style="flex: 1;">
+                        <dl>
+                            <dt>아이디</dt>
+                            <dd><input type="text" placeholder="아이디 입력" id="id"/></dd>
+                        </dl>
+                        <dl>
+                            <dt>비밀번호</dt>
+                            <dd><input type="text" placeholder="비밀번호 입력" id="title"/></dd>
+                        </dl>
+                    </div>
+
+                </div>
+
+                <div class="bt_wrap">
+                    <button id="create-btn" class="on" type="submit">로그인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+    <div class="container">
+        <div class="copyright">
+            &copy;  <strong><span>TechTalk</span></strong>
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/ -->
+            All Rights Reserved Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+<!-- 부트스트랩 JavaScript 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="assets/js/article.js"></script>
+
+</body>
+</html>

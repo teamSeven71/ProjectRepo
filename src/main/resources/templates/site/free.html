@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="on" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +71,10 @@
     <form class="d-flex justify-content-end align-items-center mb-4, form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="Search" id="searchInput">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="searchContent()">검색</button>
+        <button type="button" id="create-btn"
+                th:onclick="|location.href='@{/article/post}'|"
+                class="btn btn-secondary btn-sm mb-3">글 등록</button>
+
 
     </form>
     <table class="table mt-5">
@@ -83,15 +87,24 @@
             <th>수정 날짜</th>
         </tr>
         </thead>
-        <tbody id="posts-container">
-        <!-- 게시글이 표시될 영역 -->
+        <tbody>
+            <!-- 서버에서 받아온 게시물 데이터를 반복하여 출력합니다. -->
+            <tr th:each="article : ${articles}">
+                <td style="font-weight: bold;">
+                    <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}"></a>
+                </td>
+                <td th:text="${article.content}"></td>
+                <td th:text="${article.nickName}"></td>
+                <td th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#temporals.format(article.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
         </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    <!--<nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center" id="pagination">
-            <!-- 페이지네이션 영역 -->
+            &lt;!&ndash; 페이지네이션 영역 &ndash;&gt;
         </ul>
-    </nav>
+    </nav>-->
 </div>
 
 <!-- 부트스트랩 JS 링크 (선택사항) -->

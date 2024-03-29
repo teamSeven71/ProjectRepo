@@ -23,10 +23,11 @@ public class ArticleEntity extends TimeStamp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="title", nullable=false)
     private String title; //제목
 
     @Lob
-    @Column(columnDefinition = "TEXT")
+    @Column(name="content", nullable=false, columnDefinition = "TEXT")
     private String content; //내용
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,9 +36,11 @@ public class ArticleEntity extends TimeStamp {
 
 
     @Enumerated(EnumType.STRING)
-    private CategoryType type = CategoryType.ARTICLE;
+    @Column(name="type", nullable=false)
+    private CategoryType type;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<CommentEntity> comments = new ArrayList<>();
 
 }

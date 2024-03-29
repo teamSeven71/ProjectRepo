@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="on" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -10,22 +10,22 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Eterna
@@ -46,17 +46,18 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.html">TechTalk</a></h1>
+        <h1><a onclick="location.href='/techhome'">TechTalk</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-         <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+         <a href="index.html"><img src="/img/logo.png" alt="" class="img-fluid"></a>
       </div>
 <!--          <li><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">홈</a></li>-->
 <!--          <li><a href="#">회원가입</a></li>-->
 <!--          <li><a href="#">로그인</a></li>-->
-        <div class="nav">
-          <a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">Home</a>
-          <a href="#" style="margin-left: 10px;">Login</a>
-          <a href="#" style="margin-left: 10px;">MyPage</a>
+        <div class="d-flex justify-content-end align-items-center mb-4">
+          <a onclick="location.href='/techhome'">Home</a>
+<!--          <a href="#" style="margin-left: 10px;">Join</a>-->
+          <a onclick="location.href='/login'" style="margin-left: 10px;">Login</a>
+          <a onclick="location.href='/admin'" style="margin-left: 10px;">MyPage</a>
         </div>
     </div>
     </div>
@@ -69,19 +70,26 @@
 
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-        <div class="carousel-inner" role="listbox">
+        <div id="items" class="carousel-inner" role="listbox">
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+          <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg)" th:each="item: ${notices}">
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown"><span> 공지사항 </span></h2>
-                <p class="animate__animated animate__fadeInUp"> 공지사항1 </p>
+                <h2 class="animate__animated animate__fadeInDown">
+                  <td style="font-weight: bold;">
+                    <a th:text="${item.title}"></a>
+<!--                    <a th:href="@{/boards/{id}(id=${item.id})}" th:text="${item.title}"></a>-->
+                  </td>
+                </h2>
+                <p class="animate__animated animate__fadeInUp">
+                  <td th:text="${item.content}"></td>
+                </p>
                 <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
               </div>
             </div>
           </div>
           <!-- Slide 2 -->
-          <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+          <!--<div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown"><span> 공지사항 </span></h2>
@@ -89,7 +97,7 @@
                 <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
               </div>
             </div>
-          </div>
+          </div>-->
 
 
         </div>
@@ -116,7 +124,7 @@
           <div class="col-lg-4">
             <div class="icon-box">
               <i class="bi bi-card-checklist"></i>
-              <h3><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/free.html?_ijt=hkmihg0v2rf55p4piqtbn6n2l&_ij_reload=RELOAD_ON_SAVE">
+              <h3><a th:href="@{/articles/{type}(type= ${'ARTICLE'})}">
                 자유게시판</a></h3>
             </div>
           </div>
@@ -197,16 +205,16 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="/js/main.js"></script>
 
 </body>
 
