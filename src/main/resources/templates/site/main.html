@@ -48,14 +48,10 @@
       <div class="logo">
         <h1><a onclick="location.href='/techhome'">TechTalk</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-         <a href="index.html"><img src="/img/logo.png" alt="" class="img-fluid"></a>
+         <a href="main.html"><img src="/img/logo.png" alt="" class="img-fluid"></a>
       </div>
-<!--          <li><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">홈</a></li>-->
-<!--          <li><a href="#">회원가입</a></li>-->
-<!--          <li><a href="#">로그인</a></li>-->
         <div class="d-flex justify-content-end align-items-center mb-4">
           <a onclick="location.href='/techhome'">Home</a>
-<!--          <a href="#" style="margin-left: 10px;">Join</a>-->
           <a onclick="location.href='/login'" style="margin-left: 10px;">Login</a>
           <a onclick="location.href='/admin'" style="margin-left: 10px;">MyPage</a>
         </div>
@@ -71,37 +67,26 @@
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
         <div id="items" class="carousel-inner" role="listbox">
-          <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg)" th:each="item: ${notices}">
+          <!-- for each 반복문으로 조회한 공지 글 표시 -->
+          <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg)" th:each="item, iterStat: ${notices}" th:if="${iterStat.index lt 3}">
+            <input type="hidden" id="article-id" th:value="${item.id}">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">
                   <td style="font-weight: bold;">
-                    <a th:text="${item.title}"></a>
-<!--                    <a th:href="@{/boards/{id}(id=${item.id})}" th:text="${item.title}"></a>-->
+                    <td th:text="${item.title}"></td>
                   </td>
                 </h2>
                 <p class="animate__animated animate__fadeInUp">
                   <td th:text="${item.content}"></td>
                 </p>
-                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+                <a href="" class="btn-get-started animate__animated animate__fadeInUp" th:href="@{/article/{id}(id=${item.id})}">Read More</a>
               </div>
             </div>
           </div>
-          <!-- Slide 2 -->
-          <!--<div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown"><span> 공지사항 </span></h2>
-                <p class="animate__animated animate__fadeInUp"> 공지사항2 </p>
-                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
-              </div>
-            </div>
-          </div>-->
-
-
+          <!-- for each end -->
         </div>
-
+        <!-- 공지사항 넘기는 버튼 -->
         <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
           <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
         </a>
@@ -109,14 +94,14 @@
         <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
           <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
         </a>
-
+        <!-- 공지사항 넘기는 버튼 end -->
       </div>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= Featured Section ======= -->
+    <!-- ======= Featured(카테고리) Section ======= -->
     <section id="featured" class="featured">
       <div class="container">
 
@@ -131,14 +116,14 @@
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-bar-chart"></i>
-              <h3><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/java.html?_ijt=hkmihg0v2rf55p4piqtbn6n2l&_ij_reload=RELOAD_ON_SAVE">
+              <h3><a th:href="@{/articles/{type}(type= ${'JAVA'})}">
                 Java 게시판</a></h3>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/JavaScript.html?_ijt=hkmihg0v2rf55p4piqtbn6n2l&_ij_reload=RELOAD_ON_SAVE">
+              <h3><a th:href="@{/articles/{type}(type= ${'JS'})}">
                 Java Script 게시판</a></h3>
             </div>
           </div>
@@ -147,21 +132,21 @@
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/Python.html?_ijt=hkmihg0v2rf55p4piqtbn6n2l&_ij_reload=RELOAD_ON_SAVE">
+              <h3><a th:href="@{/articles/{type}(type= ${'PYTHON'})}">
                 Python 게시판</a></h3>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/Database.html?_ijt=hkmihg0v2rf55p4piqtbn6n2l&_ij_reload=RELOAD_ON_SAVE">
+              <h3><a th:href="@{/articles/{type}(type= ${'DB'})}">
                 DB 게시판</a></h3>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/SQL.html?_ijt=hkmihg0v2rf55p4piqtbn6n2l&_ij_reload=RELOAD_ON_SAVE">
+              <h3><a th:href="@{/articles/{type}(type= ${'SQL'})}">
                 SQL 게시판</a></h3>
             </div>
           </div>
@@ -170,19 +155,20 @@
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/etc.html?_ijt=hkmihg0v2rf55p4piqtbn6n2l&_ij_reload=RELOAD_ON_SAVE">
+              <h3><a th:href="@{/articles/{type}(type= ${'ETC'})}">
                 기타 질문 게시판</a></h3>
             </div>
           </div>
         </div>
+        <!-- ======= 카테고리 넘기는 버튼 ======= -->
         <div class="row mt-4">
           <div class="col-lg-12 text-center">
             <a class="btn btn-primary" href="#" role="button" data-bs-slide="prev">ᐊ</a>
             <a class="btn btn-primary" href="#" role="button" data-bs-slide="next">ᐅ</a>
           </div>
-        </div>
+        </div> <!-- ======= 카테고리 넘기는 버튼 end ======= -->
       </div>
-    </section><!-- End Featured Section -->
+    </section><!-- End Featured(카테고리) Section -->
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
