@@ -49,25 +49,29 @@
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
 </head>
-
 <body>
-
-<!-- ======= Header ======= -->
 <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-between align-items-center">
-
-        <div class="logo">
-            <h1><a href="main.html">TechTalk</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="main.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-        <div class="d-flex justify-content-end align-items-center mb-4">
-            <a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">Home</a>
-            <a href="#" style="margin-left: 10px;">Login</a>
-            <a href="#" style="margin-left: 10px;">MyPage</a>
+    <div class="container-fluid" style="max-width: 1117.5px;">
+        <div class="row">
+            <div class="col">
+                <div class="logo">
+                    <h1><a onclick="location.href='/techhome'">TechTalk</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <a href="main.html"><img src="/img/logo.png" alt="" class="img-fluid"></a>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex justify-content-end align-items-center mb-4">
+                    <a class="nav" onclick="location.href='/techhome'">Home</a>
+                    <a class="nav" onclick="location.href='/login'" style="margin-left: 10px;">Login</a>
+                    <a class="nav" onclick="location.href='/admin'" style="margin-left: 10px;">MyPage</a>
+                </div>
+            </div>
         </div>
     </div>
-</header>
+</header><!-- End Header -->
+
+
 <!--<header id="header" class="d-flex align-items-center">-->
 <!--    <div class="container d-flex justify-content-between align-items-center">-->
 
@@ -112,28 +116,22 @@
 <!--</header>&lt;!&ndash; End Header &ndash;&gt;-->
 
 <main id="main">
-
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
-
             <ol>
                 <li><a href="main.html">Home</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ol>
-            <h2>Title</h2>
-
+            <h2> <div th:text="${article.type}"></div></h2>
         </div>
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">
-
             <div class="row">
-
                 <div class="col-lg-8 entries">
-
                     <article class="entry entry-single">
 
                         <!--                        <div class="entry-img">-->
@@ -148,7 +146,7 @@
                             <ul>
                                 <input type="hidden" id="article-id" th:value="${article.id}">
                                 <input type="hidden" id="article-type" th:value="${article.type}">
-                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> nickName나올 계획<div th:text="${article.nickName}"></div></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <div th:text="${article.nickName}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <div th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm:ss')}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
                                         href="blog-single.html">댓글 개수 어케함?</a></li>
