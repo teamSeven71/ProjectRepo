@@ -38,3 +38,27 @@
 .pagination-link {
     margin-right: 5px;
 }
+
+#footer {
+    padding: 20px 0;
+    color: white; /* 텍스트 색상을 흰색으로 지정 */
+    margin-top: 100px; /* 마진 탑을 추가하여 상단으로 이동 */
+}
+
+#footer a {
+    color: #ff6a00; /* 하이퍼링크의 텍스트 색상을 오렌지로 지정 */
+}
+
+#searchInput {
+    border-color: #ff6a00 !important; /* 검색 입력란 테두리 색상을 진한 주황으로 지정 */
+}
+
+#create-btn {
+    background-color: #ff6a00; /* 글 작성 버튼 배경색을 진한 주황으로 지정 */
+    border-color: #ff6a00; /* 글 작성 버튼 테두리 색상을 진한 주황으로 지정 */
+}
+
+#create-btn:hover {
+    background-color: darkorange; /* 마우스를 올렸을 때의 버튼 배경색을 진한 주황으로 지정 */
+    border-color: darkorange; /* 마우스를 올렸을 때의 버튼 테두리 색상을 진한 주황으로 지정 */
+}
