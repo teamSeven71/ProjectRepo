@@ -1,12 +1,10 @@
 package community.controller;
 
 import community.constant.CategoryType;
-import community.domain.user.ArticleEntity;
 import community.dto.user.ArticleDto;
 import community.service.ArticleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +30,7 @@ public class ArticlePageController {
     public String showNotice(Model model){
         List<ArticleDto.ArticleResponseDto> notices = articleService.getAllArticlesByCategory(CategoryType.NOTICE);
         model.addAttribute("notices", notices);
-        return "/site/index";
+        return "/site/main";
     }
 
     // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
@@ -42,7 +40,7 @@ public class ArticlePageController {
         //id 순으로 정렬.
         Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
         model.addAttribute("articles", articles);
-        return "/site/free";
+        return "/site/articleList";
     }
 
 
