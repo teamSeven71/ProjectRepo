@@ -197,18 +197,16 @@
 
                         <div class="reply-form">
                             <h4>답변을 남겨주세요!</h4>
-                            <form action="">
+                            <form action="#" id="comment-form"> <!-- action 속성을 비워두거나 #으로 설정 -->
                                 <div class="row">
                                     <div class="col form-group">
-                                        <textarea name="comment" class="form-control"
-                                                  placeholder="Your Comment*"></textarea>
+                                        <textarea name="comment" class="form-control" placeholder="Your Comment*" id="comment"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">댓글 작성</button>
-
+                                <button type="submit" class="btn btn-primary" id="create-comment">댓글 작성</button>
                             </form>
-
                         </div>
+
 
                     </div><!-- End blog comments -->
 

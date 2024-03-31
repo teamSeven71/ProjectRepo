@@ -96,6 +96,30 @@ if (createButton) {
     })
 }
 
+//----------------------------댓글 생성 ----------------------------------------
+const createComment = document.getElementById('create-comment');
+
+if (createComment) {
+    createComment.addEventListener('click', event => {
+
+        let id = document.getElementById('article-id').value;
+
+        fetch(`/api/comments/create`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify({
+                articleId: id,
+                content: document.getElementById('comment').value
+            }),
+        }).then(() => {
+            alert('등록 완료되었습니다');
+            location.replace("/article/" + id);
+        })
+    })
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     var dropdownBtn = document.getElementById("categoryDropdownBtn");
     var dropdownMenu = document.getElementById("categoryDropdown");

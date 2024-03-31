@@ -45,7 +45,7 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    //해당 게시글의 댓글 작성
+    // 해당 게시글의 댓글 작성
     public CommentDto.CommentResponseDto createComment(Long userId, CommentDto.CommentRequestDto commentRequestDto) {
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("User not found with id: " + userId));
@@ -53,20 +53,19 @@ public class CommentService {
         ArticleEntity articleEntity = articleRepository.findById(commentRequestDto.getArticleId())
                 .orElseThrow(() -> new NoSuchElementException("Article not found"));
 
-
-        LocalDateTime currentTime = LocalDateTime.now();
+        // 댓글 생성 시간을 따로 설정할 필요 없음
         CommentEntity savedComment = commentRepository.save(commentMapper.toRequestEntity(commentRequestDto, userEntity, articleEntity));
 
-        savedComment.setCreateAt(currentTime);
-        savedComment = commentRepository.save(savedComment); //작성 시간 설정
+        // 이미 작성 시간이 설정되어 있을 것임
+        savedComment = commentRepository.save(savedComment);
 
         CommentDto.CommentResponseDto responseDto = commentMapper.toResponseDto(savedComment);
         responseDto.setUserId(userId);
         responseDto.setArticleId(commentRequestDto.getArticleId());
 
-
         return responseDto;
     }
+
 
     //댓글 get은 해당 Article 조회시 가져옴 -> ArticleService에서 처리
 

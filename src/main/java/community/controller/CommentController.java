@@ -1,5 +1,6 @@
 package community.controller;
 
+import community.domain.user.UserEntity;
 import community.dto.user.ArticleDto;
 import community.dto.user.CommentDto;
 import community.service.ArticleService;
@@ -7,6 +8,7 @@ import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +32,8 @@ public class CommentController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<CommentDto.CommentResponseDto> createComment(@RequestParam("userId") Long userId, @RequestBody CommentDto.CommentRequestDto commentRequestDto) {
-        CommentDto.CommentResponseDto responseDto = commentService.createComment(userId, commentRequestDto);
+    public ResponseEntity<CommentDto.CommentResponseDto> createComment(@AuthenticationPrincipal UserEntity user, @RequestBody CommentDto.CommentRequestDto commentRequestDto) {
+        CommentDto.CommentResponseDto responseDto = commentService.createComment(user.getId(),commentRequestDto);
         return ResponseEntity.ok().body(responseDto);
     }
 
