@@ -104,7 +104,7 @@ if (createComment) {
 
         let id = document.getElementById('article-id').value;
 
-        fetch(`/api/comments/create`, {
+        fetch(`/api/comments/create?articleId=${id}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -119,6 +119,31 @@ if (createComment) {
         })
     })
 }
+//----------------------------댓글 삭제 ----------------------------------------
+function deleteComment() {
+
+    // 삭제할 댓글의 ID 가져오기
+    let commentId = document.getElementById('comment-id').value;
+    let id = document.getElementById('article-id').value;
+
+    // 댓글 삭제 API 호출
+    fetch(`/api/comments/delete?commentId=${commentId}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('삭제가 완료되었습니다');
+                location.replace("/article/" + id);
+            } else {
+                alert('댓글 삭제에 실패했습니다');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting comment:', error);
+            alert('댓글 삭제 중 오류가 발생했습니다');
+        });
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
     var dropdownBtn = document.getElementById("categoryDropdownBtn");

@@ -25,7 +25,7 @@ public class CommentController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<CommentDto.CommentResponseDto>> readComment(@PathVariable Long articleId) {
+    public ResponseEntity<List<CommentDto.CommentResponseDto>> readComment(@RequestParam("articleId") Long articleId) {
         List<CommentDto.CommentResponseDto> comments = commentService.readComment(articleId);
         return ResponseEntity.ok().body(comments);
     }
@@ -46,7 +46,7 @@ public class CommentController {
 
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteComment(@RequestParam Long commentId) {
+    public ResponseEntity<?> deleteComment(@RequestParam("commentId") Long commentId) {
         commentService.deleteComment(commentId);
         return ResponseEntity.ok().body("Deleted Comment Id : " + commentId);
     }

@@ -187,8 +187,9 @@
                             <div class="d-flex" th:each="comment : ${comments}">
                                 <div class="comment-img"><img src="/img/blog/comments-1.jpg" alt=""></div>
                                 <div>
+                                    <input type="hidden" id="comment-id" th:value="${comment.id}">
                                     <h5><a href="" th:text="${comment.nickName}"></a><div><a href="#" class="likeReply"><i
-                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#" class="updateReply"><i class="bi bi-pen-fill"></i>수정</a>  <a href="#" class="deleteReply"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
+                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#" class="updateReply"><i class="bi bi-pen-fill" id="modify-comment"></i>수정</a>  <a href="javascript:deleteComment()" class="deleteReply"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
                                     <time  th:text="${#temporals.format(comment.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></time>
                                     <p th:text="${comment.content}"></p>
                                 </div>
