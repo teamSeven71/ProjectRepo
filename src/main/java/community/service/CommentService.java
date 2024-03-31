@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -35,6 +37,13 @@ public class CommentService {
         this.articleRepository = articleRepository;
     }
 
+    //
+    public List<CommentDto.CommentResponseDto> readComment(Long articleId) {
+        List<CommentEntity> comments = commentRepository.findByArticleId(articleId);
+        return comments.stream()
+                .map(commentMapper::toResponseDto)
+                .collect(Collectors.toList());
+    }
 
     //해당 게시글의 댓글 작성
     public CommentDto.CommentResponseDto createComment(Long userId, CommentDto.CommentRequestDto commentRequestDto) {

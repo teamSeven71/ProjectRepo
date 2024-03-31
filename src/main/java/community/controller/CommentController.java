@@ -9,18 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "댓글 CRUD")
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
-
-
     private final CommentService commentService;
 
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
+
+    @GetMapping("/read")
+    public ResponseEntity<List<CommentDto.CommentResponseDto>> readComment(@PathVariable Long articleId) {
+        List<CommentDto.CommentResponseDto> comments = commentService.readComment(articleId);
+        return ResponseEntity.ok().body(comments);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<CommentDto.CommentResponseDto> createComment(@RequestParam("userId") Long userId, @RequestBody CommentDto.CommentRequestDto commentRequestDto) {
