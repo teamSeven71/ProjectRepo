@@ -80,12 +80,6 @@
     margin-left: 50px;
 }
 
-.board_write .title input[type="text"],
-.board_write .info input[type="text"],
-.board_write .info input[type="password"] {
-    width: 100%;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -213,25 +207,6 @@ li {
 
 .board_write .title dd {
     width: calc(100% - 280px);
-}
-.board_write .title input[type="password"] {
-    width: 100%;
-    margin-bottom: 30px;
-    margin-left: -100px; /* 비밀번호 입력칸을 왼쪽으로 이동시킴 */
-}
-
-
-.board_write .title input[type="text"],
-.board_write .info input[type="text"],
-.board_write .info input[type="password"] {
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.board_write .title input[type="text"] {
-    width: 50%;
-    margin-bottom: 30px;
-
 }
 
 .board_write .cont {
