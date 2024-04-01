@@ -28,5 +28,4 @@ public interface UserMapper {
     @Mapping(target = "articles", ignore = true)
     @Mapping(target = "comments", ignore = true)
     UserEntity toRequestEntity(UserDto.UserRequestDto userRequestDto);
-
 }
