@@ -64,6 +64,10 @@ public class ArticlePageController {
         List<CommentDto.CommentResponseDto> comments = commentService.readComment(id);
         model.addAttribute("comments", comments);
 
+        // 댓글 개수 조회
+        Long counts = commentService.countComment(id);
+        model.addAttribute("counts", counts);
+
         return "/site/articleDetail";
     }
 
