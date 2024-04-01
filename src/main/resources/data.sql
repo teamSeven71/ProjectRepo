@@ -1,10 +1,18 @@
 INSERT INTO user_entity (username, password, name, nickName, role) VALUES ('user1', 'p1', 'UserOne', 'NickName1', 'USER');
 INSERT INTO user_entity (username, password, name, nickName, role) VALUES ('user2', 'p2', 'UserTwo', 'NickName2', 'USER');
 
-
--- article 하나 생성 시 1set
-INSERT INTO article_entity (title, content, create_At, deleted_At, modified_At, good_Count, bad_Count, view_Count) VALUES ('공지1', '내용1', NOW(),null, NOW(), 0, 0, 0);
+INSERT INTO category_entity (category_name) VALUES ('ARTICLE');
 INSERT INTO category_entity (category_name) VALUES ('NOTICE');
+INSERT INTO category_entity (category_name) VALUES ('JAVA');
+INSERT INTO category_entity (category_name) VALUES ('SQL');
+INSERT INTO category_entity (category_name) VALUES ('JS');
+INSERT INTO category_entity (category_name) VALUES ('ETC');
+INSERT INTO category_entity (category_name) VALUES ('PYTHON');
+INSERT INTO category_entity (category_name) VALUES ('NOTICE');
+
+
+
+INSERT INTO article_entity (title, content, create_At, deleted_At, modified_At, good_Count, bad_Count, view_Count) VALUES ('공지1', '내용1', NOW(),null, NOW(), 0, 0, 0);
 INSERT INTO article_category_entity (article_id, category_id) VALUES (1, 1);
 
 -- INSERT INTO article_entity (title, content, create_At, modified_At, type) VALUES ('공지2', '내용2', NOW(), NOW(), 'NOTICE');
