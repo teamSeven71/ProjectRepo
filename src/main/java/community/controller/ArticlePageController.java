@@ -2,7 +2,9 @@ package community.controller;
 
 import community.constant.CategoryType;
 import community.dto.user.ArticleDto;
+import community.dto.user.CommentDto;
 import community.service.ArticleService;
+import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,12 @@ import java.util.List;
 @Controller
 public class ArticlePageController {
     private final ArticleService articleService;
+    private final CommentService commentService;
 
     @Autowired
-    public ArticlePageController(ArticleService articleService) {
+    public ArticlePageController(ArticleService articleService, CommentService commentService) {
         this.articleService = articleService;
+        this.commentService = commentService;
     }
 
     // 메인페이지 공지사항3개 조회
@@ -52,8 +56,14 @@ public class ArticlePageController {
             Model model,
             @PathVariable Long id
     ) {
+        //게시글 정보 조회
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
         model.addAttribute("article", article);
+
+        // 댓글 정보 조회
+        List<CommentDto.CommentResponseDto> comments = commentService.readComment(id);
+        model.addAttribute("comments", comments);
+
         return "/site/articleDetail";
     }
 
