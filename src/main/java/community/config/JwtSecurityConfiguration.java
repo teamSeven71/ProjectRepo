@@ -45,17 +45,18 @@ public class JwtSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth ->              // 인증, 인가 설정
-                        auth.requestMatchers(HttpMethod.GET, "/article/post").hasRole(Role.USER.name())
+                        auth.requestMatchers(HttpMethod.GET, "/article/post").hasRole("USER")
                                 .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/{id}", "/articles/{type}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/create").hasRole(Role.USER.name())
-                                .requestMatchers(HttpMethod.PATCH, "/update").hasRole(Role.USER.name())
-                                .requestMatchers(HttpMethod.DELETE, "/delete").hasRole(Role.USER.name())
-                                .requestMatchers(HttpMethod.GET, "/admin").hasRole(Role.ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/create").hasRole("USER")
+                                .requestMatchers(HttpMethod.PATCH, "/update").hasRole("USER")
+                                .requestMatchers(HttpMethod.DELETE, "/delete").hasRole("USER")
+                                .requestMatchers(HttpMethod.GET, "/admin").hasRole("ADMIN")
+                                .anyRequest().authenticated()
                 )
                 .formLogin(auth -> auth.loginPage("/login")     // 폼 기반 로그인 설정
                         .defaultSuccessUrl("/"))
-                .logout(auth -> auth.logoutSuccessUrl("/login") // 로그아웃 설정
+                .logout(auth -> auth.logoutSuccessUrl("/") // 로그아웃 설정
                         .invalidateHttpSession(true))
                 .csrf(AbstractHttpConfigurer::disable)// csrf 비활성화
                 .sessionManagement(session -> session.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login"));
