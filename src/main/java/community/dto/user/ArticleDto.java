@@ -52,14 +52,22 @@ public class ArticleDto {
 
         private String content; //내용
 
-        private CategoryType type; //카테고리
-
-
         private List<CommentDto.CommentResponseDto> comments;
 
         private LocalDateTime createAt;
 
         private LocalDateTime modifiedAt;
+
+        private LocalDateTime deletedAt;
+
+        private Long goodCount;
+
+        private Long badCount;
+
+        private Long viewCount;
+
+//        private String categoryName;
+
 
 
     }

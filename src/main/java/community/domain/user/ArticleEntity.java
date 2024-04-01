@@ -6,7 +6,9 @@ import community.constant.CategoryType;
 import community.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +36,20 @@ public class ArticleEntity extends TimeStamp {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-
-    @Enumerated(EnumType.STRING)
-    @Column(name="type", nullable=false)
-    private CategoryType type;
-
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @Builder.Default
     private List<CommentEntity> comments = new ArrayList<>();
+
+    @CreatedDate
+    private LocalDateTime deletedAt;
+
+    private Long goodCount;
+
+    private Long badCount;
+
+    private Long viewCount;
+
+    @OneToMany(mappedBy = "article")
+    private List<ArticleCategoryEntity> articleCategories = new ArrayList<>();
 
 }
