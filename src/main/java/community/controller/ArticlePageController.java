@@ -2,7 +2,9 @@ package community.controller;
 
 import community.constant.CategoryType;
 import community.dto.user.ArticleDto;
+import community.dto.user.CommentDto;
 import community.service.ArticleService;
+import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,12 @@ import java.util.List;
 @Controller
 public class ArticlePageController {
     private final ArticleService articleService;
+    private final CommentService commentService;
 
     @Autowired
-    public ArticlePageController(ArticleService articleService) {
+    public ArticlePageController(ArticleService articleService, CommentService commentService) {
         this.articleService = articleService;
+        this.commentService = commentService;
     }
 
     // 메인페이지 공지사항3개 조회
@@ -35,15 +39,15 @@ public class ArticlePageController {
         return "/site/main";
     }
 
-    // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
-    @GetMapping("/articles/{type}")
-    public String showArticles(Model model, @PathVariable CategoryType type){
-        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
-        //id 순으로 정렬.
-        Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
-        model.addAttribute("articles", articles);
-        return "/site/articleList";
-    }
+//    // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
+//    @GetMapping("/articles/{type}")
+//    public String showArticles(Model model, @PathVariable CategoryType type){
+//        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
+//        //id 순으로 정렬.
+//        Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
+//        model.addAttribute("articles", articles);
+//        return "/site/articleList";
+//    }
 
 
     // 메인페이지의 공지사항 클릭시 & 게시글 목록 페이지에서 특정 게시글 클릭 시 : 해당 게시글 상세 페이지
@@ -52,8 +56,14 @@ public class ArticlePageController {
             Model model,
             @PathVariable Long id
     ) {
+        //게시글 정보 조회
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
         model.addAttribute("article", article);
+
+        // 댓글 정보 조회
+        List<CommentDto.CommentResponseDto> comments = commentService.readComment(id);
+        model.addAttribute("comments", comments);
+
         return "/site/articleDetail";
     }
 

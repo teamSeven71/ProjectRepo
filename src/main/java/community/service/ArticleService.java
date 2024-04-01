@@ -30,19 +30,19 @@ public class ArticleService {
     }
 
     public ArticleDto.ArticleResponseDto save(@RequestBody ArticleDto.ArticleRequestDto request
-                                             ,@AuthenticationPrincipal UserEntity user
-                                    ){
+                                             ,@AuthenticationPrincipal UserEntity user){
+
         ArticleEntity article = articleMapper.toReqeustEntity(request, user);
         ArticleEntity savedArticle = articleRepository.save(article);
         return articleMapper.toResponseDto(article);
     }
 
-    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(CategoryType type) {
-        List<ArticleEntity> articles = articleRepository.findAllCategory(type);
-        return articles.stream()
-                .map(articleMapper::toResponseDto)
-                .collect(Collectors.toList());
-    }
+//    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(CategoryType type) {
+//        List<ArticleEntity> articles = articleRepository.findAllCategory(type);
+//        return articles.stream()
+//                .map(articleMapper::toResponseDto)
+//                .collect(Collectors.toList());
+//    }
 
     public ArticleDto.ArticleResponseDto getArticleById(Long id) {
         ArticleEntity article = articleRepository.findById(id)
@@ -87,7 +87,7 @@ public class ArticleService {
 
         article.setTitle(request.getTitle());
         article.setContent(request.getContent());
-        article.setType(request.getType());
+//        article.setType(request.getType());
 
         articleRepository.save(article);
 

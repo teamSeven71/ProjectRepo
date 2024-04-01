@@ -54,6 +54,11 @@ public interface ArticleMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "userEntity")
+    @Mapping(target = "deletedAt", ignore = true)
+    @Mapping(target = "goodCount", ignore = true)
+    @Mapping(target = "badCount", ignore = true)
+    @Mapping(target = "viewCount", ignore = true)
+    @Mapping(target = "articleCategories", ignore = true)
     ArticleEntity toReqeustEntity(ArticleDto.ArticleRequestDto articleRequestDto, UserEntity userEntity);
 
 }
