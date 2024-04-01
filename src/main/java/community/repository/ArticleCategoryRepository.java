@@ -12,5 +12,6 @@ import java.util.List;
 public interface ArticleCategoryRepository extends JpaRepository<CategoryEntity, Long> {
 
 
+    @Query("SELECT a FROM ArticleCategoryEntity a WHERE a.category.id = :categoryId")
     List<ArticleCategoryEntity> findByCategoryId(Long categoryId);
 }
