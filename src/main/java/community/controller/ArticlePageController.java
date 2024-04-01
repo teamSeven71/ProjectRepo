@@ -41,11 +41,11 @@ public class ArticlePageController {
 
     // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
     @GetMapping("/articles/{type}")
-    public String showArticles(Model model, @PathVariable CategoryType type){
-//        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
+    public String showArticles(Model model, @PathVariable String type){
+        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(type);
 //        //id 순으로 정렬.
-//        Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
-//        model.addAttribute("articles", articles);
+        Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
+        model.addAttribute("articles", articles);
         return "/site/articleList";
     }
 
