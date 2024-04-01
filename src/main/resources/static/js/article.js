@@ -141,10 +141,9 @@ function deleteComment() {
         });
 }
 //----------------------------댓글 수정 api----------------------------------------
-function updateComment() {
+function updateComment(commentId) {
 
-    // 삭제할 댓글의 ID 가져오기
-    let commentId = document.getElementById('comment-id').value;
+    // 삭제할 댓글의 ID 받아옴, article-id 정의.
     let id = document.getElementById('article-id').value;
 
     // 수정할 댓글의 내용 가져오기
@@ -181,7 +180,7 @@ function modifyComment(event) {
     let commentContainer = event.target.closest('.d-flex');
 
     // 해당 댓글의 commentId 가져오기
-    let commentId = commentContainer.querySelector('#comment-id').value;
+    let commentId = commentContainer.querySelector('.comment-id');
 
     // 댓글 내용 텍스트 엘리먼트를 가져옴
     let commentTextElement = commentContainer.querySelector('p');

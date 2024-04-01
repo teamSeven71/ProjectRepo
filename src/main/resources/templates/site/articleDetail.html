@@ -185,15 +185,26 @@
 
                         <div id="comment-1" class="comment">
                             <div class="d-flex" th:each="comment : ${comments}">
+                                <input type="hidden" class="comment-id" id="comment-id" th:value="${comment.id}">
                                 <div class="comment-img"><img src="/img/blog/comments-1.jpg" alt=""></div>
                                 <div>
-                                    <h5><a href="" th:text="${comment.nickName}"></a><div><a href="#" class="likeReply"><i
-                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#" class="updateReply" onclick="modifyComment(event)"><i class="bi bi-pen-fill" id="modify-comment"></i>수정</a>
-                                        <a href="javascript:deleteComment()" class="deleteReply"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
+                                    <h5>
+                                        <a href="" th:text="${comment.nickName}"></a>
+                                        <div>
+                                            <a href="#" class="likeReply">
+                                                <i class="bi bi-hand-thumbs-up-fill"></i> 좋아요
+                                            </a>
+                                            <a href="#" class="updateReply" onclick="modifyComment(event)">
+                                                <i class="bi bi-pen-fill" id="modify-comment"></i>수정
+                                            </a>
+                                            <a href="javascript:deleteComment()" class="deleteReply">
+                                                <i class="bi bi-trash-fill"></i>삭제
+                                            </a>
+                                        </div>
+                                    </h5>
                                     <time  th:text="${#temporals.format(comment.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></time>
                                     <p th:text="${comment.content}"></p>
                                 </div>
-                                <input type="hidden" id="comment-id" th:value="${comment.id}">
                             </div>
                         </div><!-- End comment -->
 
@@ -208,8 +219,6 @@
                                 <button type="submit" class="btn btn-primary" id="create-comment">댓글 작성</button>
                             </form>
                         </div>
-
-
                     </div><!-- End blog comments -->
 
                 </div><!-- End blog entries list -->
