@@ -19,7 +19,7 @@
         <div class="logo">
             <h1><a href="/">TechTalk</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
-            <a href="/"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+            <a href="/"><img src="/img/logo.png" alt="" class="img-fluid"></a>
         </div>
         <!--          <li><a href="http://localhost:63342/TechTalk/src/main/resources/templates/site/index.html?_ijt=eoi663qigssg77t6oj56e0g7d1&_ij_reload=RELOAD_ON_SAVE">홈</a></li>-->
         <!--          <li><a href="#">회원가입</a></li>-->
@@ -61,13 +61,20 @@
                             <dt>이름</dt>
                             <dd>
                                 <input type="text" placeholder="이름 입력" id="name" name="name"/>
-                                <button onclick="checkDuplicate('name')">check</button>
+                                <button class="check-btn-invisible" onclick="checkDuplicate('name')">check</button>
                             </dd>
                         </dl>
                         <dl>
                             <dt>비밀번호</dt>
                             <dd>
-                                <input type="password" placeholder="비밀번호 입력" id="password" name="password"/>
+                                <input type="password" placeholder="PW 입력" id="password" name="password"/>
+                                <button class="check-btn-invisible" onclick="checkDuplicate('password')">check</button>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>PW 확인</dt>
+                            <dd>
+                                <input type="password" placeholder="PW 확인" id="password2" name="password"/>
                                 <button onclick="checkDuplicate('password')">check</button>
                             </dd>
                         </dl>

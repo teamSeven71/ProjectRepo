@@ -47,7 +47,7 @@ public class JwtSecurityConfiguration {
         httpSecurity.authorizeHttpRequests(auth ->              // 인증, 인가 설정
                         auth.requestMatchers(HttpMethod.GET, "/article/post").hasRole(Role.USER.name())
                                 .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/{id}", "/articles/{type}").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user","/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/create").hasRole(Role.USER.name())
                                 .requestMatchers(HttpMethod.PATCH, "/update").hasRole(Role.USER.name())
                                 .requestMatchers(HttpMethod.DELETE, "/delete").hasRole(Role.USER.name())
