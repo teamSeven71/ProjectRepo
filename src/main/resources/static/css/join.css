@@ -67,6 +67,10 @@
     margin-right: 10px;
 }
 
+.check-btn-invisible {
+    visibility: hidden;
+}
+
 .board_write button {
 
     background-color: white;
