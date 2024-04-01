@@ -38,7 +38,7 @@ public class JwtSecurityConfiguration {
     @Bean
     public WebSecurityCustomizer configure() {      // 스프링 시큐리티 기능 비활성화
         return web -> web.ignoring().requestMatchers(toH2Console())
-                .requestMatchers("/static/**", "/vendor/**", "/css/**", "/img/**", "/js/**");
+                .requestMatchers("/static/**", "/vendor/**", "/css/**", "/img/**", "/js/**","/swagger-ui/**");
     }
 
     // 특정 HTTP 요청에 대한 웹 기반 보안 구성
@@ -46,7 +46,7 @@ public class JwtSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth ->              // 인증, 인가 설정
                         auth.requestMatchers(HttpMethod.GET, "/article/post").hasRole("USER")
-                                .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/{id}", "/articles/{type}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/{id}", "/articles/{type}","/userinfo").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/create").hasRole("USER")
                                 .requestMatchers(HttpMethod.PATCH, "/update").hasRole("USER")
