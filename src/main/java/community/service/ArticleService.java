@@ -30,8 +30,8 @@ public class ArticleService {
     }
 
     public ArticleDto.ArticleResponseDto save(@RequestBody ArticleDto.ArticleRequestDto request
-                                             ,@AuthenticationPrincipal UserEntity user
-                                    ){
+                                             ,@AuthenticationPrincipal UserEntity user){
+
         ArticleEntity article = articleMapper.toReqeustEntity(request, user);
         ArticleEntity savedArticle = articleRepository.save(article);
         return articleMapper.toResponseDto(article);
