@@ -26,8 +26,12 @@ public class ArticleDto {
         @NotBlank
         private String content; //내용
 
-        @NotBlank
-        private CategoryType type; //카테고리
+//
+//        @NotBlank
+//        private CategoryType type; //카테고리
+
+        //카테고리명 요청
+        private List<Long> categories;
 
 
 
@@ -84,7 +88,10 @@ public class ArticleDto {
 
         private String content; //내용
 
-        private CategoryType type; //카테고리
+//        private CategoryType type; //카테고리
+
+        //수정 -> type ? List형태 Category
+        private List<Long> categories;
 
     }
 }
