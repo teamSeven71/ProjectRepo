@@ -180,10 +180,10 @@ function modifyComment(event) {
     let commentContainer = event.target.closest('.d-flex');
 
     // 해당 댓글의 commentId 가져오기
-    let commentId = commentContainer.querySelector('.comment-id');
+    let commentId = commentContainer.querySelector('.comment-id').value;
 
     // 댓글 내용 텍스트 엘리먼트를 가져옴
-    let commentTextElement = commentContainer.querySelector('p');
+    let commentTextElement = commentContainer.querySelector('.comment-content');
 
     // 댓글 내용을 수정할 수 있는 텍스트 입력란으로 변경
     let commentContent = commentTextElement.textContent.trim(); // 기존 댓글 내용 가져오기
@@ -199,7 +199,10 @@ function modifyComment(event) {
     let modifyButton = commentContainer.querySelector('.updateReply');
     modifyButton.innerHTML = '<i class="bi bi-x-circle-fill"></i> 취소';
     modifyButton.removeEventListener('click', modifyComment);
-    modifyButton.addEventListener('click', cancelModification);
+    modifyButton.addEventListener('click', function() {
+        // cancelModification(event); // 이벤트 객체를 전달하여 함수 호출
+        location.reload(); // 현재 페이지를 다시 불러오는 함수
+    });
 
     // 수정 완료 버튼 추가
     let confirmButton = document.createElement('a');
@@ -212,12 +215,14 @@ function modifyComment(event) {
     commentContainer.querySelector('.deleteReply').after(confirmButton);
 }
 
+/* 한번 누르는거까지 잘 작동하다가 2번째 누르면 작동 x (페이지 세로고침 안하면 작동 x) 그래서 그냥 페이지 새로고치 해버리려고 주석해둠
 function cancelModification(event) {
     // 수정 취소 시 초기 상태로 복구
-    let commentContainer = event.target.closest('.comment');
+    let commentContainer = event.target.closest('.d-flex');
     let textareaElement = commentContainer.querySelector('textarea');
     let commentTextElement = document.createElement('p');
-    commentTextElement.textContent = textareaElement.value;
+    let commentContent = commentContainer.querySelector('.comment-content').textContent; // 수정하기 전의 댓글 내용 가져오기
+    commentTextElement.textContent = commentContent;
     textareaElement.replaceWith(commentTextElement);
 
     // "좋아요", "삭제" 버튼 다시 표시
@@ -234,6 +239,7 @@ function cancelModification(event) {
     let confirmButton = commentContainer.querySelector('.confirmReply');
     confirmButton.remove();
 }
+*/
 //----------------------------------수정하기 버튼 end------------------------------
 
 document.addEventListener("DOMContentLoaded", function() {
