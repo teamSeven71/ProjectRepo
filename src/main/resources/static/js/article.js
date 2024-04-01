@@ -2,13 +2,11 @@
 const deleteButton = document.getElementById('delete-btn');
 
 if (deleteButton) {
-    console.log("버튼 있어여");
     deleteButton.addEventListener('click', event => {
-        console.log("버튼 눌렷어여");
+
         let id = document.getElementById('article-id').value;
         let typeValue = document.getElementById('article-type').value;
-        console.log(id);
-        console.log(typeValue);
+
         fetch(`/api/articles/${id}`, {
             method: 'DELETE'
         })
@@ -35,7 +33,6 @@ if (modifyButton) {
     modifyButton.addEventListener('click', event => {
         let params = new URLSearchParams(location.search);
         let id = params.get('id');
-        console.log(id);
 
         const typeElements = document.getElementsByName('type');
         let typeValue;
@@ -101,24 +98,24 @@ const createComment = document.getElementById('create-comment');
 
 if (createComment) {
     createComment.addEventListener('click', event => {
-
-        let id = document.getElementById('article-id').value;
-
-        fetch(`/api/comments/create?articleId=${id}`, {
+        event.preventDefault(); // 클릭 이벤트의 기본 동작인 폼 제출을 막습니다.
+        fetch(`/api/comments/create`, { // 랜덤 파라미터 추가
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body : JSON.stringify({
-                articleId: id,
+                articleId: document.getElementById('article-id').value,
                 content: document.getElementById('comment').value
             }),
         }).then(() => {
             alert('등록 완료되었습니다');
-            location.replace("/article/" + id);
+            // location.replace("/article/" + id);
+            location.reload(); // 현재 페이지를 다시 불러오는 함수
         })
     })
 }
+
 //----------------------------댓글 삭제 ----------------------------------------
 function deleteComment() {
 
@@ -144,10 +141,9 @@ function deleteComment() {
         });
 }
 //----------------------------댓글 수정 api----------------------------------------
-function updateComment() {
+function updateComment(commentId) {
 
-    // 삭제할 댓글의 ID 가져오기
-    let commentId = document.getElementById('comment-id').value;
+    // 삭제할 댓글의 ID 받아옴, article-id 정의.
     let id = document.getElementById('article-id').value;
 
     // 수정할 댓글의 내용 가져오기
@@ -181,13 +177,13 @@ function modifyComment(event) {
     event.preventDefault(); // 기본 이벤트 동작 방지
 
     // 수정하기 버튼을 누른 댓글 영역에 대한 참조를 가져옴
-    let commentContainer = event.target.closest('.comment');
+    let commentContainer = event.target.closest('.d-flex');
 
     // 해당 댓글의 commentId 가져오기
-    let commentId = commentContainer.querySelector('#comment-id').value;
+    let commentId = commentContainer.querySelector('.comment-id').value;
 
     // 댓글 내용 텍스트 엘리먼트를 가져옴
-    let commentTextElement = commentContainer.querySelector('p');
+    let commentTextElement = commentContainer.querySelector('.comment-content');
 
     // 댓글 내용을 수정할 수 있는 텍스트 입력란으로 변경
     let commentContent = commentTextElement.textContent.trim(); // 기존 댓글 내용 가져오기
@@ -203,7 +199,10 @@ function modifyComment(event) {
     let modifyButton = commentContainer.querySelector('.updateReply');
     modifyButton.innerHTML = '<i class="bi bi-x-circle-fill"></i> 취소';
     modifyButton.removeEventListener('click', modifyComment);
-    modifyButton.addEventListener('click', cancelModification);
+    modifyButton.addEventListener('click', function() {
+        // cancelModification(event); // 이벤트 객체를 전달하여 함수 호출
+        location.reload(); // 현재 페이지를 다시 불러오는 함수
+    });
 
     // 수정 완료 버튼 추가
     let confirmButton = document.createElement('a');
@@ -216,12 +215,14 @@ function modifyComment(event) {
     commentContainer.querySelector('.deleteReply').after(confirmButton);
 }
 
+/* 한번 누르는거까지 잘 작동하다가 2번째 누르면 작동 x (페이지 세로고침 안하면 작동 x) 그래서 그냥 페이지 새로고치 해버리려고 주석해둠
 function cancelModification(event) {
     // 수정 취소 시 초기 상태로 복구
-    let commentContainer = event.target.closest('.comment');
+    let commentContainer = event.target.closest('.d-flex');
     let textareaElement = commentContainer.querySelector('textarea');
     let commentTextElement = document.createElement('p');
-    commentTextElement.textContent = textareaElement.value;
+    let commentContent = commentContainer.querySelector('.comment-content').textContent; // 수정하기 전의 댓글 내용 가져오기
+    commentTextElement.textContent = commentContent;
     textareaElement.replaceWith(commentTextElement);
 
     // "좋아요", "삭제" 버튼 다시 표시
@@ -238,6 +239,7 @@ function cancelModification(event) {
     let confirmButton = commentContainer.querySelector('.confirmReply');
     confirmButton.remove();
 }
+*/
 //----------------------------------수정하기 버튼 end------------------------------
 
 document.addEventListener("DOMContentLoaded", function() {
