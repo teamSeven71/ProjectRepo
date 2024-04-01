@@ -55,14 +55,14 @@
         <div class="row">
             <div class="col">
                 <div class="logo">
-                    <h1><a onclick="location.href='/techhome'">TechTalk</a></h1>
+                    <h1><a onclick="location.href='/'">TechTalk</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <a href="main.html"><img src="/img/logo.png" alt="" class="img-fluid"></a>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="d-flex justify-content-end align-items-center mb-4">
-                    <a class="nav" onclick="location.href='/techhome'">Home</a>
+                    <a class="nav" onclick="location.href='/'">Home</a>
                     <a class="nav" onclick="location.href='/login'" style="margin-left: 10px;">Login</a>
                     <a class="nav" onclick="location.href='/admin'" style="margin-left: 10px;">MyPage</a>
                 </div>
@@ -120,8 +120,8 @@
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
             <ol>
-                <li><a href="main.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Blog</a></li>
             </ol>
             <h2> <div th:text="${article.type}"></div></h2>
         </div>
@@ -184,82 +184,31 @@
                         <h4 class="comments-count">4 Comments</h4>
 
                         <div id="comment-1" class="comment">
-                            <div class="d-flex">
+                            <div class="d-flex" th:each="comment : ${comments}">
                                 <div class="comment-img"><img src="/img/blog/comments-1.jpg" alt=""></div>
                                 <div>
-                                    <h5><a href="">Georgia Reader</a> <div><a href="#" class="likeReply"><i
-                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#" class="updateReply"><i class="bi bi-pen-fill"></i>수정</a>  <a href="#" class="deleteReply"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
-                                    <time datetime="2020-01-01">01 Jan, 2020</time>
-                                    <p>
-                                        Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut
-                                        sapiente quis molestiae est qui cum soluta.
-                                        Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
-                                    </p>
+                                    <h5><a href="" th:text="${comment.nickName}"></a><div><a href="#" class="likeReply"><i
+                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#" class="updateReply" onclick="modifyComment(event)"><i class="bi bi-pen-fill" id="modify-comment"></i>수정</a>
+                                        <a href="javascript:deleteComment()" class="deleteReply"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
+                                    <time  th:text="${#temporals.format(comment.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></time>
+                                    <p th:text="${comment.content}"></p>
                                 </div>
+                                <input type="hidden" id="comment-id" th:value="${comment.id}">
                             </div>
-                        </div><!-- End comment #1 -->
-
-                        <div id="comment-2" class="comment">
-                            <div class="d-flex">
-                                <div class="comment-img"><img src="/img/blog/comments-2.jpg" alt=""></div>
-                                <div>
-                                    <h5><a href="">Aron Alvarado</a> <div><a href="#" class="reply"><i
-                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#"><i class="bi bi-pen-fill"></i>수정</a>  <a href="#"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
-                                    <time datetime="2020-01-01">01 Jan, 2020</time>
-                                    <p>
-                                        Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet saepe.
-                                        Officiis illo ut beatae.
-                                    </p>
-                                </div>
-                            </div>
-                        </div><!-- End comment #2-->
-
-                        <div id="comment-3" class="comment">
-                            <div class="d-flex">
-                                <div class="comment-img"><img src="/img/blog/comments-5.jpg" alt=""></div>
-                                <div>
-                                    <h5><a href="">Nolan Davidson</a> <div><a href="#" class="reply"><i
-                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#"><i class="bi bi-pen-fill"></i>수정</a>  <a href="#"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
-                                    <time datetime="2020-01-01">01 Jan, 2020</time>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores assumenda, distinctio, doloribus ea facere facilis maxime neque nostrum odio officia pariatur perferendis, placeat quam quod sunt unde velit veritatis.
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div><!-- End comment #3 -->
-
-                        <div id="comment-4" class="comment">
-                            <div class="d-flex">
-                                <div class="comment-img"><img src="/img/blog/comments-6.jpg" alt=""></div>
-                                <div>
-                                    <h5><a href="">Kay Duggan</a> <div><a href="#" class="reply"><i
-                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#"><i class="bi bi-pen-fill"></i>수정</a>  <a href="#"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
-                                    <time datetime="2020-01-01">01 Jan, 2020</time>
-                                    <p>
-                                        Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit
-                                        tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in
-                                        fugiat.
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div><!-- End comment #4 -->
+                        </div><!-- End comment -->
 
                         <div class="reply-form">
                             <h4>답변을 남겨주세요!</h4>
-                            <form action="">
+                            <form action="#" id="comment-form"> <!-- action 속성을 비워두거나 #으로 설정 -->
                                 <div class="row">
                                     <div class="col form-group">
-                                        <textarea name="comment" class="form-control"
-                                                  placeholder="Your Comment*"></textarea>
+                                        <textarea name="comment" class="form-control" placeholder="Your Comment*" id="comment"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">댓글 작성</button>
-
+                                <button type="submit" class="btn btn-primary" id="create-comment">댓글 작성</button>
                             </form>
-
                         </div>
+
 
                     </div><!-- End blog comments -->
 

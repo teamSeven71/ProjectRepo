@@ -22,12 +22,12 @@ public class UserViewController {
     }
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "/site/login";
     }
 
     @GetMapping("/signup")
     public String signup() {
-        return "signup";
+        return "/site/Join";
     }
 
     // 관리자 페이지

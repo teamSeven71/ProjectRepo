@@ -8,8 +8,11 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import community.constant.Role;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,22 +38,27 @@ public class JwtSecurityConfiguration {
     @Bean
     public WebSecurityCustomizer configure() {      // 스프링 시큐리티 기능 비활성화
         return web -> web.ignoring().requestMatchers(toH2Console())
-                .requestMatchers("/static/**");
+                .requestMatchers("/static/**", "/vendor/**", "/css/**", "/img/**", "/js/**");
     }
 
     // 특정 HTTP 요청에 대한 웹 기반 보안 구성
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth ->              // 인증, 인가 설정
-                        auth.requestMatchers("/login", "/signup", "/user","/vendor/**","/css/**","/img/**","/js/**","/techhome").permitAll()
-                                .anyRequest().authenticated())
+                        auth.requestMatchers(HttpMethod.GET, "/article/post").hasRole(Role.USER.name())
+                                .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/{id}", "/articles/{type}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/create").hasRole(Role.USER.name())
+                                .requestMatchers(HttpMethod.PATCH, "/update").hasRole(Role.USER.name())
+                                .requestMatchers(HttpMethod.DELETE, "/delete").hasRole(Role.USER.name())
+                                .requestMatchers(HttpMethod.GET, "/admin").hasRole(Role.ADMIN.name())
+                )
                 .formLogin(auth -> auth.loginPage("/login")     // 폼 기반 로그인 설정
-                        .defaultSuccessUrl("/techhome"))
+                        .defaultSuccessUrl("/"))
                 .logout(auth -> auth.logoutSuccessUrl("/login") // 로그아웃 설정
                         .invalidateHttpSession(true))
-                .csrf(AbstractHttpConfigurer::disable);                  // csrf 비활성화
-
-//        httpSecurity.oauth2ResourceServer(auth -> auth.jwt(Customizer.withDefaults()));
+                .csrf(AbstractHttpConfigurer::disable)// csrf 비활성화
+                .sessionManagement(session -> session.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login"));
 
         return httpSecurity.build();
     }
@@ -59,34 +67,5 @@ public class JwtSecurityConfiguration {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public KeyPair keyPair() {
-        try {
-            var keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            return keyPairGenerator.generateKeyPair();
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
-    @Bean
-    public RSAKey rsaKey(KeyPair keyPair) {
-
-        return new RSAKey.Builder((RSAPublicKey) keyPair.getPublic()).privateKey(keyPair.getPrivate()).keyID(UUID.randomUUID().toString()).build();
-    }
-
-    @Bean
-    public JWKSource<SecurityContext> jwkSource(RSAKey rsaKey) {
-        var jwkSet = new JWKSet(rsaKey);
-
-        return (jwkSelector, context) -> jwkSelector.select(jwkSet);
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder(RSAKey rsaKey) throws JOSEException {
-        return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
     }
 }
