@@ -1,6 +1,8 @@
 package community.mapper.user;
 
+import community.domain.user.CategoryEntity;
 import community.domain.user.CommentEntity;
+import community.dto.user.CategoryDto;
 import community.dto.user.CommentDto;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -14,11 +16,8 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface CategoryMapper {
 
-//    /**
-//     * Entity -> Dto
-//     */
-//    @Mapping(source = "user.id", target = "userId")
-//    @Mapping(source = "article.id", target = "articleId")
-//    @Mapping(source = "user.nickName", target = "nickName")
-//    CommentDto.CommentResponseDto toResponseDto(CommentEntity commentEntity);
+    /**
+     * Entity -> Dto
+     */
+    CategoryDto.CategoryResponseDto toResponseDto(CategoryEntity categoryEntity);
 }
