@@ -61,14 +61,21 @@
                             <dt>이름</dt>
                             <dd>
                                 <input type="text" placeholder="이름 입력" id="name" name="name"/>
-                                <button onclick="checkDuplicate('name')">check</button>
+                                <button class="btn-invisible" onclick="checkDuplicate('name')">check</button>
                             </dd>
                         </dl>
                         <dl>
                             <dt>비밀번호</dt>
                             <dd>
                                 <input type="password" placeholder="비밀번호 입력" id="password" name="password"/>
-                                <button onclick="checkDuplicate('password')">check</button>
+                                <button class="btn-invisible" onclick="checkDuplicate('password')">check</button>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>PW확인</dt>
+                            <dd>
+                                <input type="password" placeholder="비밀번호 입력" id="password2" name="password2"/>
+                                <button onclick="checkDuplicate('password2')">check</button>
                             </dd>
                         </dl>
                     </div>
