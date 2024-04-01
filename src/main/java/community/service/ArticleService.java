@@ -1,12 +1,14 @@
 package community.service;
 
 import community.constant.CategoryType;
+import community.domain.user.ArticleCategoryEntity;
 import community.domain.user.ArticleEntity;
 import community.domain.user.UserEntity;
 import community.dto.user.ArticleDto;
 import community.exception.ArticleNotFoundException;
 import community.exception.UnauthorizedException;
 import community.mapper.user.ArticleMapper;
+import community.repository.ArticleCategoryRepository;
 import community.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,11 +24,14 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
+    private final ArticleCategoryRepository articleCategoryRepository;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper) {
+    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper,
+                          ArticleCategoryRepository articleCategoryRepository) {
         this.articleRepository = articleRepository;
         this.articleMapper = articleMapper;
+        this.articleCategoryRepository = articleCategoryRepository;
     }
 
     public ArticleDto.ArticleResponseDto save(@RequestBody ArticleDto.ArticleRequestDto request
@@ -37,6 +42,7 @@ public class ArticleService {
         return articleMapper.toResponseDto(article);
     }
 
+//    //카테고리 유형 별 조회
 //    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(CategoryType type) {
 //        List<ArticleEntity> articles = articleRepository.findAllCategory(type);
 //        return articles.stream()
@@ -44,12 +50,57 @@ public class ArticleService {
 //                .collect(Collectors.toList());
 //    }
 
+
+    //TODO : 테스트
+    // 카테고리 ID로 해당 카테고리에 속한 게시글 조회
+    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(Long categoryId) {
+        // 카테고리 ID로 해당하는 ArticleCategoryEntity 조회
+        List<ArticleCategoryEntity> articleCategoryEntities = articleCategoryRepository.findByCategoryId(categoryId);
+
+        // ArticleCategoryEntity에서 ArticleEntity 추출
+        List<ArticleEntity> articles = articleCategoryEntities.stream()
+                .map(ArticleCategoryEntity::getArticle)
+                .collect(Collectors.toList());
+
+        // ArticleEntity를 ResponseDto로 변환하여 반환
+        return articles.stream()
+                .map(articleMapper::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    //Article의 categoryId 가져오기
+    public List<Long> getCategoryIdsForArticle(Long articleId) {
+        // Article ID로 ArticleEntity 가져오기
+        ArticleEntity articleEntity = articleRepository.findById(articleId)
+                .orElseThrow(() -> new RuntimeException("Article not found with id: " + articleId));
+
+        // ArticleEntity에서 articleCategories 필드를 통해 Article에 속한 모든 ArticleCategoryEntity 가져오기
+        List<ArticleCategoryEntity> articleCategoryEntities = articleEntity.getArticleCategories();
+
+        // 각 ArticleCategoryEntity에서 CategoryEntity의 ID를 추출하여 리스트로 반환
+        return articleCategoryEntities.stream()
+                .map(articleCategoryEntity -> articleCategoryEntity.getCategory().getId())
+                .collect(Collectors.toList());
+    }
+
+    //게시물 단건 조회
     public ArticleDto.ArticleResponseDto getArticleById(Long id) {
         ArticleEntity article = articleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Article not found with id: " + id));
-        return articleMapper.toResponseDto(article);
+
+        // Article의 카테고리 ID 목록 가져오기
+        List<Long> categoryIds = getCategoryIdsForArticle(id);
+
+        // ArticleResponseDto를 생성하고 카테고리 ID 목록 설정 후 반환
+        ArticleDto.ArticleResponseDto responseDto = articleMapper.toResponseDto(article);
+        responseDto.setCategories(categoryIds);
+
+        return responseDto;
     }
 
+
+    //TODO: 테스트하기
+    //게시물 삭제
     public void deleteById(Long id, UserEntity user) {
         // 게시물 ID로 게시물을 조회합니다.
         Optional<ArticleEntity> optionalArticle = articleRepository.findById(id);
@@ -91,8 +142,13 @@ public class ArticleService {
 
         articleRepository.save(article);
 
-        return articleMapper.toResponseDto(article);
-    }
+        // Article의 카테고리 ID 목록 가져오기
+        List<Long> categoryIds = getCategoryIdsForArticle(id);
 
-    // 다른 필요한 메서드들을 추가할 수 있습니다.
+        // ArticleResponseDto를 생성하고 카테고리 ID 목록 설정 후 반환
+        ArticleDto.ArticleResponseDto responseDto = articleMapper.toResponseDto(article);
+        responseDto.setCategories(categoryIds);
+
+        return responseDto;
+    }
 }
