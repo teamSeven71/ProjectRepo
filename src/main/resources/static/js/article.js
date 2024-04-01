@@ -2,13 +2,11 @@
 const deleteButton = document.getElementById('delete-btn');
 
 if (deleteButton) {
-    console.log("버튼 있어여");
     deleteButton.addEventListener('click', event => {
-        console.log("버튼 눌렷어여");
+
         let id = document.getElementById('article-id').value;
         let typeValue = document.getElementById('article-type').value;
-        console.log(id);
-        console.log(typeValue);
+
         fetch(`/api/articles/${id}`, {
             method: 'DELETE'
         })
@@ -35,7 +33,6 @@ if (modifyButton) {
     modifyButton.addEventListener('click', event => {
         let params = new URLSearchParams(location.search);
         let id = params.get('id');
-        console.log(id);
 
         const typeElements = document.getElementsByName('type');
         let typeValue;
@@ -101,24 +98,24 @@ const createComment = document.getElementById('create-comment');
 
 if (createComment) {
     createComment.addEventListener('click', event => {
-
-        let id = document.getElementById('article-id').value;
-
-        fetch(`/api/comments/create?articleId=${id}`, {
+        event.preventDefault(); // 클릭 이벤트의 기본 동작인 폼 제출을 막습니다.
+        fetch(`/api/comments/create`, { // 랜덤 파라미터 추가
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body : JSON.stringify({
-                articleId: id,
+                articleId: document.getElementById('article-id').value,
                 content: document.getElementById('comment').value
             }),
         }).then(() => {
             alert('등록 완료되었습니다');
-            location.replace("/article/" + id);
+            // location.replace("/article/" + id);
+            location.reload(); // 현재 페이지를 다시 불러오는 함수
         })
     })
 }
+
 //----------------------------댓글 삭제 ----------------------------------------
 function deleteComment() {
 
@@ -181,7 +178,7 @@ function modifyComment(event) {
     event.preventDefault(); // 기본 이벤트 동작 방지
 
     // 수정하기 버튼을 누른 댓글 영역에 대한 참조를 가져옴
-    let commentContainer = event.target.closest('.comment');
+    let commentContainer = event.target.closest('.d-flex');
 
     // 해당 댓글의 commentId 가져오기
     let commentId = commentContainer.querySelector('#comment-id').value;
