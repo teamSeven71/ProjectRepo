@@ -148,8 +148,7 @@
                                 <input type="hidden" id="article-type" th:value="${article.type}">
                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <div th:text="${article.nickName}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <div th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm:ss')}"></div></li>
-                                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                        href="blog-single.html">댓글 개수 어케함?</a></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <div th:text="${counts}"></div></li>
                                 <li class="d-flex align-items-center"><button type="button" id="modify-btn"
                                                                               th:onclick="|location.href='@{/article/post?id={articleId}(articleId=${article.id})}'|"
                                                                               class="btn btn-primary btn-sm">수정</button></li>
@@ -181,19 +180,30 @@
 
                     <div class="blog-comments">
 
-                        <h4 class="comments-count">4 Comments</h4>
+                        <h4 class="comments-count" th:text="${counts} +' Comments'"></h4>
 
                         <div id="comment-1" class="comment">
                             <div class="d-flex" th:each="comment : ${comments}">
+                                <input type="hidden" class="comment-id" id="comment-id" th:value="${comment.id}">
                                 <div class="comment-img"><img src="/img/blog/comments-1.jpg" alt=""></div>
                                 <div>
-                                    <h5><a href="" th:text="${comment.nickName}"></a><div><a href="#" class="likeReply"><i
-                                            class="bi bi-hand-thumbs-up-fill"></i> 좋아요</a>  <a href="#" class="updateReply" onclick="modifyComment(event)"><i class="bi bi-pen-fill" id="modify-comment"></i>수정</a>
-                                        <a href="javascript:deleteComment()" class="deleteReply"><i class="bi bi-trash-fill"></i>삭제</a></div></h5>
+                                    <h5>
+                                        <a href="" th:text="${comment.nickName}"></a>
+                                        <div>
+                                            <a href="#" class="likeReply">
+                                                <i class="bi bi-hand-thumbs-up-fill"></i> 좋아요
+                                            </a>
+                                            <a href="#" class="updateReply" onclick="modifyComment(event)">
+                                                <i class="bi bi-pen-fill" id="modify-comment"></i>수정
+                                            </a>
+                                            <a href="javascript:deleteComment()" class="deleteReply">
+                                                <i class="bi bi-trash-fill"></i>삭제
+                                            </a>
+                                        </div>
+                                    </h5>
                                     <time  th:text="${#temporals.format(comment.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></time>
-                                    <p th:text="${comment.content}"></p>
+                                    <p class="comment-content" th:text="${comment.content}"></p>
                                 </div>
-                                <input type="hidden" id="comment-id" th:value="${comment.id}">
                             </div>
                         </div><!-- End comment -->
 
@@ -208,8 +218,6 @@
                                 <button type="submit" class="btn btn-primary" id="create-comment">댓글 작성</button>
                             </form>
                         </div>
-
-
                     </div><!-- End blog comments -->
 
                 </div><!-- End blog entries list -->

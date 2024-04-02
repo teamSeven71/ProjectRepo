@@ -33,7 +33,15 @@ public class ArticleController {
             @RequestBody ArticleDto.ArticleRequestDto request,
             @AuthenticationPrincipal UserEntity user
     ) {
+        if (request == null || user == null) { // 요청 또는 사용자가 null인 경우 처리
+            return ResponseEntity.badRequest().build(); // 잘못된 요청 응답
+        }
+
         ArticleDto.ArticleResponseDto responseDto = articleService.save(request, user);
+        if (responseDto == null) { // 응답이 null인 경우 처리
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 내부 서버 오류 응답
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 

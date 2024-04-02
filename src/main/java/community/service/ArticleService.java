@@ -4,6 +4,7 @@ import community.constant.CategoryType;
 import community.domain.user.ArticleCategoryEntity;
 import community.domain.user.ArticleEntity;
 import community.domain.user.UserEntity;
+import community.dto.user.ArticleCategoryDto;
 import community.dto.user.ArticleDto;
 import community.exception.ArticleNotFoundException;
 import community.exception.UnauthorizedException;
@@ -24,22 +25,37 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
-    private final ArticleCategoryRepository articleCategoryRepository;
+    private ArticleCategoryService articleCategoryService;
+    private ArticleCategoryRepository articleCategoryRepository;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper,
-                          ArticleCategoryRepository articleCategoryRepository) {
+    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper, ArticleCategoryService articleCategoryService, ArticleCategoryRepository articleCategoryRepository) {
         this.articleRepository = articleRepository;
         this.articleMapper = articleMapper;
+        this.articleCategoryService = articleCategoryService;
         this.articleCategoryRepository = articleCategoryRepository;
     }
 
-    public ArticleDto.ArticleResponseDto save(@RequestBody ArticleDto.ArticleRequestDto request
-                                             ,@AuthenticationPrincipal UserEntity user){
+    public ArticleDto.ArticleResponseDto save(ArticleDto.ArticleRequestDto request, UserEntity user){
 
+        //article entity 생성 > id성 됨
         ArticleEntity article = articleMapper.toReqeustEntity(request, user);
         ArticleEntity savedArticle = articleRepository.save(article);
-        return articleMapper.toResponseDto(article);
+/*
+        //article id 얻어옴.
+        Long articleId = article.getId();*/
+
+        //client에서 받아온 categories를 따로 저장
+        List<Long> categories = request.getCategories();
+
+        // for문 돌리면서 articleCategoryDto에 articleId와 해당 카테고리 Id 하나씩 넣어줌
+        for (Long categoryId : categories) {
+
+            // 저장 로직 - articleCategoryRepository를 사용하여 저장한다고 가정
+            articleCategoryService.save(savedArticle, categoryId);
+        }
+
+        return articleMapper.toResponseDto(savedArticle);
     }
 
 //    //카테고리 유형 별 조회
@@ -49,6 +65,14 @@ public class ArticleService {
 //                .map(articleMapper::toResponseDto)
 //                .collect(Collectors.toList());
 //    }
+
+    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(String type) {
+        List<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findAllArticleByCategory(type);
+
+        return articleCategories.stream()
+                .map(articleCategory -> articleMapper.toResponseDto(articleCategory.getArticle()))
+                .collect(Collectors.toList());
+    }
 
 
     //TODO : 테스트

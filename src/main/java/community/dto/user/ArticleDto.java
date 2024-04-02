@@ -19,23 +19,21 @@ public class ArticleDto {
     @Builder
     public static class ArticleRequestDto {
 
-
         @NotBlank
         private String title; //제목
 
         @NotBlank
         private String content; //내용
 
-//
 //        @NotBlank
 //        private CategoryType type; //카테고리
 
         //카테고리명 요청
         private List<Long> categories;
 
-
-
     }
+
+
 
     @Getter
     @Setter
@@ -72,9 +70,9 @@ public class ArticleDto {
 
         private List<Long> categories;
 
-
-
     }
+
+
 
     @Getter
     @Setter

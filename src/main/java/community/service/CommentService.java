@@ -66,10 +66,6 @@ public class CommentService {
         return responseDto;
     }
 
-
-    //댓글 get은 해당 Article 조회시 가져옴 -> ArticleService에서 처리
-
-
     //댓글 수정
     public CommentDto.CommentResponseDto updateComment(Long commentId, CommentDto.CommentPatchDto commentPatchDto) {
 
@@ -80,20 +76,14 @@ public class CommentService {
 
         //TODO : 해당 댓글 작성자 맞는지 확인 + 추가
 
-
-
         //댓글 수정
         commentEntity.setContent(commentPatchDto.getContent()); // 댓글 내용 업데이트
         LocalDateTime currentTime = LocalDateTime.now();
         commentEntity.setModifiedAt(currentTime); //수정시간 설정
         commentEntity = commentRepository.save(commentEntity);
 
-
         return commentMapper.toResponseDto(commentEntity);
     }
-
-
-
 
     //댓글 삭제
     public void deleteComment(Long commentId) {
@@ -103,5 +93,12 @@ public class CommentService {
 
         commentRepository.deleteById(commentId);
         log.info("삭제된 Comment: {}",commentId);
+    }
+
+    //댓글 개수 조회
+    public Long countComment(Long articleId) {
+        Long countcomment = commentRepository.countComment(articleId);
+
+        return countcomment;
     }
 }

@@ -18,5 +18,8 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
     @Query("select c from ArticleEntity a join a.comments c where a.id = :articleId")
     List<CommentEntity> findByArticleId(Long articleId);
 
+    @Query("select count(c) from ArticleEntity a join a.comments c where a.id = :articleId")
+    Long countComment(Long articleId);
+
 }
 
