@@ -5,7 +5,6 @@ if (deleteButton) {
     deleteButton.addEventListener('click', event => {
 
         let id = document.getElementById('article-id').value;
-        let typeValue = document.getElementById('article-type').value;
 
         fetch(`/api/articles/${id}`, {
             method: 'DELETE'
@@ -13,7 +12,7 @@ if (deleteButton) {
             .then(response => {
                 if (response.ok) {
                     alert('삭제가 완료되었습니다');
-                    location.replace("/articles/" + typeValue);
+                    location.replace('/');
                 } else {
                     alert('게시물 삭제에 실패했습니다');
                 }
@@ -34,15 +33,12 @@ if (modifyButton) {
         let params = new URLSearchParams(location.search);
         let id = params.get('id');
 
-        const typeElements = document.getElementsByName('type');
-        let typeValue;
+        var selectedCategories = [];
+        var checkboxes = document.querySelectorAll('input[name="types[]"]:checked');
 
-        for (let i = 0; i < typeElements.length; i++) {
-            if (typeElements[i].checked) {
-                typeValue = typeElements[i].value;
-                break; // 체크된 요소를 찾으면 반복문 종료
-            }
-        }
+        checkboxes.forEach(function(checkbox) {
+            selectedCategories.push(checkbox.value);
+        });
 
         fetch(`/api/articles/${id}`, {
             method: 'PUT',
@@ -52,7 +48,7 @@ if (modifyButton) {
             body: JSON.stringify({
                 title: document.getElementById('title').value,
                 content: document.getElementById('content').value,
-                type: typeValue
+                categories: selectedCategories
             })
         }).then(() => {
             alert('수정이 완료되었습니다');

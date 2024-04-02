@@ -3,6 +3,7 @@ package community.repository;
 import community.domain.user.CommentEntity;
 import community.domain.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,10 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
     @Query("select count(c) from ArticleEntity a join a.comments c where a.id = :articleId")
     Long countComment(Long articleId);
+
+    @Modifying
+    @Query("DELETE FROM CommentEntity c WHERE c.article.id = :articleId")
+    void deleteCommentsByArticleId(Long articleId);
 
 }
 

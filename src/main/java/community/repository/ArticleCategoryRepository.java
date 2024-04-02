@@ -3,6 +3,7 @@ package community.repository;
 import community.domain.user.ArticleCategoryEntity;
 import community.domain.user.CommentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +18,9 @@ public interface ArticleCategoryRepository extends JpaRepository<ArticleCategory
 
     @Query("select a from ArticleCategoryEntity a where a.article.id = :articleId")
     List<ArticleCategoryEntity> getCategoriesById(Long articleId);
+
+    @Modifying
+    @Query("DELETE FROM ArticleCategoryEntity a WHERE a.article.id = :articleId")
+    void deleteArticleInCategory(Long articleId);
 
 }
