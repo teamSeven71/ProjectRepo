@@ -18,4 +18,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query("select a from UserEntity a ORDER BY a.id ASC")
 //    @Query("select a from UserEntity a where a.active = :type ORDER BY a.id ASC")
     List<UserEntity> findAllActiveMembers();
+
+    @Override
+    List<UserEntity> findAllById(Iterable<Long> longs);
+
+    @Override
+    void deleteAllById(Iterable<? extends Long> longs);
 }
