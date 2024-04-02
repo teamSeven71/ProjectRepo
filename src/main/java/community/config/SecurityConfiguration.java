@@ -27,11 +27,12 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth ->              // 인증, 인가 설정
                         auth.requestMatchers(HttpMethod.GET, "/article/post").hasAnyAuthority("USER","ADMIN")
+
+                                .requestMatchers(HttpMethod.POST, "/create").hasAnyAuthority("USER","ADMIN")
+                                .requestMatchers(HttpMethod.PATCH, "/update").hasAnyAuthority("USER","ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/delete").hasAnyAuthority("USER","ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/**", "/articles/{type}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/create").hasAuthority("USER")
-                                .requestMatchers(HttpMethod.PATCH, "/update").hasAuthority("USER")
-                                .requestMatchers(HttpMethod.DELETE, "/delete").hasAuthority("USER")
                                 .requestMatchers(HttpMethod.GET, "/admin").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 )
