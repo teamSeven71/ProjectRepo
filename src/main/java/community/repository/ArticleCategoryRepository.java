@@ -10,8 +10,9 @@ import java.util.List;
 
 @Repository
 public interface ArticleCategoryRepository extends JpaRepository<ArticleCategoryEntity, Long> {
-    // 기본적으로 JpaRepository가 제공하는 메서드 외에 필요한 추가 메서드가 있다면 여기에 선언할 수 있습니다.
 
-    @Query("select a from ArticleCategoryEntity a where a.category.categoryName = :type")
-    List<ArticleCategoryEntity> findAllArticleByCategory(String type);
+    // 해당 카테고리 id 타입 가져와서 비교
+    @Query("select a from ArticleCategoryEntity a where a.category.id = :categoryId")
+    List<ArticleCategoryEntity> findAllArticleByCategory(Long categoryId);
+
 }

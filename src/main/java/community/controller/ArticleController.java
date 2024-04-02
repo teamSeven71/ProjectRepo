@@ -53,6 +53,14 @@ public class ArticleController {
         return ResponseEntity.ok(article);
     }
 
+    //  보현님 코드 주석
+    // article의 categoryId가져오기
+//    @GetMapping("/{id}/categories")
+//    public ResponseEntity<List<Long>> getCategoryIdsForArticle(@PathVariable Long id) {
+//        List<Long> categoryIds = articleService.getCategoryIdsForArticle(id);
+//        return new ResponseEntity<>(categoryIds, HttpStatus.OK);
+//    }
+
 
     //게시물 단 건 삭제 api
     @DeleteMapping("/{id}")
