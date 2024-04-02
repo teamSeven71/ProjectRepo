@@ -15,4 +15,7 @@ public interface ArticleCategoryRepository extends JpaRepository<ArticleCategory
     @Query("select a from ArticleCategoryEntity a where a.category.id = :categoryId")
     List<ArticleCategoryEntity> findAllArticleByCategory(Long categoryId);
 
+    @Query("select a from ArticleCategoryEntity a where a.article.id = :articleId")
+    List<ArticleCategoryEntity> getCategoriesById(Long articleId);
+
 }

@@ -1,8 +1,11 @@
 package community.controller;
 
 import community.constant.CategoryType;
+import community.dto.user.ArticleCategoryDto;
 import community.dto.user.ArticleDto;
+import community.dto.user.CategoryDto;
 import community.dto.user.CommentDto;
+import community.service.ArticleCategoryService;
 import community.service.ArticleService;
 import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,11 +25,13 @@ import java.util.List;
 public class ArticlePageController {
     private final ArticleService articleService;
     private final CommentService commentService;
+    private final ArticleCategoryService articleCategoryService;
 
     @Autowired
-    public ArticlePageController(ArticleService articleService, CommentService commentService) {
+    public ArticlePageController(ArticleService articleService, CommentService commentService, ArticleCategoryService articleCategoryService) {
         this.articleService = articleService;
         this.commentService = commentService;
+        this.articleCategoryService = articleCategoryService;
     }
 
     // 메인페이지 공지사항3개 조회
@@ -59,6 +64,10 @@ public class ArticlePageController {
         //게시글 정보 조회
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
         model.addAttribute("article", article);
+
+        // 카테고리 조회
+        List<CategoryDto.CategoryResponseDto> categories = articleCategoryService.getCategoriesById(id);
+        model.addAttribute("categories", categories);
 
         // 댓글 정보 조회
         List<CommentDto.CommentResponseDto> comments = commentService.readComment(id);
