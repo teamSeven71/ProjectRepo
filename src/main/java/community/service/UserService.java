@@ -53,4 +53,8 @@ public class UserService implements UserDetailsService {
                 .map(userMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
+
+    public void delete(Long id){
+        userRepository.deleteById(id);
+    }
 }

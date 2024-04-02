@@ -4,6 +4,8 @@ package community.controller;
 import community.dto.user.UserDto;
 import community.service.ArticleService;
 import community.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +31,13 @@ public class UserViewController {
     public String signup() {
         return "/site/Join";
     }
-    
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        request.getSession().invalidate();
+        return "redirect:/";
+    }
+
     // 관리자 페이지
     @GetMapping("/admin")
     public String showMembers(Model model){
