@@ -48,7 +48,7 @@
       <div class="logo">
         <h1><a onclick="location.href='/'">TechTalk</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-         <a href="main.html"><img src="/img/logo.png" alt="" class="img-fluid"></a>
+         <a href="main.html"><img alt="" class="img-fluid"></a>
       </div>
         <div class="d-flex justify-content-end align-items-center mb-4">
           <a class="nav" onclick="location.href='/'">Home</a>
@@ -109,21 +109,22 @@
           <div class="col-lg-4">
             <div class="icon-box">
               <i class="bi bi-card-checklist"></i>
-              <h3><a th:href="@{/articles/{type}(type= ${'ARTICLE'})}">
+<!--              -- ARTICLE, NOTICE, JAVA, SQL, JS, ETC, PYTHON, DB 순서대로 1~8-->
+              <h3><a th:href="@{/articles/{categoryId}(categoryId= ${'1'})}">
                 자유게시판</a></h3>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-bar-chart"></i>
-              <h3><a th:href="@{/articles/{type}(type= ${'JAVA'})}">
+              <h3><a th:href="@{/articles/{categoryId}(categoryId= ${'3'})}">
                 Java 게시판</a></h3>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a th:href="@{/articles/{type}(type= ${'JS'})}">
+              <h3><a th:href="@{/articles/{categoryId}(categoryId= ${'4'})}">
                 Java Script 게시판</a></h3>
             </div>
           </div>
@@ -132,21 +133,21 @@
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a th:href="@{/articles/{type}(type= ${'PYTHON'})}">
+              <h3><a th:href="@{/articles/{categoryId}(categoryId= ${'5'})}">
                 Python 게시판</a></h3>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a th:href="@{/articles/{type}(type= ${'DB'})}">
+              <h3><a th:href="@{/articles/{categoryId}(categoryId= ${'6'})}">
                 DB 게시판</a></h3>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a th:href="@{/articles/{type}(type= ${'SQL'})}">
+              <h3><a th:href="@{/articles/{categoryId}(categoryId= ${'7'})}">
                 SQL 게시판</a></h3>
             </div>
           </div>
@@ -155,7 +156,7 @@
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a th:href="@{/articles/{type}(type= ${'ETC'})}">
+              <h3><a th:href="@{/articles/{categoryId}(categoryId= ${'8'})}">
                 기타 질문 게시판</a></h3>
             </div>
           </div>

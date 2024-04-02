@@ -51,15 +51,15 @@ public class ArticleService {
         // for문 돌리면서 articleCategoryDto에 articleId와 해당 카테고리 Id 하나씩 넣어줌
         for (Long categoryId : categories) {
 
-            // 저장 로직 - articleCategoryRepository를 사용하여 저장한다고 가정
+            // 저장 로직 - articleCategoryService를 사용하여 저장한다고 가정
             articleCategoryService.save(savedArticle, categoryId);
         }
 
         return articleMapper.toResponseDto(savedArticle);
     }
 
-    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(String type) {
-        List<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findAllArticleByCategory(type);
+    public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(Long categoryId) {
+        List<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findAllArticleByCategory(categoryId);
 
         return articleCategories.stream()
                 .map(articleCategory -> articleMapper.toResponseDto(articleCategory.getArticle()))
