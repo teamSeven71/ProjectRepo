@@ -45,6 +45,12 @@ public class ArticleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
+//    //article의 categoryId가져오기
+//    @GetMapping("/{id}/categories")
+//    public ResponseEntity<List<Long>> getCategoryIdsForArticle(@PathVariable Long id) {
+//        List<Long> categoryIds = articleService.getCategoryIdsForArticle(id);
+//        return new ResponseEntity<>(categoryIds, HttpStatus.OK);
+//    }
 
     //게시물 단 건 조회 api
     @GetMapping("/{id}")
