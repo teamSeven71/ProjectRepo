@@ -54,7 +54,7 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
-    public void delete(Long id){
-        userRepository.deleteById(id);
+    public void deleteUsers(List<Long> userIds){
+        userRepository.deleteAllById(userIds);
     }
 }

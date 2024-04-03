@@ -49,7 +49,6 @@ public class ArticleEntity extends TimeStamp {
 
     private Long viewCount;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<ArticleCategoryEntity> articleCategories = new ArrayList<>();
-
 }
