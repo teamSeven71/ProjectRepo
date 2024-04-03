@@ -39,6 +39,9 @@
             font-size: 15px;
             background: #e96b56;
         }
+        .comment-content{
+            width: 662px;
+        }
     </style>
 
     <!-- =======================================================
@@ -123,10 +126,10 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/">Blog</a></li>
             </ol>
-            <h2>
+            <!--<h2>
                 <span>Category : </span>
                 <span th:each="category : ${categories}" th:text="${category.categoryName} + ' / '"></span>
-            </h2>
+            </h2>-->
         </div>
     </section><!-- End Breadcrumbs -->
 
@@ -169,14 +172,12 @@
                         <div class="entry-footer">
                             <i class="bi bi-folder"></i>
                             <ul class="cats">
-                                <li><a href="#">Business</a></li>
+                                <li>조회수: </li>
                             </ul>
 
                             <i class="bi bi-tags"></i>
-                            <ul class="tags">
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
+                            <ul class="tags" th:each="category : ${categories}">
+                                <li><a th:href="@{/articles/{categoryId}(categoryId= ${category.id})}" th:text="${category.categoryName}+','"></a></li>
                             </ul>
                         </div>
                     </article><!-- End blog entry -->
@@ -191,10 +192,13 @@
                                 <div class="comment-img"><img src="/img/blog/comments-1.jpg" alt=""></div>
                                 <div>
                                     <h5>
-                                        <a href="" th:text="${comment.nickName}"></a>
+                                        <div>
+                                            <a href="" th:text="${comment.nickName}"> </a>
+                                            <div>좋아요 개수: 1500개 </div>
+                                        </div>
                                         <div>
                                             <a href="#" class="likeReply">
-                                                <i class="bi bi-hand-thumbs-up-fill"></i> 좋아요
+                                                <i class="bi bi-hand-thumbs-up-fill"></i>좋아요
                                             </a>
                                             <a href="#" class="updateReply" onclick="modifyComment(event)">
                                                 <i class="bi bi-pen-fill" id="modify-comment"></i>수정
