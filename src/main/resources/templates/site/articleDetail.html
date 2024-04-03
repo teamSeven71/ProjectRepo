@@ -71,15 +71,15 @@
     </div>
 </header>
 <main id="main">
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-        <div class="container">
-            <h2>
-                <span>Category : </span>
-                <span th:each="category : ${categories}" th:text="${category.categoryName}"></span>
-            </h2>
-        </div>
-    </section><!-- End Breadcrumbs -->
+<!--    &lt;!&ndash; ======= Breadcrumbs ======= &ndash;&gt;-->
+<!--    <section id="breadcrumbs" class="breadcrumbs">-->
+<!--        <div class="container">-->
+<!--            <h2>-->
+<!--                <span>Category : </span>-->
+<!--                <span th:text="${categoryName}"></span>-->
+<!--            </h2>-->
+<!--        </div>-->
+<!--    </section>&lt;!&ndash; End Breadcrumbs &ndash;&gt;-->
 
     <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
@@ -87,15 +87,6 @@
             <div class="row">
                 <div class="col-lg-8 entries">
                     <article class="entry entry-single">
-
-                        <!--                        <div class="entry-img">-->
-                        <!--                            <img src="../static/img/blog/blog-1.jpg" alt="" class="img-fluid">-->
-                        <!--                        </div>-->
-
-                        <h2 class="entry-title">
-                            <p>Title :  <td th:text="${article.title}"></td></p>
-                        </h2>
-
                         <div class="entry-meta">
                             <ul>
                                 <input type="hidden" id="article-id" th:value="${article.id}">
@@ -115,20 +106,6 @@
                                 <p th:text="${article.content}">
                                 </p>
                             </blockquote>
-                        </div>
-
-                        <div class="entry-footer">
-                            <i class="bi bi-folder"></i>
-                            <ul class="cats">
-                                <li><a href="#">Business</a></li>
-                            </ul>
-
-                            <i class="bi bi-tags"></i>
-                            <ul class="tags">
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
-                            </ul>
                         </div>
                     </article><!-- End blog entry -->
 
