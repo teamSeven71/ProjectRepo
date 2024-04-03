@@ -1,19 +1,21 @@
 //----------------------------게시글 삭제 ----------------------------------------
 const deleteButton = document.getElementById('delete-btn');
-
 if (deleteButton) {
     deleteButton.addEventListener('click', event => {
-
         let id = document.getElementById('article-id').value;
-
-        fetch(`/api/articles/${id}`, {
+        fetch(`/api/articles/delete/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
                 if (response.ok) {
+                    // 서버로부터 성공적인 응답을 받았을 때
                     alert('삭제가 완료되었습니다');
                     location.replace('/');
+                } else if(response.status === 403){
+                    // 서버로부터 403 Forbidden 응답을 받았을 때
+                    alert('해당 글의 작성자만 삭제할 수있습니다.');
                 } else {
+                    // 서버로부터 오류 응답을 받았을 때
                     alert('게시물 삭제에 실패했습니다');
                 }
             })
@@ -23,6 +25,7 @@ if (deleteButton) {
             });
     });
 }
+
 
 //----------------------------게시글 수정 ----------------------------------------
 const modifyButton = document.getElementById('modify-btn');
