@@ -39,14 +39,14 @@ public class CommentController {
 
 
     @PatchMapping("/update")
-    public ResponseEntity<?> updateComment(@RequestParam("commentId") Long commentId, @RequestBody CommentDto.CommentPatchDto commentPatchDto) {
+    public ResponseEntity<?> updateComment(@RequestParam("commentId") Long commentId, @RequestBody CommentDto.CommentPatchDto commentPatchDto, @AuthenticationPrincipal UserEntity user) {
         return ResponseEntity.ok().body(commentService.updateComment(commentId, commentPatchDto));
     }
 
 
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteComment(@RequestParam("commentId") Long commentId) {
+    public ResponseEntity<?> deleteComment(@RequestParam("commentId") Long commentId, @AuthenticationPrincipal UserEntity user) {
         commentService.deleteComment(commentId);
         return ResponseEntity.ok().body("Deleted Comment Id : " + commentId);
     }
