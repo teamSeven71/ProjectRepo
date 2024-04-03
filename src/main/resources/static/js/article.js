@@ -166,6 +166,7 @@ function updateComment(commentId) {
             } else if(response.status === 403){
                 // 서버로부터 403 Forbidden 응답을 받았을 때
                 alert('해당 글의 작성자만 삭제할 수있습니다.');
+                location.reload();
             }else {
                 alert('댓글 수정에 실패했습니다');
             }
