@@ -68,8 +68,11 @@ public class ArticleDto {
 
         private Long viewCount;
 
-//        private String categoryName;
+        private String categoryName;
+
         private List<Long> categories;
+
+
     }
 
 

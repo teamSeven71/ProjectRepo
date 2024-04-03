@@ -1,18 +1,19 @@
 package community.service;
 
 import community.constant.CategoryType;
-import community.domain.user.ArticleCategoryEntity;
-import community.domain.user.ArticleEntity;
-import community.domain.user.CommentEntity;
-import community.domain.user.UserEntity;
+import community.domain.user.*;
 import community.dto.user.ArticleCategoryDto;
 import community.dto.user.ArticleDto;
+import community.dto.user.CategoryDto;
 import community.exception.ArticleNotFoundException;
 import community.exception.UnauthorizedException;
 import community.mapper.user.ArticleMapper;
+import community.mapper.user.CategoryMapper;
 import community.repository.ArticleCategoryRepository;
 import community.repository.ArticleRepository;
+import community.repository.CategoryRepository;
 import community.repository.CommentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ArticleService {
 
@@ -33,14 +35,21 @@ public class ArticleService {
     private ArticleCategoryService articleCategoryService;
     private ArticleCategoryRepository articleCategoryRepository;
     private CommentRepository commentRepository;
+    private CategoryRepository categoryRepository;
+    private CategoryMapper categoryMapper;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper, ArticleCategoryService articleCategoryService, ArticleCategoryRepository articleCategoryRepository, CommentRepository commentRepository) {
+    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper, ArticleCategoryService articleCategoryService, ArticleCategoryRepository articleCategoryRepository,
+                          CommentRepository commentRepository,
+                          CategoryRepository categoryRepository,
+                          CategoryMapper categoryMapper) {
         this.articleRepository = articleRepository;
         this.articleMapper = articleMapper;
         this.articleCategoryService = articleCategoryService;
         this.articleCategoryRepository = articleCategoryRepository;
         this.commentRepository = commentRepository;
+        this.categoryRepository = categoryRepository;
+        this.categoryMapper = categoryMapper;
     }
 
     public ArticleDto.ArticleResponseDto save(ArticleDto.ArticleRequestDto request, UserEntity user){
@@ -64,6 +73,15 @@ public class ArticleService {
 
         return articleMapper.toResponseDto(savedArticle);
     }
+
+    public CategoryDto.CategoryResponseDto getAllCategoryName(Long categoryId) {
+        CategoryEntity categoryEntity = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + categoryId));
+
+
+        return categoryMapper.toResponseDto(categoryEntity);
+    }
+
 
     public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(Long categoryId) {
         List<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findAllArticleByCategory(categoryId);
