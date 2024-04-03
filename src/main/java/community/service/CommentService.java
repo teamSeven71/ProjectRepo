@@ -73,9 +73,6 @@ public class CommentService {
         CommentEntity commentEntity = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NoSuchElementException("Comment not found" + commentId));
 
-
-        //TODO : 해당 댓글 작성자 맞는지 확인 + 추가
-
         //댓글 수정
         commentEntity.setContent(commentPatchDto.getContent()); // 댓글 내용 업데이트
         LocalDateTime currentTime = LocalDateTime.now();

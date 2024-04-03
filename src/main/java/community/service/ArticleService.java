@@ -80,7 +80,7 @@ public class ArticleService {
     }
 
     @Transactional
-    public void deleteById(Long id, UserEntity user) {
+    public boolean deleteById(Long id, UserEntity user) {
         // 게시물 ID로 게시물을 조회합니다.
         Optional<ArticleEntity> optionalArticle = articleRepository.findById(id);
 
@@ -91,18 +91,19 @@ public class ArticleService {
 
         ArticleEntity article = optionalArticle.get();
 
-        // 게시물을 작성한 사용자와 현재 로그인한 사용자가 같은지 확인합니다.
-        if (!article.getUser().getId().equals(user.getId())) {
-            throw new UnauthorizedException("You are not authorized to delete this article.");
-        }
-
         // 삭제 권한이 있는 경우 게시글과 관련된 댓글 먼저 삭제
         commentRepository.deleteCommentsByArticleId(id);
         // 삭제 권한이 있는 경우 게시글과 관련된 ArticleCategory data 먼저 삭제
         articleCategoryRepository.deleteArticleInCategory(id);
-        // 삭제 권한이 있는 경우 게시물을 삭제합니다.
+
+        // 게시물을 삭제합니다.
         articleRepository.deleteById(id);
+
+        // 삭제가 성공적으로 이루어졌는지 확인
+        return !articleRepository.existsById(id);
     }
+
+
 
     @Transactional
     public ArticleDto.ArticleResponseDto updateArticle(Long id, ArticleDto.ArticleRequestDto request, UserEntity user) {
@@ -113,10 +114,6 @@ public class ArticleService {
         }
 
         ArticleEntity article = optionalArticle.get();
-
-        if (!article.getUser().getId().equals(user.getId())) {
-            throw new UnauthorizedException("You are not authorized to update this article.");
-        }
 
         List<Long> categories = request.getCategories();
 

@@ -61,13 +61,17 @@ public class ArticleController {
 //        return new ResponseEntity<>(categoryIds, HttpStatus.OK);
 //    }
 
-
-    //게시물 단 건 삭제 api
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteArticle( @PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
-        articleService.deleteById(id, user);
-        return  ResponseEntity.noContent().build();
+    //게시글 단 건 삭제
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteArticleById(@PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
+        boolean deleted = articleService.deleteById(id, user);
+        if (deleted) {
+            return ResponseEntity.noContent().build(); // 삭제 성공
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 삭제 실패
+        }
     }
+
 
     //게시물 단 건 수정 api
     @PutMapping("/{id}")

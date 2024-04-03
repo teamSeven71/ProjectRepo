@@ -34,5 +34,4 @@ public class CommentEntity extends TimeStamp {
     private ArticleEntity article;
 
 
-
 }
