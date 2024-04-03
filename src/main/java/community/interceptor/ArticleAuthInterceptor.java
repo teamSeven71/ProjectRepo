@@ -2,7 +2,6 @@ package community.interceptor;
 
 import community.constant.Role;
 import community.domain.user.ArticleEntity;
-import community.exception.UnauthorizedException;
 import community.repository.ArticleRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,23 +11,21 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
 import java.util.Collection;
 
 @Component
-public class AuthInterceptor implements HandlerInterceptor {
+public class ArticleAuthInterceptor implements HandlerInterceptor {
 
     //아래서 articleRepository 사용 하려고 선언
     private final ArticleRepository articleRepository;
 
     //생성자
     @Autowired
-    public AuthInterceptor(ArticleRepository articleRepository) {
+    public ArticleAuthInterceptor(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
