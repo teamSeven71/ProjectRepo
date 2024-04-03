@@ -1,35 +1,4 @@
-/*#header {*/
-/*    height: 70px;*/
-/*    transition: all 0.5s;*/
-/*    z-index: 997;*/
-/*    transition: all 0.5s;*/
-/*    background: #fff;*/
-/*    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);*/
-/*}*/
 
-/*#header .logo h1 {*/
-/*    font-size: 26px;*/
-/*    padding: 0 0 0 8px;*/
-/*    margin: 11px 0;*/
-/*    line-height: 1;*/
-/*    font-weight: 700;*/
-/*    letter-spacing: 1px;*/
-/*    text-transform: uppercase;*/
-/*    font-family: "Poppins", sans-serif;*/
-/*    border-left: 8px solid #e96b56;*/
-/*}*/
-
-/*#header .logo h1 a,*/
-/*#header .logo h1 a:hover {*/
-/*    color: #545454;*/
-/*    text-decoration: none;*/
-/*}*/
-
-/*#header .logo img {*/
-/*    padding: 0;*/
-/*    margin: 0;*/
-/*    max-height: 40px;*/
-/*}*/
 
 .board_create {
     width: 100%;
@@ -219,6 +188,10 @@ li {
 # Footer
 --------------------------------------------------------------*/
 #footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background: #404040;
     padding: 0 0 30px 0;
     color: #fff;
@@ -390,4 +363,10 @@ li {
 #footer a {
     color: #e96b56; /* 주황색 */
     text-decoration: none;
+}
+.cont_first{
+    display: block;
+}
+.create-btn1{
+
 }
