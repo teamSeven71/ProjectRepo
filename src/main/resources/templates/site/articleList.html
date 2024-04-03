@@ -68,8 +68,8 @@
             </td>
             <td th:text="${article.content}"></td>
             <td th:text="${article.nickName}"></td>
-            <td th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${#temporals.format(article.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(article.modifiedAt, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>

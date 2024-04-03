@@ -69,63 +69,14 @@
             </div>
         </div>
     </div>
-</header><!-- End Header -->
-
-
-<!--<header id="header" class="d-flex align-items-center">-->
-<!--    <div class="container d-flex justify-content-between align-items-center">-->
-
-<!--        <div class="logo">-->
-<!--            <h1><a href="main.html">TechTalk</a></h1>-->
-<!--            &lt;!&ndash; Uncomment below if you prefer to use an image logo &ndash;&gt;-->
-<!--            &lt;!&ndash; <a href="main.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>&ndash;&gt;-->
-<!--        </div>-->
-
-<!--        <nav id="navbar" class="navbar">-->
-<!--            <ul>-->
-<!--                <li><a href="main.html">Home</a></li>-->
-<!--                <li><a href="about.html">About</a></li>-->
-<!--                <li><a href="services.html">Services</a></li>-->
-<!--                <li><a href="portfolio.html">Portfolio</a></li>-->
-<!--                <li><a href="team.html">Team</a></li>-->
-<!--                <li><a href="pricing.html">Pricing</a></li>-->
-<!--                <li><a class="active" href="blog.html">Blog</a></li>-->
-<!--                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>-->
-<!--                    <ul>-->
-<!--                        <li><a href="#">Drop Down 1</a></li>-->
-<!--                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>-->
-<!--                            <ul>-->
-<!--                                <li><a href="#">Deep Drop Down 1</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 2</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 3</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 4</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 5</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                        <li><a href="#">Drop Down 2</a></li>-->
-<!--                        <li><a href="#">Drop Down 3</a></li>-->
-<!--                        <li><a href="#">Drop Down 4</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                <li><a href="contact.html">Contact</a></li>-->
-<!--            </ul>-->
-<!--            <i class="bi bi-list mobile-nav-toggle"></i>-->
-<!--        </nav>&lt;!&ndash; .navbar &ndash;&gt;-->
-
-<!--    </div>-->
-<!--</header>&lt;!&ndash; End Header &ndash;&gt;-->
-
+</header>
 <main id="main">
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
-            <ol>
-                <li><a href="/">Home</a></li>
-                <li><a href="/">Blog</a></li>
-            </ol>
             <h2>
                 <span>Category : </span>
-                <span th:each="category : ${categories}" th:text="${category.categoryName} + ' / '"></span>
+                <span th:each="category : ${categories}" th:text="${category.categoryName}"></span>
             </h2>
         </div>
     </section><!-- End Breadcrumbs -->
@@ -150,7 +101,7 @@
                                 <input type="hidden" id="article-id" th:value="${article.id}">
                                 <input type="hidden" id="article-type" th:value="${categories}">
                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <div th:text="${article.nickName}"></div></li>
-                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <div th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm:ss')}"></div></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <div th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm')}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <div th:text="${counts}"></div></li>
                                 <li class="d-flex align-items-center"><button type="button" id="modify-btn"
                                                                               th:onclick="|location.href='@{/article/post?id={articleId}(articleId=${article.id})}'|"
@@ -204,7 +155,7 @@
                                             </a>
                                         </div>
                                     </h5>
-                                    <time  th:text="${#temporals.format(comment.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></time>
+                                    <time  th:text="${#temporals.format(comment.modifiedAt, 'yyyy-MM-dd HH:mm')}"></time>
                                     <p class="comment-content" th:text="${comment.content}"></p>
                                 </div>
                             </div>
@@ -239,10 +190,6 @@
             &copy;  <strong><span>TechTalk</span></strong>
         </div>
         <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/ -->
             All Rights Reserved Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
     </div>
