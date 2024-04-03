@@ -11,9 +11,11 @@ import community.exception.UnauthorizedException;
 import community.mapper.user.ArticleMapper;
 import community.repository.ArticleCategoryRepository;
 import community.repository.ArticleRepository;
+import community.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -27,13 +29,15 @@ public class ArticleService {
     private final ArticleMapper articleMapper;
     private ArticleCategoryService articleCategoryService;
     private ArticleCategoryRepository articleCategoryRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper, ArticleCategoryService articleCategoryService, ArticleCategoryRepository articleCategoryRepository) {
+    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper, ArticleCategoryService articleCategoryService, ArticleCategoryRepository articleCategoryRepository, CommentRepository commentRepository) {
         this.articleRepository = articleRepository;
         this.articleMapper = articleMapper;
         this.articleCategoryService = articleCategoryService;
         this.articleCategoryRepository = articleCategoryRepository;
+        this.commentRepository = commentRepository;
     }
 
     public ArticleDto.ArticleResponseDto save(ArticleDto.ArticleRequestDto request, UserEntity user){
@@ -72,6 +76,7 @@ public class ArticleService {
         return articleMapper.toResponseDto(article);
     }
 
+    @Transactional
     public void deleteById(Long id, UserEntity user) {
         // 게시물 ID로 게시물을 조회합니다.
         Optional<ArticleEntity> optionalArticle = articleRepository.findById(id);
@@ -88,6 +93,10 @@ public class ArticleService {
             throw new UnauthorizedException("You are not authorized to delete this article.");
         }
 
+        // 삭제 권한이 있는 경우 게시글과 관련된 댓글 먼저 삭제
+        commentRepository.deleteCommentsByArticleId(id);
+        // 삭제 권한이 있는 경우 게시글과 관련된 ArticleCategory data 먼저 삭제
+        articleCategoryRepository.deleteArticleInCategory(id);
         // 삭제 권한이 있는 경우 게시물을 삭제합니다.
         articleRepository.deleteById(id);
     }
@@ -107,13 +116,9 @@ public class ArticleService {
             throw new UnauthorizedException("You are not authorized to update this article.");
         }
 
-        article.setTitle(request.getTitle());
-        article.setContent(request.getContent());
-//        article.setType(request.getType());
+        articleCategoryRepository.deleteArticleInCategory(id);
 
-        articleRepository.save(article);
-
-        return articleMapper.toResponseDto(article);
+        return save(request, user);
     }
 
     // 다른 필요한 메서드들을 추가할 수 있습니다.

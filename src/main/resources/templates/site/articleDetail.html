@@ -124,7 +124,8 @@
                 <li><a href="/">Blog</a></li>
             </ol>
             <h2>
-                <div th:text="${article.categoriesName}"></div>
+                <span>Category : </span>
+                <span th:each="category : ${categories}" th:text="${category.categoryName} + ' / '"></span>
             </h2>
         </div>
     </section><!-- End Breadcrumbs -->
@@ -147,7 +148,7 @@
                         <div class="entry-meta">
                             <ul>
                                 <input type="hidden" id="article-id" th:value="${article.id}">
-                                <input type="hidden" id="article-type" th:value="${article.type}">
+                                <input type="hidden" id="article-type" th:value="${categories}">
                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <div th:text="${article.nickName}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <div th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm:ss')}"></div></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <div th:text="${counts}"></div></li>
