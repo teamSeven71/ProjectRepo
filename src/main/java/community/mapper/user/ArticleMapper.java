@@ -30,6 +30,7 @@ public interface ArticleMapper {
     @Mapping(source = "user.name", target = "name")
     @Mapping(source = "comments", target = "comments")
     @Mapping(source = "articleCategories", target = "categories", ignore = true)
+    @Mapping(target = "categoryName", ignore = true)
     ArticleDto.ArticleResponseDto toResponseDto(ArticleEntity articleEntity);
 
     @Mapping(source = "user.id", target = "userId")

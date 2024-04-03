@@ -9,6 +9,7 @@ import community.service.ArticleCategoryService;
 import community.service.ArticleService;
 import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@Slf4j
 @Tag(name = "아티클 Page")
 @Controller
 public class ArticlePageController {
@@ -45,6 +47,8 @@ public class ArticlePageController {
         return "/site/main";
     }
 
+
+
     // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
     @GetMapping("/articles/{categoryId}")
     public String showArticles(Model model, @PathVariable Long categoryId){
@@ -52,6 +56,10 @@ public class ArticlePageController {
 //        //id 순으로 정렬.
         Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
         model.addAttribute("articles", articles);
+
+        CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
+        String categoryName = categoryDto.getCategoryName();
+        model.addAttribute("categoryName", categoryName);
         return "/site/articleList";
     }
 
