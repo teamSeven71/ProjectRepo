@@ -39,6 +39,9 @@
             font-size: 15px;
             background: #e96b56;
         }
+        .comment-content{
+            width: 662px;
+        }
     </style>
 
     <!-- =======================================================
@@ -71,16 +74,6 @@
     </div>
 </header>
 <main id="main">
-<!--    &lt;!&ndash; ======= Breadcrumbs ======= &ndash;&gt;-->
-<!--    <section id="breadcrumbs" class="breadcrumbs">-->
-<!--        <div class="container">-->
-<!--            <h2>-->
-<!--                <span>Category : </span>-->
-<!--                <span th:text="${categoryName}"></span>-->
-<!--            </h2>-->
-<!--        </div>-->
-<!--    </section>&lt;!&ndash; End Breadcrumbs &ndash;&gt;-->
-
     <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">
@@ -119,10 +112,13 @@
                                 <div class="comment-img"><img src="/img/blog/comments-1.jpg" alt=""></div>
                                 <div>
                                     <h5>
-                                        <a href="" th:text="${comment.nickName}"></a>
+                                        <div>
+                                            <a href="" th:text="${comment.nickName}"> </a>
+                                            <div>좋아요 개수: 1500개 </div>
+                                        </div>
                                         <div>
                                             <a href="#" class="likeReply">
-                                                <i class="bi bi-hand-thumbs-up-fill"></i> 좋아요
+                                                <i class="bi bi-hand-thumbs-up-fill"></i>좋아요
                                             </a>
                                             <a href="#" class="updateReply" onclick="modifyComment(event)">
                                                 <i class="bi bi-pen-fill" id="modify-comment"></i>수정

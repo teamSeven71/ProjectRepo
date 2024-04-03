@@ -1,12 +1,15 @@
 package community.repository;
 
 import  community.domain.user.UserEntity;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
@@ -24,4 +27,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Override
     void deleteAllById(Iterable<? extends Long> longs);
+
+    @Override
+    <S extends UserEntity> boolean exists(Example<S> example);
+
+    boolean existsByUsername(String userName);
+    boolean existsByNickName(String nickName);
 }
