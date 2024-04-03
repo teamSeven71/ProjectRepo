@@ -18,8 +18,6 @@ public class CommentDto {
         private String content; //내용
 
 
-
-
     }
 
     @Getter

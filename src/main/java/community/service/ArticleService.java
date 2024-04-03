@@ -114,10 +114,6 @@ public class ArticleService {
 
         ArticleEntity article = optionalArticle.get();
 
-        if (!article.getUser().getId().equals(user.getId())) {
-            throw new UnauthorizedException("You are not authorized to update this article.");
-        }
-
         List<Long> categories = request.getCategories();
 
         // 게시글 내용 업데이트
