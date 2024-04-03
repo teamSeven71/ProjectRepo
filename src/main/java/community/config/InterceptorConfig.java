@@ -1,5 +1,6 @@
-package community.interceptor;
+package community.config;
 
+import community.interceptor.AuthInterceptor;
 import community.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 //실행 순서
                 .order(1)
                 //지정 url 일때만 해당 Interceptor 실행
-                .addPathPatterns("/article/post");
+                .addPathPatterns("/article/post", "/api/articles/delete/**");
     }
 }
