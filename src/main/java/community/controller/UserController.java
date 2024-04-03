@@ -1,12 +1,14 @@
 package community.controller;
 
 import community.dto.user.AddUserRequest;
+import community.dto.user.DeleteUserIdsRequest;
 import community.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -22,9 +24,9 @@ public class UserController {
         return "redirect:/login";   // 회원 가입 처리 후 로그인 페이지로 강제 이동
     }
 
-    @DeleteMapping("/user/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.delete(id);
+    @DeleteMapping("/users")
+    public ResponseEntity<Void> deleteUsers(@RequestBody DeleteUserIdsRequest request) {
+        userService.deleteUsers(request.getUserIds());
 
         return ResponseEntity.ok().build();
     }

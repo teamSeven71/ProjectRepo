@@ -1,6 +1,8 @@
 package community;
 
 import community.constant.Role;
+import community.domain.user.ArticleCategoryEntity;
+import community.domain.user.ArticleEntity;
 import community.domain.user.CategoryEntity;
 import community.domain.user.UserEntity;
 import community.repository.CategoryRepository;

@@ -19,7 +19,7 @@ public class SecurityConfiguration {
     @Bean
     public WebSecurityCustomizer configure() {      // 스프링 시큐리티 기능 비활성화
         return web -> web.ignoring().requestMatchers(toH2Console())
-                .requestMatchers("/static/**", "/vendor/**", "/css/**", "/img/**", "/js/**","/error");
+                .requestMatchers("/static/**", "/vendor/**", "/css/**", "/img/**", "/js/**");
     }
 
     // 특정 HTTP 요청에 대한 웹 기반 보안 구성
@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/create").hasAnyAuthority("USER","ADMIN")
                                 .requestMatchers(HttpMethod.PATCH, "/update").hasAnyAuthority("USER","ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/delete").hasAnyAuthority("USER","ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/**", "/articles/{type}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/**", "/articles/{type}","/error").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/admin").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()

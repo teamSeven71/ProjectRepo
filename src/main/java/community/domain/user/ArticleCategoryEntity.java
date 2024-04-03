@@ -3,8 +3,6 @@ package community.domain.user;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.awt.print.Book;
-
 @Entity
 @Getter
 @Setter
@@ -25,5 +23,4 @@ public class ArticleCategoryEntity {
     @ManyToOne
     @JoinColumn(name = "article_id")
     private ArticleEntity article;
-
 }

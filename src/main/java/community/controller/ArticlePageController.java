@@ -37,10 +37,11 @@ public class ArticlePageController {
     // 메인페이지 공지사항3개 조회
     @GetMapping("/")
     public String showNotice(Model model){
-//        List<ArticleDto.ArticleResponseDto> notices = articleService.getAllArticlesByCategory(CategoryType.NOTICE);
-//        // 공지사항 리스트를 역순으로 변경
-//        Collections.reverse(notices);
-//        model.addAttribute("notices", notices);
+        long noticeId = 2;
+        List<ArticleDto.ArticleResponseDto> notices = articleService.getAllArticlesByCategory(noticeId);
+        // 공지사항 리스트를 역순으로 변경
+        Collections.reverse(notices);
+        model.addAttribute("notices", notices);
         return "/site/main";
     }
 

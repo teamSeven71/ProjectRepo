@@ -25,7 +25,4 @@ public class CategoryEntity {
 
     @OneToMany(mappedBy = "category")
     private List<ArticleCategoryEntity> articleCategories = new ArrayList<>();
-
-
-
 }
