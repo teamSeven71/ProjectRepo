@@ -3,6 +3,7 @@ package community.service;
 import community.constant.CategoryType;
 import community.domain.user.ArticleCategoryEntity;
 import community.domain.user.ArticleEntity;
+import community.domain.user.CommentEntity;
 import community.domain.user.UserEntity;
 import community.dto.user.ArticleCategoryDto;
 import community.dto.user.ArticleDto;
@@ -18,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -101,25 +104,42 @@ public class ArticleService {
         articleRepository.deleteById(id);
     }
 
+    @Transactional
     public ArticleDto.ArticleResponseDto updateArticle(Long id, ArticleDto.ArticleRequestDto request, UserEntity user) {
         Optional<ArticleEntity> optionalArticle = articleRepository.findById(id);
 
-        // 게시물이 존재하지 않는 경우 예외를 던집니다.
         if (optionalArticle.isEmpty()) {
             throw new ArticleNotFoundException("Article not found with id: " + id);
         }
 
         ArticleEntity article = optionalArticle.get();
 
-        // 게시물을 작성한 사용자와 현재 로그인한 사용자가 같은지 확인합니다.
         if (!article.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("You are not authorized to update this article.");
         }
 
+        List<Long> categories = request.getCategories();
+
+        // 게시글 내용 업데이트
+        article.setContent(request.getContent());
+        article.setTitle(request.getTitle());
+
+        // 기존에 연결된 ArticleCategoryEntity를 모두 삭제합니다.
         articleCategoryRepository.deleteArticleInCategory(id);
 
-        return save(request, user);
+        // 새로운 categories 목록으로 ArticleCategoryEntity를 생성하여 업데이트합니다.
+        for (Long categoryId : categories) {
+            // 저장 로직 - articleCategoryService를 사용하여 저장한다고 가정
+            articleCategoryService.save(article, categoryId);
+        }
+
+        // articleRepository를 사용하여 게시글을 업데이트합니다.
+        articleRepository.save(article);
+
+        // 위와 같이 ResponseDto를 구성한 후 반환합니다.
+        return articleMapper.toResponseDto(article);
     }
+
 
     // 다른 필요한 메서드들을 추가할 수 있습니다.
 }
