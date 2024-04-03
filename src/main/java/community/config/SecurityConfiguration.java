@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.PATCH, "/update").hasAnyAuthority("USER","ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/delete").hasAnyAuthority("USER","ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/login", "/signup", "/", "/article/**", "/articles/{type}","/error").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user","/checkEmail","/checkNickName").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/admin").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 )
