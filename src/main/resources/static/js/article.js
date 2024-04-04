@@ -43,6 +43,24 @@ if (modifyButton) {
             selectedCategories.push(checkbox.value);
         });
 
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
+
+        if (!title) {
+            alert('제목을 입력해주세요.');
+            return;
+        }
+
+        if (!content) {
+            alert('내용을 입력해주세요.');
+            return;
+        }
+
+        if (selectedCategories.length === 0) {
+            alert('카테고리를 선택해주세요.');
+            return;
+        }
+
         fetch(`/api/articles/${id}`, {
             method: 'PUT',
             headers: {
@@ -71,6 +89,24 @@ if (createButton) {
         checkboxes.forEach(function(checkbox) {
             selectedCategories.push(checkbox.value);
         });
+
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
+
+        if (!title) {
+            alert('제목을 입력해주세요.');
+            return;
+        }
+
+        if (!content) {
+            alert('내용을 입력해주세요.');
+            return;
+        }
+
+        if (selectedCategories.length === 0) {
+            alert('카테고리를 선택해주세요.');
+            return;
+        }
 
         fetch(`/api/articles`, {
             method: 'POST',
