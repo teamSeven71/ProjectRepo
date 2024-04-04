@@ -61,12 +61,6 @@ public class ArticlePageController {
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
         String categoryName = categoryDto.getCategoryName();
 
-        if(categoryName == "ARTICLE"){
-            categoryName = "자유";
-        }else if(categoryName == "ETC"){
-            categoryName = "기타 질문";
-        }
-
         model.addAttribute("categoryName", categoryName);
         return "/site/articleList";
     }

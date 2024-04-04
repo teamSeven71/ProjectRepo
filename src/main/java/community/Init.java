@@ -54,7 +54,7 @@ public class Init {
 
     @Transactional
     public void initCategory() {
-        String[] categories = {"ARTICLE", "NOTICE", "JAVA", "SQL", "JS", "ETC", "PYTHON", "DB"};
+        String[] categories = {"자유", "NOTICE", "Java", "SQL", "JavaScript", "기타 질문", "Python", "DB"};
 
         for (String categoryName : categories) {
             CategoryEntity categoryEntity = new CategoryEntity();
