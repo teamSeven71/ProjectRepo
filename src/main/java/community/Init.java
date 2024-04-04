@@ -40,7 +40,7 @@ public class Init {
         admin.setRole(Role.ADMIN);
         userRepository.save(admin);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             UserEntity user = new UserEntity();
             user.setUsername("user" + (i+1) + "@naver.com");
 //            user.setUsername("user" + (i+1));
