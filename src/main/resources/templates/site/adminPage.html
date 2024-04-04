@@ -20,6 +20,10 @@
     <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+    <!-- JS 링크 -->
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script defer src="/js/articleList.js"></script>
+    <script defer src="/js/admin.js"></script>
 </head>
 <body>
 <!-- ======= Header ======= -->
@@ -48,7 +52,7 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="searchContent()">검색</button>
             </div>
         </div>
-        <button class="btn btn-danger" id="deleteButton">사용자 탈퇴</button>
+        <button type="button" class="btn btn-danger" id="deleteButton">사용자 탈퇴</button>
     </form>
     <table class="table mt-5">
         <thead class="table_article">
@@ -91,10 +95,6 @@
         </div>
     </div>
 </footer><!-- End Footer -->
-
-<!-- 부트스트랩 JS 링크 (선택사항) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<script src="/js/articleList.js"></script>
 
 </body>
 <!--<script>-->

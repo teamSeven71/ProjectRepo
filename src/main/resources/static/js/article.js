@@ -1,19 +1,21 @@
 //----------------------------게시글 삭제 ----------------------------------------
 const deleteButton = document.getElementById('delete-btn');
-
 if (deleteButton) {
     deleteButton.addEventListener('click', event => {
-
         let id = document.getElementById('article-id').value;
-
-        fetch(`/api/articles/${id}`, {
+        fetch(`/api/articles/delete/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
                 if (response.ok) {
+                    // 서버로부터 성공적인 응답을 받았을 때
                     alert('삭제가 완료되었습니다');
                     location.replace('/');
+                } else if(response.status === 403){
+                    // 서버로부터 403 Forbidden 응답을 받았을 때
+                    alert('해당 글의 작성자만 삭제할 수있습니다.');
                 } else {
+                    // 서버로부터 오류 응답을 받았을 때
                     alert('게시물 삭제에 실패했습니다');
                 }
             })
@@ -23,6 +25,7 @@ if (deleteButton) {
             });
     });
 }
+
 
 //----------------------------게시글 수정 ----------------------------------------
 const modifyButton = document.getElementById('modify-btn');
@@ -110,10 +113,11 @@ if (createComment) {
 }
 
 //----------------------------댓글 삭제 ----------------------------------------
-function deleteComment() {
-
-    // 삭제할 댓글의 ID 가져오기
-    let commentId = document.getElementById('comment-id').value;
+function deleteComment(event) {
+    event.preventDefault(); // 기본 이벤트 동작 방지
+    // 수정하기 버튼을 누른 댓글 영역에 대한 참조를 가져옴
+    let commentContainer = event.target.closest('.d-flex');
+    let commentId = commentContainer.querySelector('.comment-id').value;
     let id = document.getElementById('article-id').value;
 
     // 댓글 삭제 API 호출
@@ -124,7 +128,10 @@ function deleteComment() {
             if (response.ok) {
                 alert('삭제가 완료되었습니다');
                 location.replace("/article/" + id);
-            } else {
+            } else if(response.status === 403){
+                // 서버로부터 403 Forbidden 응답을 받았을 때
+                alert('해당 글의 작성자만 삭제할 수있습니다.');
+            }else {
                 alert('댓글 삭제에 실패했습니다');
             }
         })
@@ -156,7 +163,11 @@ function updateComment(commentId) {
             if (response.ok) {
                 alert('수정 완료되었습니다');
                 location.replace("/article/" + id);
-            } else {
+            } else if(response.status === 403){
+                // 서버로부터 403 Forbidden 응답을 받았을 때
+                alert('해당 글의 작성자만 삭제할 수있습니다.');
+                location.reload();
+            }else {
                 alert('댓글 수정에 실패했습니다');
             }
         })
@@ -208,31 +219,6 @@ function modifyComment(event) {
     commentContainer.querySelector('.deleteReply').after(confirmButton);
 }
 
-/* 한번 누르는거까지 잘 작동하다가 2번째 누르면 작동 x (페이지 세로고침 안하면 작동 x) 그래서 그냥 페이지 새로고치 해버리려고 주석해둠
-function cancelModification(event) {
-    // 수정 취소 시 초기 상태로 복구
-    let commentContainer = event.target.closest('.d-flex');
-    let textareaElement = commentContainer.querySelector('textarea');
-    let commentTextElement = document.createElement('p');
-    let commentContent = commentContainer.querySelector('.comment-content').textContent; // 수정하기 전의 댓글 내용 가져오기
-    commentTextElement.textContent = commentContent;
-    textareaElement.replaceWith(commentTextElement);
-
-    // "좋아요", "삭제" 버튼 다시 표시
-    commentContainer.querySelector('.likeReply').style.display = 'inline';
-    commentContainer.querySelector('.deleteReply').style.display = 'inline';
-
-    // "취소" 버튼 다시 "수정"으로 변경
-    let modifyButton = commentContainer.querySelector('.updateReply');
-    modifyButton.innerHTML = '<i class="bi bi-pen-fill"></i> 수정';
-    modifyButton.removeEventListener('click', cancelModification);
-    modifyButton.addEventListener('click', modifyComment);
-
-    // 수정 완료 버튼 제거
-    let confirmButton = commentContainer.querySelector('.confirmReply');
-    confirmButton.remove();
-}
-*/
 //----------------------------------수정하기 버튼 end------------------------------
 
 document.addEventListener("DOMContentLoaded", function() {

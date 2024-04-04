@@ -25,9 +25,13 @@ public class UserController {
 
     @DeleteMapping("/users")
     public ResponseEntity<Void> deleteUsers(@RequestBody DeleteUserIdsRequest request) {
-        userService.deleteUsers(request.getUserIds());
-
-        return ResponseEntity.ok().build();
+        try {
+            userService.deleteUsers(request.getUserIds());
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            // 다른 예외 처리 (예: 500 Internal Server Error 반환)
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @PostMapping("/checkEmail")
