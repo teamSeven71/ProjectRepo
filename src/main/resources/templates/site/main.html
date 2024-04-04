@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="on" xmlns:th="http://www.thymeleaf.org">
+<html lang="on" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="utf-8">
@@ -54,7 +55,8 @@
           <a class="nav" onclick="location.href='/'">Home</a>
           <a class="nav" onclick="location.href='/login'" style="margin-left: 10px;">Login</a>
           <a class="nav" onclick="location.href='/logout'" style="margin-left: 10px;">Logout</a>
-          <a class="nav" onclick="location.href='/admin'" style="margin-left: 10px;">MyPage</a>
+          <a class="nav" sec:authorize="hasAuthority('ADMIN')" href="/admin" style="margin-left: 10px;">AdminPage</a>
+          <a class="nav" sec:authorize="hasAuthority('USER')" href="/userInfo" style="margin-left: 10px;">UserInfo</a>
         </div>
     </div>
     </div>
