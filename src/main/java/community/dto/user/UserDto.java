@@ -53,6 +53,8 @@ public class UserDto {
 
         private String username;
 
+        private String role;
+
         private List<ArticleEntity> articles;
 
         private List<CommentEntity> comments;

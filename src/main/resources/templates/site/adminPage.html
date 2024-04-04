@@ -68,7 +68,8 @@
             <td th:text="${member.name}"></td>
             <td th:text="${member.username}"></td>
             <td>
-                <input th:value="${member.id}" type="checkbox">
+                <!-- 사용자 역할이 관리자인 경우에만 삭제 체크박스를 숨깁니다 -->
+                <input th:unless="${member.role == 'ADMIN'}" type="checkbox" th:value="${member.id}">
             </td>
         </tr>
         </tbody>
