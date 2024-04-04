@@ -53,8 +53,9 @@ public class ArticlePageController {
     @GetMapping("/articles/{categoryId}")
     public String showArticles(Model model, @PathVariable Long categoryId){
         List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(categoryId);
-//        //id 순으로 정렬.
-        Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
+
+        //역순으로 정렬
+        Collections.reverse(articles);
         model.addAttribute("articles", articles);
 
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
