@@ -91,7 +91,7 @@
                     <input type="hidden" id="article-id" th:value="${article.id}">
                     <button th:if="${article.id} == null" id="create-btn" class="on" type="submit">등록</button>
                     <button th:if="${article.id} != null" id="modify-btn" class="on" type="submit">수정</button>
-                    <a th:if="${article.id} == null" th:href="@{/articles/{type}(type= ${'ARTICLE'})}">취소</a>
+                    <a th:if="${article.id} == null" th:href="@{/articles/{type}(type= ${categoryId})}">취소</a>
                     <a th:if="${article.id} != null" th:href="@{/article/{id}(id=${article.id})}">취소</a>
                 </div>
             </div>

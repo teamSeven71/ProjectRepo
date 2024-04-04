@@ -111,10 +111,11 @@ public class ArticlePageController {
 
     // 게시글 작성 페이지 & 수정 페이지
     @GetMapping("/article/post")
-    public String postArticle(Model model, @RequestParam(required = false) Long id)
+    public String postArticle(Model model, @RequestParam(required = false) Long id, @RequestParam(required = false) Long categoryId)
     {
         if (id == null) {  // 등록
             model.addAttribute("article", new ArticleDto.ArticleResponseDto());
+            model.addAttribute("categoryId",categoryId);
         } else {  // 수정
             ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
             model.addAttribute("article", article);
