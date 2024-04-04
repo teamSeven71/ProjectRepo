@@ -70,7 +70,7 @@
         <!-- 서버에서 받아온 게시물 데이터를 반복하여 출력합니다. -->
         <tr th:each="article : ${articles}">
             <td style="font-weight: bold;">
-                <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}"></a>
+                <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}" style="text-decoration: none; color: #e96b56; "></a>
             </td>
             <td th:text="${article.content}"></td>
             <td th:text="${article.nickName}"></td>
@@ -83,13 +83,13 @@
 <nav aria-label="Page navigation example" th:if="${not articles.empty}">
     <ul class="pagination pagination-orange justify-content-center">
         <li class="page-item" th:classappend="${startPage == articles.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber - 1}, categoryId=${categoryId})}" tabindex="-1">Previous</a>
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber - 1}, categoryId=${categoryId})}" tabindex="-1">ᐊ</a>
         </li>
         <li class="page-item" th:classappend="${num == articles.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
             <a class="page-link" th:href="@{/articles/{categoryId}(page=${num-1}, categoryId=${categoryId})}" th:text="${num}">1</a></li>
 
         <li class="page-item" th:classappend="${endPage == articles.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber + 1}, categoryId=${categoryId})}">Next</a>
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber + 1}, categoryId=${categoryId})}">ᐅ</a>
         </li>
     </ul>
 </nav>
