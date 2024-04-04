@@ -6,15 +6,18 @@ import community.dto.user.AddUserRequest;
 import community.dto.user.UserDto;
 import community.mapper.user.UserMapper;
 import community.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 @Service("userDetailsService")
 public class UserService implements UserDetailsService {
@@ -35,6 +38,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new IllegalArgumentException(email));
     }
 
+
     public UserEntity save(AddUserRequest dto) {
         return userRepository.save(
                 UserEntity.builder()
@@ -47,11 +51,9 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public List<UserDto.UserResponseDto> getAllActiveMembers() {
-        List<UserEntity> users = userRepository.findAllActiveMembers();
-        return users.stream()
-                .map(userMapper::toResponseDto)
-                .collect(Collectors.toList());
+    public Page<UserDto.UserResponseDto> getAllActiveMembers(Pageable pageable) {
+        return userRepository.findAll(pageable)
+                .map(userMapper::toResponseDto);
     }
 
     public void deleteUsers(List<Long> userIds){
@@ -63,7 +65,30 @@ public class UserService implements UserDetailsService {
         return result;
     }
 
-    public boolean existsByNickName(String nickname){
-       return userRepository.existsByNickName(nickname);
+    @Transactional
+    public UserDto.UserResponseDto updateUser(Long userId, String nickName){
+
+        Optional<UserEntity> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isEmpty()) {
+            throw new UsernameNotFoundException("User not found with id: " +userId);
+        }
+
+        UserEntity user = optionalUser.get();
+
+        user.setNickName(nickName);
+
+        userRepository.save(user);
+
+        return userMapper.toResponseDto(user);
     }
+
+    public boolean existsByUsername(String email){
+        boolean result = userRepository.existsByUsername(email);
+
+
+    public boolean existsByNickName(String nickname){
+        return userRepository.existsByNickName(nickname);
+    }
+
 }
