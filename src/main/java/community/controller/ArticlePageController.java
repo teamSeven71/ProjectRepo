@@ -59,22 +59,17 @@ public class ArticlePageController {
 
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
         String categoryName = categoryDto.getCategoryName();
+
+        if(categoryName == "ARTICLE"){
+            categoryName = "자유";
+        }else if(categoryName == "ETC"){
+            categoryName = "기타 질문";
+        }
+
         model.addAttribute("categoryName", categoryName);
         return "/site/articleList";
     }
 
-    // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
-    @GetMapping("/article/categoryName/{categoryId}")
-    public String showCategory(Model model, @PathVariable("categoryId") Long categoryId){
-        System.out.println("아이디: " + categoryId);
-
-        CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
-        String categoryName = categoryDto.getCategoryName();
-
-        System.out.println("이름: " + categoryName);
-        model.addAttribute("categoryName", categoryName);
-        return "site/main";
-    }
 
 
 
