@@ -3,6 +3,7 @@ package community.service;
 import community.constant.Role;
 import community.domain.user.UserEntity;
 import community.dto.user.AddUserRequest;
+import community.dto.user.UserDto;
 import community.mapper.user.UserMapper;
 import community.repository.UserRepository;
 import org.springframework.data.domain.Page;
@@ -46,8 +47,9 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public Page<UserEntity> getAllActiveMembers(Pageable pageable) { // 수정된 부분
-        return userRepository.findAll(pageable);
+    public Page<UserDto.UserResponseDto> getAllActiveMembers(Pageable pageable) {
+        return userRepository.findAll(pageable)
+                .map(userMapper::toResponseDto);
     }
 
     public void deleteUsers(List<Long> userIds){

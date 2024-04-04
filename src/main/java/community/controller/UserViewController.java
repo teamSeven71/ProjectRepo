@@ -2,6 +2,7 @@ package community.controller;
 
 
 import community.domain.user.UserEntity;
+import community.dto.user.UserDto;
 import community.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +43,7 @@ public class UserViewController {
     // 관리자 페이지
     @GetMapping("/admin")
     public String showMembers(@PageableDefault(size=10) Pageable pageable, Model model) {
-        Page<UserEntity> members = userService.getAllActiveMembers(pageable);
+        Page<UserDto.UserResponseDto> members = userService.getAllActiveMembers(pageable);
         int startPage = Math.max(1, members.getPageable().getPageNumber() - 4);
         int endPage = Math.min(members.getPageable().getPageNumber()+4, members.getTotalPages());
 
