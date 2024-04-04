@@ -227,6 +227,15 @@ li {
     resize: vertical;
 }
 
+#id,
+#nickName,
+#name,
+#password,
+#password2{
+    width: 230px;
+    text-align: center;
+}
+
 body {
     display: flex;
     flex-direction: column;

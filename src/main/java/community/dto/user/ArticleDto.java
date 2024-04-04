@@ -44,7 +44,7 @@ public class ArticleDto {
 
         private Long id;
 
-        private String username; //게시글 작성한 사용자 아이디
+        private String email; //게시글 작성한 사용자 이메일
 
         private String name; //사용자 이름
 

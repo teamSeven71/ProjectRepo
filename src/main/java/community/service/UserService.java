@@ -30,15 +30,15 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException(username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException(email));
     }
 
     public UserEntity save(AddUserRequest dto) {
         return userRepository.save(
                 UserEntity.builder()
-                        .username(dto.getUsername())
+                        .email(dto.getUsername())
                         .password(encoder.encode(dto.getPassword()))// 패스워드 암호화
                         .name(dto.getName())
                         .nickName(dto.getNickname())
@@ -58,8 +58,8 @@ public class UserService implements UserDetailsService {
         userRepository.deleteAllById(userIds);
     }
 
-    public boolean existsByUsername(String email){
-        boolean result = userRepository.existsByUsername(email);
+    public boolean existsByEmail(String email){
+        boolean result = userRepository.existsByEmail(email);
         return result;
     }
 

@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    Optional<UserEntity> findByUsername(String username);  // username으로 사용자 정보를 가져옴
+    Optional<UserEntity> findByEmail(String email);  // email로 사용자 정보를 가져옴
 
     @Override
     <S extends UserEntity> S save(S entity);
@@ -31,6 +31,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Override
     <S extends UserEntity> boolean exists(Example<S> example);
 
-    boolean existsByUsername(String userName);
+    boolean existsByEmail(String email);
     boolean existsByNickName(String nickName);
 }

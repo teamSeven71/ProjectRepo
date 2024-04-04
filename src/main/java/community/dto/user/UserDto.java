@@ -21,7 +21,7 @@ public class UserDto {
     public static class UserRequestDto {
 
         @NotBlank(message = "이메일을 작성해주세요.")
-        private String username; //사용자 아이디
+        private String email; //사용자 이메일
 
         @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$",
                 message = "비밀번호는 8~15자 영문, 숫자, 특수문자 조합이어야 합니다.")
@@ -51,7 +51,7 @@ public class UserDto {
 
         private String password;
 
-        private String username;
+        private String email;
 
         private List<ArticleEntity> articles;
 
