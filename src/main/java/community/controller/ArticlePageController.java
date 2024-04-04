@@ -7,8 +7,10 @@ import community.dto.user.CategoryDto;
 import community.dto.user.CommentDto;
 import community.service.ArticleCategoryService;
 import community.service.ArticleService;
+import community.service.CategoryService;
 import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jdk.jfr.Category;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -34,7 +37,8 @@ public class ArticlePageController {
     private final ArticleCategoryService articleCategoryService;
 
     @Autowired
-    public ArticlePageController(ArticleService articleService, CommentService commentService, ArticleCategoryService articleCategoryService) {
+    public ArticlePageController(ArticleService articleService, CommentService commentService,
+                                 ArticleCategoryService articleCategoryService) {
         this.articleService = articleService;
         this.commentService = commentService;
         this.articleCategoryService = articleCategoryService;
@@ -57,12 +61,15 @@ public class ArticlePageController {
     public String showArticles(@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId){
         Page<ArticleDto.ArticleResponseDto> articles = articleService.findAllArticleByCategory(categoryId, pageable);
 
+
+
         // 페이지 설정
         int startPage = Math.max(1, articles.getPageable().getPageNumber() - 4);
         int endPage = Math.min(articles.getPageable().getPageNumber() + 4, articles.getTotalPages());
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("articles", articles);
+
 
         // 카테고리명 추가
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
@@ -72,6 +79,27 @@ public class ArticlePageController {
         model.addAttribute("categoryId", categoryDto.getId());
 
         return "/site/articleList";
+    }
+
+//    @GetMapping("/articles/countComment/{articleId}")
+//    public String countComment( Model model,
+//                             @PathVariable Long articleId){
+//
+//        Long commentNum = commentService.countComment(articleId);
+//        model.addAttribute(commentNum);
+//
+//        return "/site/articleList";
+//
+//    }
+
+    @GetMapping("/articles/countComment/{articleId}")
+    public Long countComment(@PathVariable Long articleId){
+
+        Long commentNum = commentService.countComment(articleId);
+//        model.addAttribute(commentNum);
+
+        return commentNum;
+
     }
 
 

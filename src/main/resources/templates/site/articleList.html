@@ -60,7 +60,7 @@
         <thead class="table_article">
         <tr>
             <th>게시글 제목</th>
-            <th>게시글 내용</th>
+            <th>댓글 개수</th>
             <th>작성자</th>
             <th>작성 날짜</th>
             <th>수정 날짜</th>
@@ -72,7 +72,10 @@
             <td style="font-weight: bold;">
                 <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}" style="text-decoration: none; color: #e96b56; "></a>
             </td>
-            <td th:text="${article.content}"></td>
+            <td>
+                <!-- 서버로 요청하여 해당 게시물의 댓글 수를 받아옵니다. -->
+                <span th:text="${@articlePageController.countComment(article.id)}"></span>
+            </td>
             <td th:text="${article.nickName}"></td>
             <td th:text="${#temporals.format(article.createAt, 'yyyy-MM-dd HH:mm')}"></td>
             <td th:text="${#temporals.format(article.modifiedAt, 'yyyy-MM-dd HH:mm')}"></td>
