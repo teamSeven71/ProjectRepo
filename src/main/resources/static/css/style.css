@@ -1959,6 +1959,7 @@ section {
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
+  transform: translateY(0%);
 }
 
 #footer .footer-newsletter {
