@@ -1,6 +1,6 @@
-let deleteButton = document.getElementById('deleteButton');
+const deleteButton = document.getElementById('deleteButton');
 
-deleteButton.addEventListener('click', () => {
+deleteButton.addEventListener('click', ()=> {
     const checkedInputs = document.querySelectorAll('input[type="checkbox"]:checked');
     const userIds = [];
 
@@ -20,16 +20,11 @@ deleteButton.addEventListener('click', () => {
     })
         .then(response => {
             if (response.ok) {
-                return response.text();
+                alert("삭제 성공");
+                location.reload(); // 이 부분으로 이동
             } else {
                 throw new Error('삭제 실패');
             }
-        })
-        .then(data => {
-            console.log('삭제 성공:', data);
-            const checkedRows = document.querySelectorAll('input[type="checkbox"]:checked').parentElement.parentElement;
-            checkedRows.forEach(row => row.remove());
-            location.reload(); // 이 부분으로 이동
         })
         .catch(error => {
             console.error('삭제 실패:', error);

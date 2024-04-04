@@ -81,7 +81,6 @@ public class ArticleService {
         CategoryEntity categoryEntity = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + categoryId));
 
-
         return categoryMapper.toResponseDto(categoryEntity);
     }
 

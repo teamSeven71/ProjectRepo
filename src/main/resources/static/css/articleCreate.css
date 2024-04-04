@@ -78,7 +78,7 @@ li {
 }
 
 .board_title strong {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .board_title p {
@@ -182,20 +182,26 @@ li {
     border: 0;
     resize: vertical;
 }
-
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 #footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    position: relative;
+    bottom: auto; /* bottom 속성 제거 */
     width: 100%;
     background: #404040;
     padding: 0 0 30px 0;
     color: #fff;
     font-size: 14px;
+    transform: translateY(0%);
+    display: flex;
+    margin-top: auto;
 }
 
 #footer .footer-newsletter {
