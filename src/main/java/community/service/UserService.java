@@ -11,8 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -30,10 +32,11 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserEntity loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException(username));
     }
+
 
     public UserEntity save(AddUserRequest dto) {
         return userRepository.save(
@@ -58,6 +61,24 @@ public class UserService implements UserDetailsService {
         userRepository.deleteAllById(userIds);
     }
 
+    @Transactional
+    public UserDto.UserResponseDto updateUser(Long userId, String nickName){
+
+        Optional<UserEntity> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isEmpty()) {
+            throw new UsernameNotFoundException("User not found with id: " +userId);
+        }
+
+        UserEntity user = optionalUser.get();
+
+        user.setNickName(nickName);
+
+        userRepository.save(user);
+
+        return userMapper.toResponseDto(user);
+    }
+
     public boolean existsByUsername(String email){
         boolean result = userRepository.existsByUsername(email);
         return result;
@@ -66,4 +87,5 @@ public class UserService implements UserDetailsService {
     public boolean existsByNickName(String nickname){
        return userRepository.existsByNickName(nickname);
     }
+
 }
