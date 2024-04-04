@@ -9,6 +9,19 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+.pagination-orange .page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #f57c00; /* 주황색 */
+  border-color: #f57c00; /* 주황색 */
+}
+
+.pagination-orange .page-link {
+  color: #f57c00; /* 주황색 */
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
