@@ -10,14 +10,18 @@ import community.mapper.user.CommentMapper;
 import community.repository.ArticleRepository;
 import community.repository.CommentRepository;
 import community.repository.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+
 
 @Slf4j
 @Service
@@ -27,6 +31,9 @@ public class CommentService {
     private final CommentMapper commentMapper;
     private final UserRepository userRepository;
     private final ArticleRepository articleRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     public CommentService(CommentRepository commentRepository, CommentMapper commentMapper,
@@ -82,15 +89,33 @@ public class CommentService {
         return commentMapper.toResponseDto(commentEntity);
     }
 
-    //댓글 삭제
+    // 댓글 삭제
+    @Transactional
     public void deleteComment(Long commentId) {
-
         CommentEntity commentEntity = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NoSuchElementException("Comment not found with id: " + commentId));
 
-        commentRepository.deleteById(commentId);
-        log.info("삭제된 Comment: {}",commentId);
+        try {
+            // 해당 댓글을 작성한 사용자를 찾습니다.
+            UserEntity userEntity = commentEntity.getUser();
+
+            // 사용자가 작성한 댓글 목록에서 해당 댓글을 제거합니다.
+            if (userEntity != null) {
+                userEntity.getComments().remove(commentEntity);
+                userRepository.save(userEntity);
+            }
+
+            // 댓글을 삭제합니다.
+            commentRepository.delete(commentEntity);
+            log.info("삭제된 Comment: {}", commentId);
+        } catch (Exception e) {
+            // 댓글 삭제 중 예외가 발생한 경우 처리
+            log.error("댓글 삭제 중 예외 발생: {}", e.getMessage());
+            throw new RuntimeException("댓글 삭제 중 문제가 발생했습니다.", e);
+        }
     }
+
+
 
     //댓글 개수 조회
     public Long countComment(Long articleId) {
