@@ -6,6 +6,8 @@ import community.dto.user.AddUserRequest;
 import community.dto.user.UserDto;
 import community.mapper.user.UserMapper;
 import community.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 @Service("userDetailsService")
 public class UserService implements UserDetailsService {
@@ -50,11 +51,9 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public List<UserDto.UserResponseDto> getAllActiveMembers() {
-        List<UserEntity> users = userRepository.findAllActiveMembers();
-        return users.stream()
-                .map(userMapper::toResponseDto)
-                .collect(Collectors.toList());
+    public Page<UserDto.UserResponseDto> getAllActiveMembers(Pageable pageable) {
+        return userRepository.findAll(pageable)
+                .map(userMapper::toResponseDto);
     }
 
     public void deleteUsers(List<Long> userIds){
@@ -85,7 +84,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean existsByNickName(String nickname){
-       return userRepository.existsByNickName(nickname);
+        return userRepository.existsByNickName(nickname);
     }
 
 }

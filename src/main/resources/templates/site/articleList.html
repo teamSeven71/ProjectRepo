@@ -77,7 +77,19 @@
         </tbody>
     </table>
 </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-orange justify-content-center">
+        <li class="page-item" th:classappend="${startPage == articles.pageable.pageNumber + 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber - 1}, categoryId=${categoryId})}" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item" th:classappend="${num == articles.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${num-1}, categoryId=${categoryId})}" th:text="${num}">1</a></li>
 
+        <li class="page-item" th:classappend="${endPage == articles.pageable.pageNumber + 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber + 1}, categoryId=${categoryId})}">Next</a>
+        </li>
+    </ul>
+</nav>
 <!-- ======= Footer ======= -->
 <footer id="footer">
 

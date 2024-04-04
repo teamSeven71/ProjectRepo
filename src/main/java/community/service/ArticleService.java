@@ -15,6 +15,9 @@ import community.repository.CategoryRepository;
 import community.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,13 +85,27 @@ public class ArticleService {
     }
 
 
+    //게시글 목록 pagination 때문에 필요
+    public Page<ArticleDto.ArticleResponseDto> findAllArticleByCategory(Long categoryId, Pageable pageable) {
+        Page<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findAllArticleByCategory(categoryId, pageable);
+
+        // ArticleCategoryEntity를 ArticleDto.ArticleResponseDto로 매핑하여 새로운 페이지를 생성합니다.
+        List<ArticleDto.ArticleResponseDto> articles = articleCategories.getContent().stream()
+                .map(articleCategory -> articleMapper.toResponseDto(articleCategory.getArticle()))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(articles, pageable, articleCategories.getTotalElements());
+    }
+
+    //그냥 공지사항 3개 메인페이지 조회시필요
     public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(Long categoryId) {
-        List<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findAllArticleByCategory(categoryId);
+        List<ArticleCategoryEntity> articleCategories = articleCategoryRepository.getAllArticleByCategory(categoryId);
 
         return articleCategories.stream()
                 .map(articleCategory -> articleMapper.toResponseDto(articleCategory.getArticle()))
                 .collect(Collectors.toList());
     }
+
 
     public ArticleDto.ArticleResponseDto getArticleById(Long id) {
         ArticleEntity article = articleRepository.findById(id)
