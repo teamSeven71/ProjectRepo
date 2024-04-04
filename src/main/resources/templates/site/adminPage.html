@@ -75,6 +75,21 @@
         </tbody>
     </table>
 </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-orange justify-content-center">
+        <li class="page-item" th:classappend="${startPage == members.pageable.pageNumber + 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/admin(page=${members.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item" th:classappend="${num == members.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
+            <a class="page-link" th:href="@{/admin(page=${num-1})}" th:text="${num}">1</a></li>
+
+        <li class="page-item" th:classappend="${endPage == members.pageable.pageNumber + 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/admin(page=${members.pageable.pageNumber + 1})}">Next</a>
+        </li>
+    </ul>
+</nav>
+
+
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
