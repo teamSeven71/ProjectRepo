@@ -63,6 +63,20 @@ public class ArticlePageController {
         return "/site/articleList";
     }
 
+    // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
+    @GetMapping("/article/categoryName/{categoryId}")
+    public String showCategory(Model model, @PathVariable("categoryId") Long categoryId){
+        System.out.println("아이디: " + categoryId);
+
+        CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
+        String categoryName = categoryDto.getCategoryName();
+
+        System.out.println("이름: " + categoryName);
+        model.addAttribute("categoryName", categoryName);
+        return "site/main";
+    }
+
+
 
     // 메인페이지의 공지사항 클릭시 & 게시글 목록 페이지에서 특정 게시글 클릭 시 : 해당 게시글 상세 페이지
     @GetMapping("/article/{id}")
