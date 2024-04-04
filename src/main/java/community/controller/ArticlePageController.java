@@ -59,9 +59,18 @@ public class ArticlePageController {
 
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
         String categoryName = categoryDto.getCategoryName();
+
+        if(categoryName == "ARTICLE"){
+            categoryName = "자유";
+        }else if(categoryName == "ETC"){
+            categoryName = "기타 질문";
+        }
+
         model.addAttribute("categoryName", categoryName);
         return "/site/articleList";
     }
+
+
 
 
     // 메인페이지의 공지사항 클릭시 & 게시글 목록 페이지에서 특정 게시글 클릭 시 : 해당 게시글 상세 페이지

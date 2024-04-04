@@ -34,11 +34,12 @@
         <div class="d-flex justify-content-end align-items-center mb-4">
             <a class="nav" onclick="location.href='/'">Home</a>
             <a class="nav" onclick="location.href='/login'" style="margin-left: 10px;">Login</a>
+            <a class="nav" onclick="location.href='/logout'" style="margin-left: 10px;">Logout</a>
             <a class="nav" onclick="location.href='/admin'" style="margin-left: 10px;">MyPage</a>
         </div>
     </div>
     </div>
-</header><!-- End Header -->
+</header>
 <div class="container">
 <!--    <h2 class="text-center mt-5">게시판</h2>-->
     <h2 class="text-center mt-5" th:text="${categoryName} + ' 게시판'"></h2>

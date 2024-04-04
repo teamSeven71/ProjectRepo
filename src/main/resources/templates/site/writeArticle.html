@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
 <body>
+<!-- ======= Header ======= -->
 <header id="header" class="d-flex align-items-center">
     <div class="container d-flex justify-content-between align-items-center">
 
@@ -25,6 +26,7 @@
         <div class="d-flex justify-content-end align-items-center mb-4">
             <a class="nav" onclick="location.href='/'">Home</a>
             <a class="nav" onclick="location.href='/login'" style="margin-left: 10px;">Login</a>
+            <a class="nav" onclick="location.href='/logout'" style="margin-left: 10px;">Logout</a>
             <a class="nav" onclick="location.href='/admin'" style="margin-left: 10px;">MyPage</a>
         </div>
     </div>
@@ -33,7 +35,7 @@
 <div class="board_wrap">
     <div class="board_create">
         <div class="board_title">
-            <strong th:if="${article.id} == null">글쓰기</strong>
+            <strong th:if="${article.id} == null">게시글 작성</strong>
             <strong th:if="${article.id} != null">수정하기</strong>
         </div>
         <div class="board_write_wrap">
