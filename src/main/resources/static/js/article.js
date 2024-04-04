@@ -76,6 +76,28 @@ if (modifyButton) {
             location.replace(`/article/${id}`);
         });
     });
+
+    // 페이지 로드 시 기존에 선택된 카테고리 체크박스들을 체크
+    window.onload = function() {
+        let params = new URLSearchParams(location.search);
+        let id = params.get('id');
+
+        //해당 게시글의 카테고리 정보를 가져오기
+        fetch(`/api/articles/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                let selectedCategories = data.categories;
+
+                // 기존에 선택된 카테고리들을 체크
+                selectedCategories.forEach(category => {
+                    let checkbox = document.querySelector(`input[name="types[]"][value="${category.id}"]`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+            })
+            .catch(error => console.error('카테고리 불러오기 실패:', error));
+    };
 }
 //----------------------------게시글 생성 ----------------------------------------
 const createButton = document.getElementById('create-btn');
