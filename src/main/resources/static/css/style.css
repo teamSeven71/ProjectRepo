@@ -346,7 +346,7 @@ h6 {
   width: 80%;
   animation-delay: 0.4s;
   margin: 0 auto 30px auto;
-  color: arken(#545454, 15);
+  /*color: darken(#545454, 15);*/
 }
 
 #hero .carousel-inner .carousel-item {
@@ -1951,15 +1951,29 @@ section {
   font-size: 14px;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 페이지의 내용이 적을 때도 전체 높이를 가지도록 수정 */
+}
+main {
+  flex: 1; /* 메인 콘텐츠가 남은 공간을 모두 차지하도록 설정 */
+  overflow-y: auto; /* 메인 콘텐츠가 넘치면 스크롤바가 나타나도록 설정 */
+}
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 #footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
   background: #404040;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
   transform: translateY(0%);
+  margin-top: auto;
 }
 
 #footer .footer-newsletter {

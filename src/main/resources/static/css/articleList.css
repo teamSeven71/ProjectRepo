@@ -46,7 +46,7 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* 최소 높이를 화면의 높이와 같게 설정하여 페이지의 내용이 적을 때도 전체 높이를 가지도록 함 */
+    min-height: 100vh; /* 페이지의 내용이 적을 때도 전체 높이를 가지도록 수정 */
 }
 
 /*--------------------------------------------------------------
@@ -54,7 +54,7 @@ body {
 --------------------------------------------------------------*/
 #footer {
     position: relative;
-    bottom: auto; /* bottom 속성 제거 */
+    bottom: auto;
     width: 100%;
     background: #404040;
     padding: 0 0 30px 0;
