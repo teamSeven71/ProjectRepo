@@ -83,8 +83,9 @@ public class UserService implements UserDetailsService {
         return userMapper.toResponseDto(user);
     }
 
-    public boolean existsByUsername(String email){
-        boolean result = userRepository.existsByUsername(email);
+//    public boolean existsByUsername(String email) {
+//        boolean result = userRepository.existsByUsername(email);
+//    }
 
 
     public boolean existsByNickName(String nickname){
