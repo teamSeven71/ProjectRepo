@@ -246,7 +246,13 @@ li {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* 페이지의 내용이 적을 때도 전체 높이를 가지도록 수정 */
+    min-height: 100vh;
+}
+
+#id,
+#password {
+    width: 300px;
+    text-align: center;
 }
 
 /*--------------------------------------------------------------
@@ -289,7 +295,7 @@ body {
 #footer .footer-newsletter form input[type=email] {
     border: 0;
     padding: 8px;
-    width: calc(100% - 140px);
+    width: calc(100% - 150px);
 }
 
 #footer .footer-newsletter form input[type=submit] {

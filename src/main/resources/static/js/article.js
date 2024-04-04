@@ -82,11 +82,17 @@ if (createButton) {
                 content: document.getElementById('content').value,
                 categories: selectedCategories
             })
-        }).then(() => {
-            alert('등록 완료되었습니다');
-            location.replace("/");
         })
-    })
+            .then(response => response.json()) // JSON 형태 파싱
+            .then(data => {
+                const id = data.id;
+                alert('등록 완료되었습니다');
+                location.replace(`/article/${id}`);
+            })
+            .catch(error => {
+                console.error('등록 실패:', error);
+            });
+    });
 }
 
 //----------------------------댓글 생성 ----------------------------------------

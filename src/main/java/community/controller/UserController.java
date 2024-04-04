@@ -37,7 +37,7 @@ public class UserController {
     @PostMapping("/checkEmail")
     public ResponseEntity<Void> checkEmail(@RequestBody CheckDuplicateRequest request) {
         System.out.println(request.getEmail());
-        if (userService.existsByUsername(request.getEmail())) {
+        if (userService.existsByEmail(request.getEmail())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } else {
             return ResponseEntity.ok().build();

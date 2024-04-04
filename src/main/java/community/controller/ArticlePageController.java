@@ -62,18 +62,11 @@ public class ArticlePageController {
         int endPage = Math.min(articles.getPageable().getPageNumber() + 4, articles.getTotalPages());
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-
         model.addAttribute("articles", articles);
 
         // 카테고리명 추가
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
         String categoryName = categoryDto.getCategoryName();
-
-        if(categoryName == "ARTICLE"){
-            categoryName = "자유";
-        }else if(categoryName == "ETC"){
-            categoryName = "기타 질문";
-        }
 
         model.addAttribute("categoryName", categoryName);
         model.addAttribute("categoryId", categoryDto.getId());

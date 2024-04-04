@@ -25,7 +25,7 @@ public interface ArticleMapper {
     /**
      * Entity -> Dto
      */
-    @Mapping(source = "user.username", target = "username")
+    @Mapping(source = "user.email", target = "email")
     @Mapping(source = "user.nickName", target = "nickName")
     @Mapping(source = "user.name", target = "name")
     @Mapping(source = "comments", target = "comments")

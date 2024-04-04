@@ -25,8 +25,8 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username",nullable = false, unique = true)
-    private String username; //사용자 아이디
+    @Column(name = "email",nullable = false, unique = true)
+    private String email; //사용자 아이디
 
     @Column(name = "password",nullable = false)
     private String password;
@@ -74,5 +74,10 @@ public class UserEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 }

@@ -33,7 +33,7 @@ public class Init {
     public void initUsers() {
 
         UserEntity admin = new UserEntity();
-        admin.setUsername("admin@naver.com");
+        admin.setEmail("admin@naver.com");
         admin.setNickName("admin");
         admin.setName("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
@@ -42,7 +42,7 @@ public class Init {
 
         for (int i = 0; i < 2; i++) {
             UserEntity user = new UserEntity();
-            user.setUsername("user" + (i+1) + "@naver.com");
+            user.setEmail("user" + (i+1) + "@naver.com");
 //            user.setUsername("user" + (i+1));
             user.setNickName("userNickname" + (i+1));
             user.setName("user" + (i+1));
@@ -54,7 +54,7 @@ public class Init {
 
     @Transactional
     public void initCategory() {
-        String[] categories = {"ARTICLE", "NOTICE", "JAVA", "SQL", "JS", "ETC", "PYTHON", "DB"};
+        String[] categories = {"자유", "NOTICE", "Java", "SQL", "JavaScript", "기타 질문", "Python", "DB"};
 
         for (String categoryName : categories) {
             CategoryEntity categoryEntity = new CategoryEntity();
