@@ -11,6 +11,9 @@ import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Tag(name = "아티클 Page")
@@ -49,17 +53,24 @@ public class ArticlePageController {
 
 
 
-    // 카테고리 클릭 시 해당 카테고리 게시글 목록 페이지
     @GetMapping("/articles/{categoryId}")
-    public String showArticles(Model model, @PathVariable Long categoryId){
-        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticlesByCategory(categoryId);
-//        //id 순으로 정렬.
-        Collections.sort(articles, Comparator.comparing(ArticleDto.ArticleResponseDto::getId));
+    public String showArticles(@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId){
+        Page<ArticleDto.ArticleResponseDto> articles = articleService.findAllArticleByCategory(categoryId, pageable);
+
+        // 페이지 설정
+        int startPage = Math.max(1, articles.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(articles.getPageable().getPageNumber() + 4, articles.getTotalPages());
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
         model.addAttribute("articles", articles);
 
+        // 카테고리명 추가
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
         String categoryName = categoryDto.getCategoryName();
         model.addAttribute("categoryName", categoryName);
+        model.addAttribute("categoryId", categoryDto.getId());
+
         return "/site/articleList";
     }
 
