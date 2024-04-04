@@ -35,8 +35,8 @@
 <div class="board_wrap">
     <div class="board_create">
         <div class="board_title">
-            <strong th:if="${article.id} == null">게시글 작성</strong>
-            <strong th:if="${article.id} != null">수정하기</strong>
+            <strong th:if="${article.id} == null">게시글 작성</strong>기
+            <strong th:if="${article.id} != null">게시글 수정</strong>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
@@ -53,28 +53,28 @@
                         </button>
                         <div id="categoryDropdown" class="dropdown-menu" aria-labelledby="categoryDropdownBtn">
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="1" th:checked="${'ARTICLE'}"> ARTICLE
+                                <input type="checkbox" name="types[]" value="1" >   자유 게시판
                             </label>
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="2" th:checked="${'NOTICE'}"> NOTICE
+                                <input type="checkbox" name="types[]" value="2">   공지사항
                             </label>
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="3" th:checked="${'JAVA'}"> JAVA
+                                <input type="checkbox" name="types[]" value="3">   Java
                             </label>
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="4" th:checked="${'SQL'}"> SQL
+                                <input type="checkbox" name="types[]" value="4">   SQL
                             </label>
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="5" th:checked="${'JS'}"> JS
+                                <input type="checkbox" name="types[]" value="5">   JavaScript
                             </label>
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="6" th:checked="${'ETC'}"> ETC
+                                <input type="checkbox" name="types[]" value="6">   기타 질문
                             </label>
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="7" th:checked="${'PYTHON'}"> PYTHON
+                                <input type="checkbox" name="types[]" value="7">   Python
                             </label>
                             <label class="dropdown-item">
-                                <input type="checkbox" name="types[]" value="8" th:checked="${'DB'}"> DB
+                                <input type="checkbox" name="types[]" value="8">   DB
                             </label>
                         </div>
                     </div>
