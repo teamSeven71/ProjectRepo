@@ -78,6 +78,9 @@
             <div class="row">
                 <div class="col-lg-8 entries">
                     <article class="entry entry-single">
+                        <h2 class="entry-title">
+                            <p>Title :  <td th:text="${article.title}"></td></p>
+                        </h2>
                         <div class="entry-meta">
                             <ul>
                                 <input type="hidden" id="article-id" th:value="${article.id}">
@@ -97,6 +100,17 @@
                                 <p th:text="${article.content}">
                                 </p>
                             </blockquote>
+                        </div>
+                        <div class="entry-footer">
+                            <i class="bi bi-folder"></i>
+                            <ul class="cats">
+                                <li>조회수: </li>
+                            </ul>
+
+                            <i class="bi bi-tags"></i>
+                            <ul class="tags" th:each="category : ${categories}">
+                                <li><a th:href="@{/articles/{categoryId}(categoryId= ${category.id})}" th:text="${category.categoryName}+','"></a></li>
+                            </ul>
                         </div>
                     </article><!-- End blog entry -->
 
