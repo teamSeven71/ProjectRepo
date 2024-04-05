@@ -52,32 +52,36 @@ if (modifyButton) {
         });
 
 
-        if (!checkEmpty(selectedCategories)) {
-            alert('카테고리를 선택해주세요.');
+        if (checkEmpty(selectedCategories)) {
+            alert('카테고리가 선택되지 않았습니다. 선택을 마쳐주세요!');
             return;
         }
 
-        if (!checkEmpty(titleValue) && !checkEmpty(contentValue)) {
-            fetch(`/api/articles/${id}`, {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    title: titleValue,
-                    content: contentValue,
-                    categories: selectedCategories
-                })
-            }).then(() => {
-                alert('수정이 완료되었습니다');
-                location.replace(`/article/${id}`);
-            });
-        } else {
-            if (checkEmpty(titleValue))
-                alert("제목이 비어있습니다. 작성을 마쳐주세요!");
-            if (checkEmpty(contentValue))
-                alert("내용이 비어있습니다. 작성을 마쳐주세요!");
+        if (checkEmpty(titleValue)) {
+            alert("제목이 비어있습니다. 작성을 마쳐주세요!");
+            return;
         }
+
+        if (checkEmpty(contentValue)) {
+            alert("내용이 비어있습니다. 작성을 마쳐주세요!");
+            return;
+        }
+
+        fetch(`/api/articles/${id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: titleValue,
+                content: contentValue,
+                categories: selectedCategories
+            })
+        }).then(() => {
+            alert('수정이 완료되었습니다');
+            location.replace(`/article/${id}`);
+        });
+
     });
 }
 //----------------------------게시글 생성 ----------------------------------------
@@ -95,38 +99,42 @@ if (createButton) {
         var titleValue = document.getElementById('title').value;
         var contentValue = document.getElementById('content').value;
 
-        if (selectedCategories.length === 0) {
-            alert('카테고리를 선택해주세요.');
+        if (checkEmpty(selectedCategories)) {
+            alert('카테고리가 선택되지 않았습니다. 선택을 마쳐주세요!');
             return;
         }
 
-        if (!checkEmpty(titleValue) && !checkEmpty(contentValue)) {
-            fetch(`/api/articles`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    title: titleValue,
-                    content: contentValue,
-                    categories: selectedCategories
-                })
-            })
-                .then(response => response.json()) // JSON 형태 파싱
-                .then(data => {
-                    const id = data.id;
-                    alert('등록 완료되었습니다');
-                    location.replace(`/article/${id}`);
-                })
-                .catch(error => {
-                    console.error('등록 실패:', error);
-                });
-        } else {
-            if (checkEmpty(titleValue))
-                alert("제목이 비어있습니다. 작성을 마쳐주세요!");
-            if (checkEmpty(contentValue))
-                alert("내용이 비어있습니다. 작성을 마쳐주세요!");
+        if (checkEmpty(titleValue)) {
+            alert("제목이 비어있습니다. 작성을 마쳐주세요!");
+            return;
         }
+
+        if (checkEmpty(contentValue)) {
+            alert("내용이 비어있습니다. 작성을 마쳐주세요!");
+            return;
+        }
+
+        fetch(`/api/articles`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: titleValue,
+                content: contentValue,
+                categories: selectedCategories
+            })
+        })
+            .then(response => response.json()) // JSON 형태 파싱
+            .then(data => {
+                const id = data.id;
+                alert('등록 완료되었습니다');
+                location.replace(`/article/${id}`);
+            })
+            .catch(error => {
+                console.error('등록 실패:', error);
+            });
+
     });
 }
 
@@ -138,24 +146,26 @@ if (createComment) {
         event.preventDefault(); // 클릭 이벤트의 기본 동작인 폼 제출을 막습니다.
         var content = document.getElementById('comment').value;
 
-        if (!checkEmpty(content)) {
-            fetch(`/api/comments/create`, { // 랜덤 파라미터 추가
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    articleId: document.getElementById('article-id').value,
-                    content: content
-                }),
-            }).then(() => {
-                alert('등록 완료되었습니다');
-                // location.replace("/article/" + id);
-                location.reload(); // 현재 페이지를 다시 불러오는 함수
-            })
-        } else {
+        if (checkEmpty(content)) {
             alert("댓글 내용이 없습니다! 작성을 마쳐주세요!");
+            return;
         }
+
+        fetch(`/api/comments/create`, { // 랜덤 파라미터 추가
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                articleId: document.getElementById('article-id').value,
+                content: content
+            }),
+        }).then(() => {
+            alert('등록 완료되었습니다');
+            // location.replace("/article/" + id);
+            location.reload(); // 현재 페이지를 다시 불러오는 함수
+        })
+
     })
 }
 
@@ -197,36 +207,38 @@ function updateComment(commentId) {
     // 수정할 댓글의 내용 가져오기
     let updatedContent = document.querySelector('.comment textarea').value;
 
-    if (!checkEmpty(updatedContent)) {
-        // 댓글 삭제 API 호출
-        fetch(`/api/comments/update?commentId=${commentId}`, {
-            method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                content: updatedContent
-            }),
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('수정 완료되었습니다');
-                    location.replace("/article/" + id);
-                } else if (response.status === 403) {
-                    // 서버로부터 403 Forbidden 응답을 받았을 때
-                    alert('해당 글의 작성자만 삭제할 수있습니다.');
-                    location.reload();
-                } else {
-                    alert('댓글 수정에 실패했습니다');
-                }
-            })
-            .catch(error => {
-                console.error('Error deleting comment:', error);
-                alert('댓글 수정 중 오류가 발생했습니다');
-            });
-    } else {
+    if (checkEmpty(updatedContent)) {
         alert("댓글 내용이 없습니다! 작성을 마쳐주세요!");
+        return;
     }
+
+    // 댓글 삭제 API 호출
+    fetch(`/api/comments/update?commentId=${commentId}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: updatedContent
+        }),
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('수정 완료되었습니다');
+                location.replace("/article/" + id);
+            } else if (response.status === 403) {
+                // 서버로부터 403 Forbidden 응답을 받았을 때
+                alert('해당 글의 작성자만 삭제할 수있습니다.');
+                location.reload();
+            } else {
+                alert('댓글 수정에 실패했습니다');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting comment:', error);
+            alert('댓글 수정 중 오류가 발생했습니다');
+        });
+
 }
 
 //----------------------------댓글 수정하기 버튼 누를시----------------------------------------
