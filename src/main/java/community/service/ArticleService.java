@@ -179,6 +179,7 @@ public class ArticleService {
     }
 
 
+    //수정
     @Transactional
     public void updateViews(Long articleId, HttpServletRequest request, HttpServletResponse response) throws Exception {
         // ArticleRepository를 사용하여 articleId를 통해 ArticleEntity 가져오기
