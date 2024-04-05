@@ -36,19 +36,9 @@ function searchContent() {
 
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    table = document.querySelector(".table_user");
-    tr = table.getElementsByTagName("tr");
 
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1]; // Change the index according to the column you want to search
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
+    // 검색어를 URL에 추가
+    var currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set("search", input.value);
+    location.replace(currentUrl); // 페이지 새로 고침
 }
