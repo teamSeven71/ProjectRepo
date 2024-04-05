@@ -98,6 +98,18 @@ public class ArticleService {
         return new PageImpl<>(articles, pageable, articleCategories.getTotalElements());
     }
 
+    //게시글 목록 pagination 검색어 조회때문에 필요
+    public Page<ArticleDto.ArticleResponseDto> searchAllArticleByCategory(String search,Long categoryId, Pageable pageable) {
+        Page<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findByTitleContainingIgnoreCase(search,categoryId, pageable);
+
+        // ArticleCategoryEntity를 ArticleDto.ArticleResponseDto로 매핑하여 새로운 페이지를 생성합니다.
+        List<ArticleDto.ArticleResponseDto> articles = articleCategories.getContent().stream()
+                .map(articleCategory -> articleMapper.toResponseDto(articleCategory.getArticle()))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(articles, pageable, articleCategories.getTotalElements());
+    }
+
     //그냥 공지사항 3개 메인페이지 조회시필요
     public List<ArticleDto.ArticleResponseDto> getAllArticlesByCategory(Long categoryId) {
         List<ArticleCategoryEntity> articleCategories = articleCategoryRepository.getAllArticleByCategory(categoryId);

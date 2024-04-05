@@ -22,6 +22,9 @@ public interface ArticleCategoryRepository extends JpaRepository<ArticleCategory
     // 해당 카테고리 id 타입 가져와서 비교(pagination 사용 때문에)
     @Query("SELECT a FROM ArticleCategoryEntity a WHERE a.category.id = :categoryId")
     Page<ArticleCategoryEntity> findAllArticleByCategory(Long categoryId, Pageable pageable);
+    // 해당 카테고리 id 타입 가져와서 비교(pagination 사용 때문에)
+    @Query("SELECT a FROM ArticleCategoryEntity a WHERE a.category.id = :categoryId AND a.article.title LIKE %:title%")
+    Page<ArticleCategoryEntity> findByTitleContainingIgnoreCase(String title, Long categoryId, Pageable pageable);
 
     // 해당 카테고리 id 타입 가져와서 비교(메인 페이지의 pagination 사용 x)
     @Query("select a from ArticleCategoryEntity a where a.category.id = :categoryId")
