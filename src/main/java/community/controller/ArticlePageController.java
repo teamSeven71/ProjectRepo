@@ -1,15 +1,19 @@
 package community.controller;
 
 import community.constant.CategoryType;
+import community.domain.user.ArticleEntity;
 import community.dto.user.ArticleCategoryDto;
 import community.dto.user.ArticleDto;
 import community.dto.user.CategoryDto;
 import community.dto.user.CommentDto;
+import community.repository.ArticleRepository;
 import community.service.ArticleCategoryService;
 import community.service.ArticleService;
 import community.service.CategoryService;
 import community.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jdk.jfr.Category;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -35,13 +36,16 @@ public class ArticlePageController {
     private final ArticleService articleService;
     private final CommentService commentService;
     private final ArticleCategoryService articleCategoryService;
+    private final ArticleRepository articleRepository;
 
     @Autowired
     public ArticlePageController(ArticleService articleService, CommentService commentService,
-                                 ArticleCategoryService articleCategoryService) {
+                                 ArticleCategoryService articleCategoryService,
+                                 ArticleRepository articleRepository) {
         this.articleService = articleService;
         this.commentService = commentService;
         this.articleCategoryService = articleCategoryService;
+        this.articleRepository = articleRepository;
     }
 
     // 메인페이지 공지사항3개 조회
@@ -56,12 +60,10 @@ public class ArticlePageController {
     }
 
 
-
     @GetMapping("/articles/{categoryId}")
-    public String showArticles(@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId){
+    public String showArticles(@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId,
+                               HttpServletRequest request, HttpServletResponse response){
         Page<ArticleDto.ArticleResponseDto> articles = articleService.findAllArticleByCategory(categoryId, pageable);
-
-
 
         // 페이지 설정
         int startPage = Math.max(1, articles.getPageable().getPageNumber() - 4);
@@ -70,27 +72,31 @@ public class ArticlePageController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("articles", articles);
 
-
         // 카테고리명 추가
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
         String categoryName = categoryDto.getCategoryName();
-
         model.addAttribute("categoryName", categoryName);
         model.addAttribute("categoryId", categoryDto.getId());
+
+        // 각 기사의 조회수 업데이트 및 모델에 추가
+        Map<Long, Long> viewCounts = new HashMap<>();
+        for (ArticleDto.ArticleResponseDto article : articles) {
+            try {
+                Long viewCount = articleService.getViewCount(article.getId());
+                // 기사 ID와 조회수를 맵에 추가
+                viewCounts.put(article.getId(), viewCount);
+            } catch (Exception e) {
+                // 오류 처리
+                e.printStackTrace();
+            }
+        }
+        // 조회수 맵을 모델에 추가
+        model.addAttribute("viewCounts", viewCounts);
 
         return "/site/articleList";
     }
 
-//    @GetMapping("/articles/countComment/{articleId}")
-//    public String countComment( Model model,
-//                             @PathVariable Long articleId){
-//
-//        Long commentNum = commentService.countComment(articleId);
-//        model.addAttribute(commentNum);
-//
-//        return "/site/articleList";
-//
-//    }
+
 
     @GetMapping("/articles/countComment/{articleId}")
     public Long countComment(@PathVariable Long articleId){
