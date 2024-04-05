@@ -51,7 +51,10 @@ public interface ArticleMapper {
      */
 
 //    @Mapping(source = "userId", target = "user.id") //게시글 작성자 매핑
-//    ArticleEntity toResponseEntity(ArticleDto.ArticleResponseDto articleResponseDto);
+    @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "articleCategories", ignore = true)
+    ArticleEntity toResponseEntity(ArticleDto.ArticleResponseDto articleResponseDto);
 
 
     @Mapping(target = "id", ignore = true)
