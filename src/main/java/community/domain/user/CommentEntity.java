@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import community.common.TimeStamp;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Getter
@@ -31,7 +32,6 @@ public class CommentEntity extends TimeStamp {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private ArticleEntity article;
-
 
 
 }

@@ -22,10 +22,10 @@ public interface UserMapper {
     /**
      * Dto -> Entity
      */
+
     @Mapping(target="id", ignore = true)
     @Mapping(target="role", ignore = true)
     @Mapping(target = "articles", ignore = true)
     @Mapping(target = "comments", ignore = true)
     UserEntity toRequestEntity(UserDto.UserRequestDto userRequestDto);
-
 }

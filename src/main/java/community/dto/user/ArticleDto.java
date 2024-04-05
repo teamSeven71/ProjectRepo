@@ -1,5 +1,6 @@
 package community.dto.user;
 
+import community.constant.CategoryType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -18,16 +19,21 @@ public class ArticleDto {
     @Builder
     public static class ArticleRequestDto {
 
-
         @NotBlank
         private String title; //제목
 
         @NotBlank
         private String content; //내용
 
+//        @NotBlank
+//        private CategoryType type; //카테고리
 
+        //카테고리명 요청
+        private List<Long> categories;
 
     }
+
+
 
     @Getter
     @Setter
@@ -38,7 +44,7 @@ public class ArticleDto {
 
         private Long id;
 
-        private Long username; //게시글 작성한 사용자 아이디
+        private String email; //게시글 작성한 사용자 이메일
 
         private String name; //사용자 이름
 
@@ -48,15 +54,28 @@ public class ArticleDto {
 
         private String content; //내용
 
-
         private List<CommentDto.CommentResponseDto> comments;
 
         private LocalDateTime createAt;
 
         private LocalDateTime modifiedAt;
 
+        private LocalDateTime deletedAt;
+
+        private Long goodCount;
+
+        private Long badCount;
+
+        private Long viewCount;
+
+        private String categoryName;
+
+        private List<Long> categories;
+
 
     }
+
+
 
     @Getter
     @Setter
@@ -69,6 +88,11 @@ public class ArticleDto {
         private String title; //제목
 
         private String content; //내용
+
+//        private CategoryType type; //카테고리
+
+        //수정 -> type ? List형태 Category
+        private List<Long> categories;
 
     }
 }

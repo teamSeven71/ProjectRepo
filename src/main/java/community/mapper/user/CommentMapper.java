@@ -4,11 +4,10 @@ import community.domain.user.ArticleEntity;
 import community.domain.user.CommentEntity;
 import community.domain.user.UserEntity;
 import community.dto.user.CommentDto;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.stereotype.Component;
+
 
 @Mapper(
         componentModel = "spring",
@@ -16,6 +15,7 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.ERROR
 )
+@Component //
 public interface CommentMapper {
 
     /**
@@ -40,4 +40,5 @@ public interface CommentMapper {
     @Mapping(target = "article", source = "articleEntity")
     @Mapping(target = "content", source = "commentRequestDto.content")
     CommentEntity toRequestEntity(CommentDto.CommentRequestDto commentRequestDto, UserEntity userEntity, ArticleEntity articleEntity);
+
 }

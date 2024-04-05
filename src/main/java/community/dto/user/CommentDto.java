@@ -1,9 +1,6 @@
 package community.dto.user;
 
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -19,7 +16,6 @@ public class CommentDto {
         private Long articleId; //댓글이 달린 게시글 dto
 
         private String content; //내용
-
 
 
     }
@@ -49,16 +45,16 @@ public class CommentDto {
 
     }
 
-//    @Getter
-//    @Setter
-//    @AllArgsConstructor
-//    @NoArgsConstructor
-//    @Builder
-//    public static class CommentPatchDto {
-//
-//
-//        private String content; //내용
-//
-//    }
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class CommentPatchDto {
+
+
+        private String content; //내용
+
+    }
 
 }

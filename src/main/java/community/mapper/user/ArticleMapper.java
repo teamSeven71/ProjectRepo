@@ -25,10 +25,12 @@ public interface ArticleMapper {
     /**
      * Entity -> Dto
      */
-    @Mapping(source = "user.username", target = "username")
+    @Mapping(source = "user.email", target = "email")
     @Mapping(source = "user.nickName", target = "nickName")
     @Mapping(source = "user.name", target = "name")
     @Mapping(source = "comments", target = "comments")
+    @Mapping(source = "articleCategories", target = "categories", ignore = true)
+    @Mapping(target = "categoryName", ignore = true)
     ArticleDto.ArticleResponseDto toResponseDto(ArticleEntity articleEntity);
 
     @Mapping(source = "user.id", target = "userId")
@@ -44,8 +46,6 @@ public interface ArticleMapper {
 
 
 
-
-
     /**
      * Dto -> Entity
      */
@@ -56,7 +56,11 @@ public interface ArticleMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "userEntity")
-    @Mapping(target = "type", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
+    @Mapping(target = "goodCount", ignore = true)
+    @Mapping(target = "badCount", ignore = true)
+    @Mapping(target = "viewCount", ignore = true)
+    @Mapping(target = "articleCategories", ignore = true)
     ArticleEntity toReqeustEntity(ArticleDto.ArticleRequestDto articleRequestDto, UserEntity userEntity);
 
 }
