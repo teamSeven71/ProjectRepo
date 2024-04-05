@@ -86,18 +86,16 @@
 <nav aria-label="Page navigation example" th:if="${not members.empty}">
     <ul class="pagination pagination-orange justify-content-center">
         <li class="page-item" th:classappend="${startPage == members.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/admin(page=${members.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>
+            <a class="page-link" th:href="@{/admin (page=${members.pageable.pageNumber - 1}, search=${search})}" tabindex="-1">ᐊ</a>
         </li>
         <li class="page-item" th:classappend="${num == members.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
-            <a class="page-link" th:href="@{/admin(page=${num-1})}" th:text="${num}">1</a></li>
+            <a class="page-link" th:href="@{/admin (page=${num-1} , search=${search})}" th:text="${num}">1</a></li>
 
         <li class="page-item" th:classappend="${endPage == members.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/admin(page=${members.pageable.pageNumber + 1})}">Next</a>
+            <a class="page-link" th:href="@{/admin (page=${members.pageable.pageNumber + 1}, search=${search})}">ᐅ</a>
         </li>
     </ul>
 </nav>
-
-
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
