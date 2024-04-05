@@ -51,6 +51,12 @@ if (modifyButton) {
             selectedCategories.push(checkbox.value);
         });
 
+
+        if (!checkEmpty(selectedCategories)) {
+            alert('카테고리를 선택해주세요.');
+            return;
+        }
+
         if (!checkEmpty(titleValue) && !checkEmpty(contentValue)) {
             fetch(`/api/articles/${id}`, {
                 method: 'PUT',
@@ -89,6 +95,10 @@ if (createButton) {
         var titleValue = document.getElementById('title').value;
         var contentValue = document.getElementById('content').value;
 
+        if (selectedCategories.length === 0) {
+            alert('카테고리를 선택해주세요.');
+            return;
+        }
 
         if (!checkEmpty(titleValue) && !checkEmpty(contentValue)) {
             fetch(`/api/articles`, {
