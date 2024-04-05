@@ -206,7 +206,6 @@ public class ArticleService {
             for (int i = 0; i < cookies.length; i++) {
                 mapCookie.put(cookies[i].getName(), cookies[i].getValue());
             }
-
             String viewsCookie = mapCookie.get("views");
             String newCookie = "|" + articleId;
 
@@ -220,6 +219,5 @@ public class ArticleService {
             }
         }
     }
-
 
 }

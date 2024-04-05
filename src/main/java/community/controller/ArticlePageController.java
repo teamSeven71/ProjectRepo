@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -144,8 +145,8 @@ public class ArticlePageController {
     @GetMapping("/article/{id}")
     public String showDetails(
             Model model,
-            @PathVariable Long id
-    ) {
+            @PathVariable Long id, Principal principal, HttpServletRequest request, HttpServletResponse response
+    ) throws Exception {
         //게시글 정보 조회
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);
         model.addAttribute("article", article);
@@ -161,7 +162,6 @@ public class ArticlePageController {
         // 댓글 개수 조회
         Long counts = commentService.countComment(id);
         model.addAttribute("counts", counts);
-
 
         Long viewCount = articleService.getViewCount(id);
         model.addAttribute("viewCount", viewCount);
