@@ -107,7 +107,7 @@
                         <div class="entry-footer">
                             <i class="bi bi-folder"></i>
                             <ul class="cats">
-                                <li>조회수: </li>
+                                <li>조회수: <span th:text="${article.getViewCount()}"></span></li>
                             </ul>
 
                             <i class="bi bi-tags"></i>
@@ -129,7 +129,7 @@
                                     <h5>
                                         <div>
                                             <a href="" th:text="${comment.nickName}"> </a>
-                                            <div>좋아요 개수: 1500개 </div>
+                                            <div>좋아요 개수: 0개 </div>
                                         </div>
                                         <div>
                                             <a href="#" class="likeReply">
