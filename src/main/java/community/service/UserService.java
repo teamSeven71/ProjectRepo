@@ -51,8 +51,15 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    //기본 조회 페이지네이션 메소드
     public Page<UserDto.UserResponseDto> getAllActiveMembers(Pageable pageable) {
         return userRepository.findAll(pageable)
+                .map(userMapper::toResponseDto);
+    }
+
+    // 검색 기능 추가된 페이지네이션 메서드
+    public Page<UserDto.UserResponseDto> searchActiveMembers(String search, Pageable pageable) {
+        return userRepository.findByNickNameContainingIgnoreCaseOrNameContainingIgnoreCase(search, search, pageable)
                 .map(userMapper::toResponseDto);
     }
 

@@ -84,16 +84,16 @@
         </tbody>
     </table>
 </div>
-<nav aria-label="Page navigation example" th:if="${not articles.empty}">
+<nav aria-label="Page navigation example" th:if="${articles != null and not articles.empty}">
     <ul class="pagination pagination-orange justify-content-center">
         <li class="page-item" th:classappend="${startPage == articles.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber - 1}, categoryId=${categoryId})}" tabindex="-1">ᐊ</a>
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber - 1}, categoryId=${categoryId}, search=${search})}" tabindex="-1">ᐊ</a>
         </li>
         <li class="page-item" th:classappend="${num == articles.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
-            <a class="page-link" th:href="@{/articles/{categoryId}(page=${num-1}, categoryId=${categoryId})}" th:text="${num}">1</a></li>
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${num-1}, categoryId=${categoryId}, search=${search})}" th:text="${num}">1</a></li>
 
         <li class="page-item" th:classappend="${endPage == articles.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber + 1}, categoryId=${categoryId})}">ᐅ</a>
+            <a class="page-link" th:href="@{/articles/{categoryId}(page=${articles.pageable.pageNumber + 1}, categoryId=${categoryId}, search=${search})}">ᐅ</a>
         </li>
     </ul>
 </nav>

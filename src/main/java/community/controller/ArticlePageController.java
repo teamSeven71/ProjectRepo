@@ -61,16 +61,34 @@ public class ArticlePageController {
     }
 
     @GetMapping("/articles/{categoryId}")
-    public String showArticles(@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId,
-                               HttpServletRequest request, HttpServletResponse response) {
-        Page<ArticleDto.ArticleResponseDto> articles = articleService.findAllArticleByCategory(categoryId, pageable);
+    public String showArticles(@RequestParam(value = "search", required = false) String search,@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId){
+        Page<ArticleDto.ArticleResponseDto> articles;
+
+        int startPage;
+        int endPage;
+
+        if (search != null && !search.isEmpty()) {
+            articles = articleService.searchAllArticleByCategory(search, categoryId, pageable);
+            // 페이지 설정
+            startPage = Math.max(1, articles.getPageable().getPageNumber() - 4);
+            endPage = Math.min(articles.getPageable().getPageNumber() + 4, articles.getTotalPages());
+        } else {
+            articles = articleService.findAllArticleByCategory(categoryId, pageable);
+            // 페이지 설정
+            startPage = Math.max(1, articles.getPageable().getPageNumber() - 4);
+            endPage = Math.min(articles.getPageable().getPageNumber() + 4, articles.getTotalPages());
+        }
+
+        // 로그로 articles 변수 출력
+        System.out.println("Articles: " + articles.getContent());
 
         // 페이지 설정
-        int startPage = Math.max(1, articles.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(articles.getPageable().getPageNumber() + 4, articles.getTotalPages());
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("articles", articles);
+      
+        // 검색어 저장
+        model.addAttribute("search", search);
 
         // 카테고리명 추가
         CategoryDto.CategoryResponseDto categoryDto = articleService.getAllCategoryName(categoryId);
