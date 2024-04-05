@@ -73,16 +73,29 @@ public class UserViewController {
 
     // 관리자 페이지
     @GetMapping("/admin")
-    public String showMembers(@PageableDefault(size=10) Pageable pageable, Model model) {
-        Page<UserDto.UserResponseDto> members = userService.getAllActiveMembers(pageable);
-        int startPage = Math.max(1, members.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(members.getPageable().getPageNumber()+4, members.getTotalPages());
+    public String showMembers(@RequestParam(value = "search", required = false) String search,
+                              @PageableDefault(size = 10) Pageable pageable, Model model) {
+        Page<UserDto.UserResponseDto> members;
+        int startPage;
+        int endPage;
+
+        if (search != null && !search.isEmpty()) {
+            members = userService.searchActiveMembers(search, pageable);
+            startPage = Math.max(1, members.getPageable().getPageNumber() - 4);
+            endPage = Math.min(members.getPageable().getPageNumber() + 4, members.getTotalPages());
+        } else {
+            members = userService.getAllActiveMembers(pageable);
+            startPage = Math.max(1, members.getPageable().getPageNumber() - 4);
+            endPage = Math.min(members.getPageable().getPageNumber() + 4, members.getTotalPages());
+        }
 
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("members", members);
+        model.addAttribute("search", search);
         return "/site/adminPage";
     }
+
 
 
 }   
