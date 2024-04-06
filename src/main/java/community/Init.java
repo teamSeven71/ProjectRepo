@@ -32,7 +32,7 @@ public class Init {
     @Transactional
     public void initUsers() {
 
-        UserEntity admin = new UserEntity();
+        /*UserEntity admin = new UserEntity();
         admin.setEmail("admin@naver.com");
         admin.setNickName("admin");
         admin.setName("admin");
@@ -49,18 +49,18 @@ public class Init {
             user.setPassword(bCryptPasswordEncoder.encode("user" + (i+1)));
             user.setRole(Role.USER);
             userRepository.save(user);
-        }
+        }*/
     }
 
     @Transactional
     public void initCategory() {
-        String[] categories = {"자유", "NOTICE", "Java", "SQL", "JavaScript", "기타 질문", "Python", "DB"};
+        /*String[] categories = {"자유", "NOTICE", "Java", "SQL", "JavaScript", "기타 질문", "Python", "DB"};
 
         for (String categoryName : categories) {
             CategoryEntity categoryEntity = new CategoryEntity();
             categoryEntity.setCategoryName(categoryName);
             categoryRepository.save(categoryEntity);
-        }
+        }*/
     }
 }
 
