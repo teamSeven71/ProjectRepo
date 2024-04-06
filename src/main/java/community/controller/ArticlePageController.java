@@ -61,7 +61,8 @@ public class ArticlePageController {
     }
 
     @GetMapping("/articles/{categoryId}")
-    public String showArticles(@RequestParam(value = "search", required = false) String search,@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId){
+    public String showArticles(@RequestParam(value = "search", required = false) String search,@PageableDefault(size=10) Pageable pageable, Model model, @PathVariable Long categoryId,
+                               HttpServletRequest request, HttpServletResponse response){
         Page<ArticleDto.ArticleResponseDto> articles;
 
         int startPage;
