@@ -3,12 +3,17 @@ package community.controller;
 
 import community.domain.user.UserEntity;
 import community.dto.user.UserDto;
+import community.exception.DuplicateEmailException;
+import community.exception.DuplicateNicknameException;
 import community.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +35,7 @@ public class UserViewController {
     public UserViewController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping("/login")
     public String login() {
         return "/site/login";
@@ -48,27 +54,47 @@ public class UserViewController {
 
     // 유저 정보 페이지
     @GetMapping("/userInfo")
-    public String UserInfo(Model model){
+    public String UserInfo(Model model) {
         // 현재 로그인한 사용자 정보 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
         UserEntity user = (UserEntity) userService.loadUserByUsername(username);
 
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
 
         return "/site/userPage";
     }
 
     //유저 닉네임 수정
     @PutMapping("/userInfo")
-    public String updateUser(String nickName, @AuthenticationPrincipal UserEntity user, Model model) {
+    public ResponseEntity<String> updateUser(@RequestBody UserDto.UserResponseDto userDto, @AuthenticationPrincipal UserEntity user) {
+        String nickName = userDto.getNickName();
+        String name = userDto.getName();
+        String email = userDto.getEmail();
 
+        // 닉네임과 이메일 중복 체크
+        boolean isNickNameDuplicate = userService.existsByNickName(nickName);
+        boolean isEmailDuplicate = userService.existsByEmail(email);
 
-        UserDto.UserResponseDto updatedUser = userService.updateUser(user.getId(), nickName);
-        model.addAttribute("user", updatedUser);
+        if (isNickNameDuplicate || isEmailDuplicate) {
+            if (isNickNameDuplicate && isEmailDuplicate) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("DUPLICATE_NICKNAME_AND_EMAIL");
+            } else if (isNickNameDuplicate) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("DUPLICATE_NICKNAME");
+            } else {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("DUPLICATE_EMAIL");
+            }
+        }
 
-        return "/site/userPage";
+        // 중복값이 없으면 사용자 정보 업데이트
+        try {
+            UserDto.UserResponseDto updatedUser = userService.updateUser(user.getId(), nickName, name, email);
+            return ResponseEntity.ok("/site/userPage");
+        } catch (DataIntegrityViolationException e) {
+            // 데이터 무결성 위반 오류 처리
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("FAILED_TO_UPDATE_USER");
+        }
     }
 
     // 관리자 페이지
@@ -97,5 +123,4 @@ public class UserViewController {
     }
 
 
-
-}   
+}

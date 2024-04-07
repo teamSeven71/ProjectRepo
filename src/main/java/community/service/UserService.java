@@ -73,7 +73,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDto.UserResponseDto updateUser(Long userId, String nickName){
+    public UserDto.UserResponseDto updateUser(Long userId, String nickName,String name, String email){
 
         Optional<UserEntity> optionalUser = userRepository.findById(userId);
 
@@ -84,6 +84,10 @@ public class UserService implements UserDetailsService {
         UserEntity user = optionalUser.get();
 
         user.setNickName(nickName);
+
+        user.setName(name);
+
+        user.setEmail(email);
 
         userRepository.save(user);
 

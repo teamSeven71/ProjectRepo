@@ -172,6 +172,10 @@ li {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
+.btn-delete {
+    margin-top: 50px;
+}
+
 /*.board_write {*/
 /*    border-top: 2px solid #000;*/
 /*}*/
