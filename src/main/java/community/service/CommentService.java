@@ -53,6 +53,7 @@ public class CommentService {
     }
 
     // 해당 게시글의 댓글 작성
+    @Transactional
     public CommentDto.CommentResponseDto createComment(Long userId, CommentDto.CommentRequestDto commentRequestDto) {
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("User not found with id: " + userId));
@@ -74,6 +75,7 @@ public class CommentService {
     }
 
     //댓글 수정
+    @Transactional
     public CommentDto.CommentResponseDto updateComment(Long commentId, CommentDto.CommentPatchDto commentPatchDto) {
 
 

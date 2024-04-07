@@ -177,6 +177,7 @@
   }
 
   function prevPage() {
+    event.preventDefault(); // 기본 동작 중지
     if (currentPage > 1) {
       currentPage--;
       showPage(currentPage);
@@ -184,6 +185,7 @@
   }
 
   function nextPage() {
+    event.preventDefault(); // 기본 동작 중지
     if (currentPage < Math.ceil(boardSections[0].querySelectorAll('.icon-box').length / itemsPerPage)) {
       currentPage++;
       showPage(currentPage);
@@ -202,6 +204,7 @@
 
 
   function prevPage() {
+    event.preventDefault(); // 기본 동작 중지
     if (currentPage > 1) {
       currentPage--;
       showPage(currentPage);
@@ -209,6 +212,7 @@
   }
 
   function nextPage() {
+    event.preventDefault(); // 기본 동작 중지
     const totalItems = document.querySelectorAll('.icon-box').length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     if (currentPage < totalPages) {
