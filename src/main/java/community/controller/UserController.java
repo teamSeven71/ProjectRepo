@@ -4,11 +4,13 @@ import community.dto.user.AddUserRequest;
 import community.dto.user.CheckDuplicateRequest;
 import community.dto.user.DeleteUserIdsRequest;
 import community.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "관리자 api")
 @Controller
 public class UserController {
     private UserService userService;
