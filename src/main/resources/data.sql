@@ -1,4 +1,4 @@
--- UserEntity 테이블 생성
+/*-- UserEntity 테이블 생성
 CREATE TABLE IF NOT EXISTS user_entity (
                                            user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                                            email VARCHAR(255) NOT NULL UNIQUE,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS article_category_entity (
                                                        FOREIGN KEY (article_id) REFERENCES article_entity(article_id),
                                                        FOREIGN KEY (category_id) REFERENCES category_entity(category_id)
 );
-
+*/
 
 
 -- INSERT INTO user_entity (username, password, name, nickName, role) VALUES ('user1', 'p1', 'UserOne', 'NickName1', 'USER');
