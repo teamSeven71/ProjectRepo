@@ -10,6 +10,7 @@ import community.mapper.user.CategoryMapper;
 import community.repository.ArticleCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class ArticleCategoryService {
         this.categoryService = categoryService;
         this.categoryMapper = categoryMapper;
     }
-
+    @Transactional
     public ArticleCategoryEntity save(ArticleEntity articleEntity, Long categoryId) {
         Optional<CategoryEntity> category= categoryService.getCategoryById(categoryId);
 

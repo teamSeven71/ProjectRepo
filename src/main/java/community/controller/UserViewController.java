@@ -6,6 +6,7 @@ import community.dto.user.UserDto;
 import community.exception.DuplicateEmailException;
 import community.exception.DuplicateNicknameException;
 import community.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-
+@Tag(name = "관리자 page api")
 @Controller
 @Slf4j
 public class UserViewController {

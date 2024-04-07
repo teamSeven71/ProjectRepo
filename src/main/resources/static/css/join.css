@@ -102,6 +102,7 @@ li {
 
 .nav:hover {
     color: #e96b56 !important; /* 주황색 */
+    cursor: pointer; /* 마우스를 올렸을 때 손 형태의 커서로 변경 */
 }
 
 .board_wrap {

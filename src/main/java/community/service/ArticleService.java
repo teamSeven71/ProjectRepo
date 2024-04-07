@@ -50,6 +50,7 @@ public class ArticleService {
         this.categoryMapper = categoryMapper;
     }
 
+    @Transactional
     public ArticleDto.ArticleResponseDto save(ArticleDto.ArticleRequestDto request, UserEntity user){
 
         //article entity 생성 > id성 됨
@@ -57,6 +58,7 @@ public class ArticleService {
 
         article.setViewCount(0L);
         ArticleEntity savedArticle = articleRepository.save(article);
+
 /*
         //article id 얻어옴.
         Long articleId = article.getId();*/
@@ -206,7 +208,6 @@ public class ArticleService {
             for (int i = 0; i < cookies.length; i++) {
                 mapCookie.put(cookies[i].getName(), cookies[i].getValue());
             }
-
             String viewsCookie = mapCookie.get("views");
             String newCookie = "|" + articleId;
 
@@ -220,6 +221,5 @@ public class ArticleService {
             }
         }
     }
-
 
 }

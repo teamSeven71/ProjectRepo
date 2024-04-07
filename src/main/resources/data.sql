@@ -1,3 +1,59 @@
+-- UserEntity 테이블 생성
+CREATE TABLE IF NOT EXISTS user_entity (
+                                           user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                           email VARCHAR(255) NOT NULL UNIQUE,
+                                           password VARCHAR(255) NOT NULL,
+                                           name VARCHAR(255) NOT NULL,
+                                           nickname VARCHAR(255) NOT NULL,
+                                           role VARCHAR(255) DEFAULT 'USER',
+                                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- CommentEntity 테이블 생성
+CREATE TABLE IF NOT EXISTS comment_entity (
+                                              comment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                              user_id BIGINT,
+                                              content TEXT,
+                                              article_id BIGINT,
+                                              created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                              updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                              FOREIGN KEY (user_id) REFERENCES user_entity(user_id),
+                                              FOREIGN KEY (article_id) REFERENCES article_entity(article_id)
+);
+
+-- CategoryEntity 테이블 생성
+CREATE TABLE IF NOT EXISTS category_entity (
+                                               category_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                               category_name VARCHAR(255)
+);
+
+-- ArticleEntity 테이블 생성
+CREATE TABLE IF NOT EXISTS article_entity (
+                                              article_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                              title VARCHAR(255) NOT NULL,
+                                              content TEXT NOT NULL,
+                                              user_id BIGINT,
+                                              deleted_at TIMESTAMP,
+                                              good_count BIGINT DEFAULT 0,
+                                              bad_count BIGINT DEFAULT 0,
+                                              view_count BIGINT DEFAULT 0,
+                                              created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                              updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                              FOREIGN KEY (user_id) REFERENCES user_entity(user_id)
+);
+
+-- ArticleCategoryEntity 중간 테이블 생성
+CREATE TABLE IF NOT EXISTS article_category_entity (
+                                                       article_id BIGINT,
+                                                       category_id BIGINT,
+                                                       PRIMARY KEY (article_id, category_id),
+                                                       FOREIGN KEY (article_id) REFERENCES article_entity(article_id),
+                                                       FOREIGN KEY (category_id) REFERENCES category_entity(category_id)
+);
+
+
+
 -- INSERT INTO user_entity (username, password, name, nickName, role) VALUES ('user1', 'p1', 'UserOne', 'NickName1', 'USER');
 -- INSERT INTO user_entity (username, password, name, nickName, role) VALUES ('user2', 'p2', 'UserTwo', 'NickName2', 'USER');
 
