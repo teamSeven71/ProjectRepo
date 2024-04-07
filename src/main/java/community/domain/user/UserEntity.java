@@ -1,6 +1,5 @@
 package community.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import community.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;

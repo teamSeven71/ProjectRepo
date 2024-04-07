@@ -33,6 +33,7 @@ dependencies {
 
 //	runtimeOnly 'mysql:mysql-connector-java' // MySQL 드라이버 추가
 	implementation 'mysql:mysql-connector-java:8.0.28'
+	implementation 'com.h2database:h2'
 
 	//Spring Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
