@@ -112,7 +112,7 @@
 
                             <i class="bi bi-tags"></i>
                             <ul class="tags" th:each="category : ${categories}">
-                                <li><a th:href="@{/articles/{categoryId}(categoryId= ${category.id})}" th:text="${category.categoryName}+','"></a></li>
+                                <li><a th:href="@{/articles/{categoryId}(categoryId= ${category.id})}" th:text="'#' +${category.categoryName}"></a></li>
                             </ul>
                         </div>
                     </article><!-- End blog entry -->
