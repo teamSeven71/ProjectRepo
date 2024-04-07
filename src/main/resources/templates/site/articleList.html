@@ -51,7 +51,7 @@
         <div class="input-group">
             <input class="form-control mr-sm-2 border border-orange" type="search" placeholder="검색" aria-label="Search" id="searchInput">
             <div class="input-group-append">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="searchContent()">검색</button>
+                <button class="btn btn-outline-success my-2 my-sm-0 custom-btn-outline-success" type="submit" onclick="searchContent()">검색</button>
             </div>
         </div>
         <button type="button" id="create-btn" th:onclick="|location.href='@{/article/post?(categoryId=${categoryId})}'|" class="btn btn-orange btn-sm mb-3">글 등록</button>

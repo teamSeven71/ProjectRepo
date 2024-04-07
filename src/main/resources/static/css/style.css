@@ -1388,7 +1388,7 @@ section {
 .contact .php-email-form .sent-message {
   display: none;
   color: #fff;
-  background: #18d26e;
+  background: #e96b56;
   text-align: center;
   padding: 15px;
   font-weight: 600;
@@ -1408,7 +1408,7 @@ section {
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
+  border: 3px solid #e96b56;
   border-top-color: #eee;
   animation: animate-loading 1s linear infinite;
 }
@@ -2146,4 +2146,21 @@ body {
   text-align: center;
   font-size: 13px;
   color: #fff;
+}
+
+/* 사용자 정의 스타일 */
+.custom-btn-outline-success {
+  color: #e96b56 !important; /* 버튼 텍스트 색상 */
+  border-color: #e96b56 !important; /* 버튼 테두리 색상 */
+}
+
+/* 마우스를 올렸을 때의 스타일 */
+.custom-btn-outline-success:hover {
+  background-color: #e96b56 !important; /* 버튼 배경색상 */
+  color: #fff !important; /* 마우스를 올렸을 때 텍스트 색상 */
+}
+
+/* 기본 상태의 텍스트 색상 */
+.custom-btn-outline-success:not(:hover) {
+  color: black !important; /* 버튼 텍스트 색상 */
 }
