@@ -113,6 +113,15 @@ public class ArticlePageController {
 
     }
 
+    @GetMapping("/articles/viewCount/{articleId}")
+    public void viewCount(@PathVariable Long articleId){
+
+        Long viewCount = articleService.getViewCount(articleId);
+//        model.addAttribute("viewCount", viewCount);
+//        model.addAttribute(commentNum);
+
+    }
+
 
 
 
@@ -145,7 +154,7 @@ public class ArticlePageController {
     @GetMapping("/article/{id}")
     public String showDetails(
             Model model,
-            @PathVariable Long id, Principal principal, HttpServletRequest request, HttpServletResponse response
+            @PathVariable Long id
     ) throws Exception {
         //게시글 정보 조회
         ArticleDto.ArticleResponseDto article = articleService.getArticleById(id);

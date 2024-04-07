@@ -55,7 +55,7 @@ public class ArticleService {
         //article entity 생성 > id성 됨
         ArticleEntity article = articleMapper.toReqeustEntity(request, user);
 
-        article.setViewCount(-1L);
+        article.setViewCount(0L);
         ArticleEntity savedArticle = articleRepository.save(article);
 /*
         //article id 얻어옴.
