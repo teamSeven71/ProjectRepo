@@ -54,11 +54,11 @@ DB
 - Discord + 웹훅을 통한 깃헙 알림 설정
 
 <br></br>
-## 개발 일정  
+## 🗓️ 개발 일정  
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/79041981-d030-4cc8-b833-087445a07fee)
 
 <br></br>
-## Flow Chart  
+## 🖌️ Flow Chart  
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/1a9b8232-47ee-4263-9be0-8fea14804e68)
 
@@ -88,7 +88,7 @@ DB
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/8fe72f45-8c90-4d27-b30b-ed7b165985c4)
 
 <br></br>
-## 프로젝트 구조
+## 🤓 프로젝트 구조
 - FE + BE
 
 📂 gradle  
@@ -188,49 +188,49 @@ DB
 <br></br>
 ##🎨 UI
 
-1. main.html / 메인페이지 - 상단바(로그인 안하는 경우)
+ main.html / 메인페이지 - 상단바(로그인 안하는 경우)
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/013ffc5a-e946-4c98-ae52-9520be40d597)
 
 
-1. main.html / 메인페이지 - 상단바(로그인 한 경우)
+ main.html / 메인페이지 - 상단바(로그인 한 경우)
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/064def2f-a165-4bf0-bf3e-b1714e2c7d94)
 
 
-1. articleList.html / 게시물 목록 페이지
+ articleList.html / 게시물 목록 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/c2798976-6514-4a3a-9e88-9a88475b7250)
 
-1. articleDetail / 게시물 상세 페이지
+ articleDetail / 게시물 상세 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/5265c064-cb02-4b95-a2cc-ef50a428915b)
 
-1. writeArticle.html / 글 등록 페이지
+ writeArticle.html / 글 등록 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/e905ad55-20a5-4924-b0c5-eac718c2247c)
 
 
-5-1. writeArticle.html / 글 수정 페이지
+ writeArticle.html / 글 수정 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/585834c8-a8bc-4624-b404-ad8dc54a6d91)
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/2189c65f-43ee-4340-82f9-dc887e97aaae)
 
 
-1. adminPage.html / 관리자 페이지
+ adminPage.html / 관리자 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/42c324d4-1b50-48d0-a52c-144d0b0d33b9)
 
 
-1. userPage.html / 회원 정보 페이지
+ userPage.html / 회원 정보 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/27e1eb53-7fb4-4557-a6f7-ef9e61aa18c7)
 
-1. login.html / 로그인 페이지
+ login.html / 로그인 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/c5923982-e5c7-4bd7-8381-82319491d147)
 
-1. join.html / 회원가입 페이지
+ join.html / 회원가입 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/683ae25a-facc-48bf-aa8a-880fc1edc4c1)
 
