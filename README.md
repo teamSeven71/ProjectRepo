@@ -230,5 +230,5 @@ DB
 
 ## 개발 이슈
 
-[이슈](https://github.com/teamSeven71/TechTalk/issues/79)
-[이슈](https://github.com/teamSeven71/TechTalk/issues/81)
+[ERD 수정](https://github.com/teamSeven71/TechTalk/issues/79)  
+[댓글 영속성 문제 발생](https://github.com/teamSeven71/TechTalk/issues/81)
