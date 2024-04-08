@@ -1,4 +1,4 @@
-# TechTalk
+# 🌱 TechTalk
 개발자들의 지식 공유 커뮤니티 TechTalk 입니다.
 
 
@@ -21,13 +21,14 @@
         - 공지사항 작성/수정/삭제 기능
         - 회원 조회/검색/삭제 기능
 
+<br></br>
 ## 팀원 소개 😊
 이영석(PL)  
 류석현  
 최보현
 
-
-## 프로젝트 사용 기술 및 환경
+<br></br>
+## 💻 프로젝트 사용 기술 및 환경
 
 FE
 
@@ -52,26 +53,30 @@ DB
 - Github
 - Discord + 웹훅을 통한 깃헙 알림 설정
 
-## 개발 일정
+<br></br>
+## 🗓️ 개발 일정  
+![image](https://github.com/teamSeven71/TechTalk/assets/109260733/79041981-d030-4cc8-b833-087445a07fee)
 
-## Flow Chart  
+<br></br>
+## 🖌️ Flow Chart  
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/1a9b8232-47ee-4263-9be0-8fea14804e68)
 
 
-
+<br></br>
 ## 요구사항 및 기능 명세  
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/8759b35e-0b31-47c7-8407-6ad7dc1e8f91)
 
-
+<br></br>
 ## 데이터베이스 모델링(ERD)
 <br></br>
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/4695ba89-5de1-417d-9f88-d4aa3ef8e258)
 
-
+<br></br>
 ## 배포 아키텍처  
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/0c6b9539-d7ac-4223-a1d2-a4c6e2a521ab)
 
+<br></br>
 ## API 명세서
 
 ➰ :  표시 중 최소 1개 필요
@@ -82,8 +87,8 @@ DB
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/8fe72f45-8c90-4d27-b30b-ed7b165985c4)
 
-
-## 프로젝트 구조
+<br></br>
+## 🤓 프로젝트 구조
 - FE + BE
 
 📂 gradle  
@@ -180,51 +185,52 @@ DB
 ┣ 📜 README.md    
 ┣ 📜 settings.gradle    
 
-## UI
+<br></br>
+##🎨 UI
 
-1. main.html / 메인페이지 - 상단바(로그인 안하는 경우)
+ main.html / 메인페이지 - 상단바(로그인 안하는 경우)
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/013ffc5a-e946-4c98-ae52-9520be40d597)
 
 
-1. main.html / 메인페이지 - 상단바(로그인 한 경우)
+ main.html / 메인페이지 - 상단바(로그인 한 경우)
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/064def2f-a165-4bf0-bf3e-b1714e2c7d94)
 
 
-1. articleList.html / 게시물 목록 페이지
+ articleList.html / 게시물 목록 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/c2798976-6514-4a3a-9e88-9a88475b7250)
 
-1. articleDetail / 게시물 상세 페이지
+ articleDetail / 게시물 상세 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/5265c064-cb02-4b95-a2cc-ef50a428915b)
 
-1. writeArticle.html / 글 등록 페이지
+ writeArticle.html / 글 등록 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/e905ad55-20a5-4924-b0c5-eac718c2247c)
 
 
-5-1. writeArticle.html / 글 수정 페이지
+ writeArticle.html / 글 수정 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/585834c8-a8bc-4624-b404-ad8dc54a6d91)
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/2189c65f-43ee-4340-82f9-dc887e97aaae)
 
 
-1. adminPage.html / 관리자 페이지
+ adminPage.html / 관리자 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/42c324d4-1b50-48d0-a52c-144d0b0d33b9)
 
 
-1. userPage.html / 회원 정보 페이지
+ userPage.html / 회원 정보 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/27e1eb53-7fb4-4557-a6f7-ef9e61aa18c7)
 
-1. login.html / 로그인 페이지
+ login.html / 로그인 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/c5923982-e5c7-4bd7-8381-82319491d147)
 
-1. join.html / 회원가입 페이지
+ join.html / 회원가입 페이지
 
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/683ae25a-facc-48bf-aa8a-880fc1edc4c1)
 
@@ -233,3 +239,25 @@ DB
 [ERD 수정](https://github.com/teamSeven71/TechTalk/issues/79)  
 [댓글 영속성 문제 발생](https://github.com/teamSeven71/TechTalk/issues/81)  
 [배포 단계에서 에러](https://github.com/teamSeven71/TechTalk/issues/85)
+[댓글 영속성 문제 발생](https://github.com/teamSeven71/TechTalk/issues/81)
+
+<br></br>
+## 개발 회고
+🧑‍💻 류석현  
+    
+    짧은 개발 기간 안에 설계부터 배포까지 모두 해야만하는 프로젝트여서 코드 작성할 때 많은 오류를 겪었습니다. 그 중에서 가장 큰 배움은 TDD의 중요성입니다.  이번 개발과정에서는 API 하나부터 클라이언틀와 서버의 정보교환까지 모든 코드 부분을 실행하려면 직접 로컬서버를 실행하거나 POSTMAN을 실행시켜봐야 알 수 있었습니다. 이 과정에서 시간이 많이 소요됐고 다양한 경우의 수를 사전에 test 해보지 못해서 다른 코드와도 얽혀서 작동에 문제가 생기는 경우도 많았습니다.  
+    
+    따라서 ,TDD를 구축하고 활용한다면 기존의 테스트 케이스가 새로운 코드의 동작을 검증해주기 때문에 예상치 못한 버그를 방지할 수 있을 것이고  코드의 재사용성과 유지보수성에도 큰 역할을 할수있다고 생각합니다.
+    
+    너무 너무 짧고 길게 시간이 흐른것 같습니다. 직접 프로젝트를 해보고 부딪혀 보면서 정말 정말 많은 경험과 배움을 얻은 것 같습니다. 부득이하게 적은 인원으로 프로젝트를 진행하게됐지만 다른 팀원분들이 너무 잘 도와주시고 역할을 수행해주셔서 프로젝트를 잘 마무리했습니다 
+    
+🧑‍💻 이영석  
+    
+    설계가 중요하다는 이야기는 많이 들었지만, 막상 실제로 진행해보니 어느정도까지 해야하는지 감을 잡기도 어려웠고, 처음 설계대로 흘러가지 않아 수정하기도 하는 등, 어려움이 많았던것 같습니다. 하지만 수업시간에 배운 내용들을 실제로 도입해보면서 이렇게 사용해야하는구나를 깨달아서 개인적으로 얻어간 것이 더 많았다고 생각합니다.
+    
+    중간에 인원공백이 생겨 시간적인 여유가 부족해 구현하지 못한 기능들도 있었고, 팀장으로서 좀 더 잘했어야 했다는 아쉬움이 남지만, 팀원분들이 각자 자발적으로 잘해주셔서 결국엔 마무리 할 수 있었던 것 같습니다. 다들 정말 감사합니다!
+    
+👩‍💻 최보현  
+    
+    DB 수정이 자주 발생하면서 초기 설계의 중요성을 몸소 느꼈습니다.
+    하지만 누구 하나 맡은 역할 미루지 않고 열성적으로 임해준 팀원분들 덕분에 2주라는 짧은 기간 안에 프로젝트를 잘 마무리할 수 있었던 것 같습니다.  다들 고생많으셨고 감사하다고  말씀전하고싶네요!
