@@ -86,40 +86,40 @@ DB
 ## 프로젝트 구조
 - FE + BE
 
-🌱TechTalk
-┣ 📂gradle
-┣ 📂src
-┃ ┗ 📂main
+🌱TechTalk  
+┣ 📂gradle  
+┣ 📂src  
+┃ ┗ 📂main  
 
-┃     ┗ 📂java
+┃     ┗ 📂java  
 
-┃            ┗ 📂community
+┃            ┗ 📂community  
 
-┃                  ┗ 📂coomon
+┃                  ┗ 📂coomon  
 
-┃                          ┗ 📜TimeStamp.class
+┃                          ┗ 📜TimeStamp.class  
 
-┃                  ┗ 📂config
+┃                  ┗ 📂config  
 
-┃                           ┗ 📜InterceptorConfig.class
+┃                           ┗ 📜InterceptorConfig.class  
 
-┃                           ┗ 📜SecurityConfiguration
+┃                           ┗ 📜SecurityConfiguration  
+  
+┃                           ┗ 📜SwaggerConfig  
 
-┃                           ┗ 📜SwaggerConfig
+┃                      ┗ 📂constant  
 
-┃                      ┗ 📂constant
+┃                           ┗ 📜CategoryType.class  
 
-┃                           ┗ 📜CategoryType.class
+┃                           ┗ 📜Role  
+  
+┃                  ┗ 📂controller  
 
-┃                           ┗ 📜Role
+┃                           ┗ 📜ArticleController.class  
 
-┃                  ┗ 📂controller
-
-┃                           ┗ 📜ArticleController.class
-
-┃                           ┗ 📜ArticlePageController.class
-
-┃                           ┗ 📜CommentController.class
+┃                           ┗ 📜ArticlePageController.class  
+ 
+┃                           ┗ 📜CommentController.class  
 
 ┃                           ┗ 📜UserController.class
 
