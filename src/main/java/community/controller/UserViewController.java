@@ -1,6 +1,7 @@
 package community.controller;
 
 
+import community.constant.Role;
 import community.domain.user.UserEntity;
 import community.dto.user.UserDto;
 import community.exception.DuplicateEmailException;
@@ -99,8 +100,15 @@ public class UserViewController {
 
             // 새로운 사용자 정보로 인증 객체 업데이트
             UserEntity updatedEntity = new UserEntity();
+
+            updatedEntity.setName(name);
+            updatedEntity.setId(user.getId());
+            updatedEntity.setNickName(nickName);
             updatedEntity.setEmail(email);
-            updatedEntity.setPassword(user.getPassword()); // 사용자 비밀번호를 가져와야 할 필요가 있습니다. 이 부분을 수정해야 합니다.
+            updatedEntity.setPassword(user.getPassword());
+            updatedEntity.setRole(Role.USER);
+            updatedEntity.setArticles(user.getArticles());
+            updatedEntity.setComments(user.getComments());
             authentication = new UsernamePasswordAuthenticationToken(updatedEntity, authentication.getCredentials(), authentication.getAuthorities());
 
             // SecurityContext에 새로운 인증 정보 설정
