@@ -37,6 +37,7 @@ public class ArticleEntity extends TimeStamp {
     private UserEntity user;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @Builder.Default
     private List<CommentEntity> comments = new ArrayList<>();
 

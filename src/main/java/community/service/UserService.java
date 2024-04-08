@@ -6,6 +6,7 @@ import community.dto.user.AddUserRequest;
 import community.dto.user.UserDto;
 import community.mapper.user.UserMapper;
 import community.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service("userDetailsService")
 public class UserService implements UserDetailsService {
 
@@ -34,10 +36,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.info("EMAIL : "+email);
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException(email));
     }
-
 
     public UserEntity save(AddUserRequest dto) {
         return userRepository.save(
@@ -51,8 +53,15 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    //기본 조회 페이지네이션 메소드
     public Page<UserDto.UserResponseDto> getAllActiveMembers(Pageable pageable) {
         return userRepository.findAll(pageable)
+                .map(userMapper::toResponseDto);
+    }
+
+    // 검색 기능 추가된 페이지네이션 메서드
+    public Page<UserDto.UserResponseDto> searchActiveMembers(String search, Pageable pageable) {
+        return userRepository.findByNickNameContainingIgnoreCaseOrNameContainingIgnoreCase(search, search, pageable)
                 .map(userMapper::toResponseDto);
     }
 
@@ -66,7 +75,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDto.UserResponseDto updateUser(Long userId, String nickName){
+    public UserDto.UserResponseDto updateUser(Long userId, String nickName,String name, String email){
 
         Optional<UserEntity> optionalUser = userRepository.findById(userId);
 
@@ -77,6 +86,10 @@ public class UserService implements UserDetailsService {
         UserEntity user = optionalUser.get();
 
         user.setNickName(nickName);
+
+        user.setName(name);
+
+        user.setEmail(email);
 
         userRepository.save(user);
 

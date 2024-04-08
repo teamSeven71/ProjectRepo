@@ -23,6 +23,7 @@
 #header .logo h1 a:hover {
     color: #545454;
     text-decoration: none;
+    cursor: pointer; /* 마우스를 올렸을 때 손 형태의 커서로 변경 */
 }
 
 #header .logo img {
@@ -87,10 +88,13 @@ li {
 .nav {
     color: #e96b56 !important; /* 주황색 */
     text-decoration: none;
+    cursor: pointer; /* 마우스를 올렸을 때 손 형태의 커서로 변경 */
 }
 
 .nav:hover {
     color: #e96b56 !important; /* 주황색 */
+    text-decoration: none;
+    cursor: pointer; /* 마우스를 올렸을 때 손 형태의 커서로 변경 */
 }
 
 .board_wrap {
@@ -170,6 +174,10 @@ li {
     background-color: darkgrey;
     color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.btn-delete {
+    margin-top: 50px;
 }
 
 /*.board_write {*/

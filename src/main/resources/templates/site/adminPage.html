@@ -53,7 +53,7 @@
         <div class="input-group">
             <input class="form-control mr-sm-2 border border-orange" type="search" placeholder="검색" aria-label="Search" id="searchInput">
             <div class="input-group-append">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="searchContent()">검색</button>
+                <button class="btn btn-outline-success my-2 my-sm-0 custom-btn-outline-success" type="submit" onclick="searchContent()">검색</button>
             </div>
         </div>
         <button type="button" class="btn btn-danger" id="deleteButton">사용자 탈퇴</button>
@@ -86,18 +86,16 @@
 <nav aria-label="Page navigation example" th:if="${not members.empty}">
     <ul class="pagination pagination-orange justify-content-center">
         <li class="page-item" th:classappend="${startPage == members.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/admin(page=${members.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>
+            <a class="page-link" th:href="@{/admin (page=${members.pageable.pageNumber - 1}, search=${search})}" tabindex="-1">ᐊ</a>
         </li>
         <li class="page-item" th:classappend="${num == members.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
-            <a class="page-link" th:href="@{/admin(page=${num-1})}" th:text="${num}">1</a></li>
+            <a class="page-link" th:href="@{/admin (page=${num-1} , search=${search})}" th:text="${num}">1</a></li>
 
         <li class="page-item" th:classappend="${endPage == members.pageable.pageNumber + 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/admin(page=${members.pageable.pageNumber + 1})}">Next</a>
+            <a class="page-link" th:href="@{/admin (page=${members.pageable.pageNumber + 1}, search=${search})}">ᐅ</a>
         </li>
     </ul>
 </nav>
-
-
 
 <!-- ======= Footer ======= -->
 <footer id="footer">

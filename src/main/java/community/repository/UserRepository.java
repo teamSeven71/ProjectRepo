@@ -15,14 +15,20 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByEmail(String email);  // email로 사용자 정보를 가져옴
 
     @Override
+    Optional<UserEntity> findById(Long aLong);
+
+    @Override
     <S extends UserEntity> S save(S entity);
 
   /*  @Query("select a from UserEntity a ORDER BY a.id ASC")
 //    @Query("select a from UserEntity a where a.active = :type ORDER BY a.id ASC")
     List<UserEntity> findAllActiveMembers();
 */
-  // 사용자 활성화 여부에 따라 사용자 목록을 가져오는 메소드
+    //페이지네이션 필요한 메소드
     Page<UserEntity> findAll(Pageable pageable);
+
+    //검색 기능 추가한 페이지네이션 메소드
+    Page<UserEntity> findByNickNameContainingIgnoreCaseOrNameContainingIgnoreCase(String nickName, String name, Pageable pageable);
 
     @Override
     List<UserEntity> findAllById(Iterable<Long> longs);

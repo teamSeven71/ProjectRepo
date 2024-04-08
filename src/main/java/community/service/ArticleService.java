@@ -1,33 +1,27 @@
 package community.service;
 
-import community.constant.CategoryType;
 import community.domain.user.*;
-import community.dto.user.ArticleCategoryDto;
 import community.dto.user.ArticleDto;
 import community.dto.user.CategoryDto;
 import community.exception.ArticleNotFoundException;
-import community.exception.UnauthorizedException;
 import community.mapper.user.ArticleMapper;
 import community.mapper.user.CategoryMapper;
 import community.repository.ArticleCategoryRepository;
 import community.repository.ArticleRepository;
 import community.repository.CategoryRepository;
 import community.repository.CommentRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -56,11 +50,15 @@ public class ArticleService {
         this.categoryMapper = categoryMapper;
     }
 
+    @Transactional
     public ArticleDto.ArticleResponseDto save(ArticleDto.ArticleRequestDto request, UserEntity user){
 
         //article entity 생성 > id성 됨
         ArticleEntity article = articleMapper.toReqeustEntity(request, user);
+
+        article.setViewCount(0L);
         ArticleEntity savedArticle = articleRepository.save(article);
+
 /*
         //article id 얻어옴.
         Long articleId = article.getId();*/
@@ -89,6 +87,18 @@ public class ArticleService {
     //게시글 목록 pagination 때문에 필요
     public Page<ArticleDto.ArticleResponseDto> findAllArticleByCategory(Long categoryId, Pageable pageable) {
         Page<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findAllArticleByCategory(categoryId, pageable);
+
+        // ArticleCategoryEntity를 ArticleDto.ArticleResponseDto로 매핑하여 새로운 페이지를 생성합니다.
+        List<ArticleDto.ArticleResponseDto> articles = articleCategories.getContent().stream()
+                .map(articleCategory -> articleMapper.toResponseDto(articleCategory.getArticle()))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(articles, pageable, articleCategories.getTotalElements());
+    }
+
+    //게시글 목록 pagination 검색어 조회때문에 필요
+    public Page<ArticleDto.ArticleResponseDto> searchAllArticleByCategory(String search,Long categoryId, Pageable pageable) {
+        Page<ArticleCategoryEntity> articleCategories = articleCategoryRepository.findByTitleContainingIgnoreCase(search,categoryId, pageable);
 
         // ArticleCategoryEntity를 ArticleDto.ArticleResponseDto로 매핑하여 새로운 페이지를 생성합니다.
         List<ArticleDto.ArticleResponseDto> articles = articleCategories.getContent().stream()
@@ -172,6 +182,44 @@ public class ArticleService {
         return articleMapper.toResponseDto(article);
     }
 
+    @Transactional
+    public Long getViewCount(Long articleId){
+        ArticleEntity articleEntity = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NoSuchElementException("Article not found with id: " + articleId));
 
-    // 다른 필요한 메서드들을 추가할 수 있습니다.
+        Long currentViewCount = articleEntity.getViewCount();
+        articleEntity.setViewCount(currentViewCount + 1);
+        return currentViewCount;
+    }
+
+
+
+    @Transactional
+    public void updateViews(Long articleId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // ArticleRepository를 사용하여 articleId를 통해 ArticleEntity 가져오기
+        ArticleEntity articleEntity = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NoSuchElementException("Article not found with id: " + articleId));
+
+        // 이하 로직은 이전과 동일하게 수행
+        Cookie[] cookies = request.getCookies();
+        Map<String, String> mapCookie = new HashMap<>();
+
+        if (request.getCookies() != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                mapCookie.put(cookies[i].getName(), cookies[i].getValue());
+            }
+            String viewsCookie = mapCookie.get("views");
+            String newCookie = "|" + articleId;
+
+            // 쿠키가 없을 경우 쿠키 생성 후 조회수 증가
+            if (viewsCookie == null || !viewsCookie.contains(newCookie)) {
+                Cookie cookie = new Cookie("views", viewsCookie + newCookie);
+                response.addCookie(cookie);
+
+                articleEntity.setViewCount(articleEntity.getViewCount() + 1);
+                articleRepository.save(articleEntity);
+            }
+        }
+    }
+
 }
