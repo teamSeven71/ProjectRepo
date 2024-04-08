@@ -1556,7 +1556,6 @@ section {
   background-color: #fafafa;
   padding: 60px;
   position: relative;
-  text-align: center;
   margin: 20px 0;
 }
 
@@ -1564,9 +1563,10 @@ section {
   color: #444444;
   line-height: 1.6;
   margin-bottom: 0;
-  font-style: italic;
+  font-style: normal;
   font-weight: 500;
-  font-size: 22px;
+  font-size: 17px;
+  white-space: pre-line;
 }
 
 .blog .entry .entry-content blockquote::after {
