@@ -6,6 +6,7 @@ import community.dto.user.AddUserRequest;
 import community.dto.user.UserDto;
 import community.mapper.user.UserMapper;
 import community.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service("userDetailsService")
 public class UserService implements UserDetailsService {
 
@@ -34,10 +36,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.info("EMAIL : "+email);
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException(email));
     }
-
 
     public UserEntity save(AddUserRequest dto) {
         return userRepository.save(

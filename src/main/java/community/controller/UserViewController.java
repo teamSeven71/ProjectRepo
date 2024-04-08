@@ -15,6 +15,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +70,7 @@ public class UserViewController {
 
     //유저 닉네임 수정
     @PutMapping("/userInfo")
-    public ResponseEntity<String> updateUser(@RequestBody UserDto.UserResponseDto userDto, @AuthenticationPrincipal UserEntity user) {
+    public ResponseEntity<String> updateUser(@RequestBody UserDto.UserResponseDto userDto, @AuthenticationPrincipal UserEntity user,Model model) {
         String nickName = userDto.getNickName();
         String name = userDto.getName();
         String email = userDto.getEmail();
@@ -91,6 +92,20 @@ public class UserViewController {
         // 중복값이 없으면 사용자 정보 업데이트
         try {
             UserDto.UserResponseDto updatedUser = userService.updateUser(user.getId(), nickName, name, email);
+            model.addAttribute("user", updatedUser);
+
+            // 현재 사용자의 인증 정보 가져오기
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            // 새로운 사용자 정보로 인증 객체 업데이트
+            UserEntity updatedEntity = new UserEntity();
+            updatedEntity.setEmail(email);
+            updatedEntity.setPassword(user.getPassword()); // 사용자 비밀번호를 가져와야 할 필요가 있습니다. 이 부분을 수정해야 합니다.
+            authentication = new UsernamePasswordAuthenticationToken(updatedEntity, authentication.getCredentials(), authentication.getAuthorities());
+
+            // SecurityContext에 새로운 인증 정보 설정
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
             return ResponseEntity.ok("/site/userPage");
         } catch (DataIntegrityViolationException e) {
             // 데이터 무결성 위반 오류 처리

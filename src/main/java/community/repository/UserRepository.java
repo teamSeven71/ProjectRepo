@@ -15,6 +15,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByEmail(String email);  // email로 사용자 정보를 가져옴
 
     @Override
+    Optional<UserEntity> findById(Long aLong);
+
+    @Override
     <S extends UserEntity> S save(S entity);
 
   /*  @Query("select a from UserEntity a ORDER BY a.id ASC")
