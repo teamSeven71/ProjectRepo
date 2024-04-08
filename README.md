@@ -231,5 +231,5 @@ DB
 ## 개발 이슈
 
 [ERD 수정](https://github.com/teamSeven71/TechTalk/issues/79)  
-[댓글 영속성 문제 발생](https://github.com/teamSeven71/TechTalk/issues/81)
+[댓글 영속성 문제 발생](https://github.com/teamSeven71/TechTalk/issues/81)  
 [배포 단계에서 에러](https://github.com/teamSeven71/TechTalk/issues/85)
