@@ -60,6 +60,9 @@ DB
 <br></br>
 ## 🖌️ Flow Chart  
 
+처음 메인 페이지에 들어가면 관리자가 올린 공지사항, 글을 올릴 수 있는 여러 게시판 카테고리 선택란, 네비게이션 상단바가 보이게 됩니다.  
+크게 세 개로 나누어 흐름도를 작성하였습니다.
+
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/1a9b8232-47ee-4263-9be0-8fea14804e68)
 
 
@@ -68,12 +71,22 @@ DB
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/8759b35e-0b31-47c7-8407-6ad7dc1e8f91)
 
 <br></br>
-## 데이터베이스 모델링(ERD)
+## 데이터베이스 모델링(ERD)  
+
+① 유저와 관리자의 속성 값이 일치하여 하나의 테이블(유저 테이블)에서 Enum으로만 USER / ADMIN 역할 분리  
+② 정규화를 위해 기존 게시글(사용자 작성 게시글, 관리자 작성 게시글) 관련 테이블 -> Article, ArticleCategory, Category 테이블로 변경  
+③ 사용자와 댓글 데이터간의 접근 차원을 줄이기 위해 유저 테이블과 댓글 테이블간 연관 관계 수정  
+
+
 <br></br>
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/4695ba89-5de1-417d-9f88-d4aa3ef8e258)
 
 <br></br>
 ## 배포 아키텍처  
+
+사용자가 URL을 통해 ec2 인스턴스에 빌드된 스프링부트 서버에 접속요청을 보내면, 
+서버는 RDS에 있는 MySQL DB에 메인 페이지의 thymeleaf에서 필요한 공지사항, 카테고리 종류 데이터를 요청하고, HTML,CSS(Bootstrap),JS를 구성해 사용자에게 요청한 View를 반환해줍니다.  
+IntelliJ에서 작업한 작업내용은 Github Repo에 저장하며, commit, merge, pr 등 레포지토리에서 발생하는 모든 변화는 디스코드 웹훅을 통해 즉시 알림메세지 형태로 전달됩니다.
 ![image](https://github.com/teamSeven71/TechTalk/assets/109260733/0c6b9539-d7ac-4223-a1d2-a4c6e2a521ab)
 
 <br></br>
